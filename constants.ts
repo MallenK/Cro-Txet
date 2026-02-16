@@ -8,7 +8,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 'alea',
     name: 'Aléa',
-    meaning: { ES: 'Destino / Casualidad', CAT: 'Destí / Casualitat', EN: 'Fate / Chance' },
+    meaning: { 
+      CAT: 'del francès “destí” o “casualitat”; subtil i poètic.',
+      ES: 'del francés “destino” o “casualidad”; sutil y poética',
+      EN: 'from the French “destiny” or “chance”; subtle and poetic.'
+    },
     description: { 
       ES: 'Bolso hecho a mano en tonos metálicos, con forma semicircular y trenzado artesanal. Puede tener cierre semicircular o cuadrado, usarse de mano o con cadena, e incluir asa integrada.', 
       CAT: 'Bolso fet a mà en tons metàl·lics, amb forma semicircular i trenat artesanal. Es pot fer amb tancament semicircular o quadrat, portar de mà o amb cadeneta, i incloure nanseta integrada.', 
@@ -16,10 +20,10 @@ export const PRODUCTS: Product[] = [
     },
     price: 35,
     images: [
-      `${IMG_PATH}alea_1.jpg`, // Foto del bolso plateado semicircular
-      `${IMG_PATH}alea_2.jpg`, // Foto del grupo: Silver, Golden, Metallic Black
-      `${IMG_PATH}alea_3.jpg`, // Foto detalle del trenzado metálico
-      `${IMG_PATH}alea_4.jpg`  // Foto extra
+      `${IMG_PATH}alea_1.jpg`,
+      `${IMG_PATH}alea_2.jpg`,
+      `${IMG_PATH}alea_3.jpg`,
+      `${IMG_PATH}alea_4.jpg`
     ],
     colors: [{ name: 'Silver', hex: '#C0C0C0' }, { name: 'Golden', hex: '#D4AF37' }, { name: 'Metallic Black', hex: '#2C2C2C' }],
     details: {
@@ -36,7 +40,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 'oraia',
     name: 'Oraïa',
-    meaning: { ES: 'Bella / Calidez', CAT: 'Bella / Calidesa', EN: 'Beautiful / Warmth' },
+    meaning: { 
+      CAT: 'del grec “bella”; calidesa i feminitat.',
+      ES: 'del griego “bella”; calidez y feminidad',
+      EN: 'from the Greek “beautiful”; warmth and femininity'
+    },
     description: { 
       ES: 'Bolso artesanal elaborado con hilo de piel vegana y tejido con el elegante punto cesto o intercalado. Disponible en varios colores y en forma semicircular o cuadrada, con asa integrada.', 
       CAT: 'Bolso artesanal fet amb fil de pell vegana i treballat amb el delicat punt cistell o intercalat. Disponible en diferents colors i en forma semicircular o quadrada, amb nanseta integrada.', 
@@ -44,9 +52,9 @@ export const PRODUCTS: Product[] = [
     },
     price: 40,
     images: [
-      `${IMG_PATH}oraia_1.jpg`, // Foto del bolso color Teal/Azul verdoso
-      `${IMG_PATH}oraia_2.jpg`, // Foto del bolso color Chocolate
-      `${IMG_PATH}oraia_3.jpg`  // Foto comparativa Bronze/Teal
+      `${IMG_PATH}oraia_1.jpg`,
+      `${IMG_PATH}oraia_2.jpg`,
+      `${IMG_PATH}oraia_3.jpg`
     ],
     colors: [{ name: 'Chocolate', hex: '#3E2723' }, { name: 'Burgundy', hex: '#800020' }, { name: 'Teal', hex: '#008080' }],
     details: {
@@ -63,7 +71,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 'altair',
     name: 'Altair',
-    meaning: { ES: 'Estrecha brillante', CAT: 'Estrella brillant', EN: 'Bright star' },
+    meaning: { 
+      CAT: 'una de les estrelles més brillants del cel. Simbolitza llum, elegància i llibertat.',
+      ES: 'una de las estrellas más brillantes del cielo. Simboliza luz, elegancia y libertad.',
+      EN: 'one of the brightest stars in the night sky. Its name symbolizes light, elegance and freedom.'
+    },
     description: { 
       ES: 'Bolso artesanal que destaca por su delicado punto estrella. Puede confeccionarse con hilo de piel vegana o con hilo reciclado de lycra, combinando diseño, sostenibilidad y calidad.', 
       CAT: 'Bolso artesanal que destaca pel seu delicat punt d’estrella. Es pot realitzar amb fil de pell vegana o amb fil reciclat de lycra, combinant disseny, sostenibilitat i qualitat.', 
@@ -71,9 +83,9 @@ export const PRODUCTS: Product[] = [
     },
     price: 50,
     images: [
-      `${IMG_PATH}altair_1.jpg`, // Foto de la creadora con el bolso rosa punto estrella
-      `${IMG_PATH}altair_2.jpg`, // Detalle del punto estrella en rosa
-      `${IMG_PATH}altair_3.jpg`  // Foto extra de detalle
+      `${IMG_PATH}altair_1.jpg`,
+      `${IMG_PATH}altair_2.jpg`,
+      `${IMG_PATH}altair_3.jpg`
     ],
     colors: [{ name: 'Pale Pink', hex: '#FADADD' }, { name: 'Black', hex: '#000000' }],
     details: {
@@ -85,7 +97,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 'lyra',
     name: 'Lyra',
-    meaning: { ES: 'Constelación / Minimalista', CAT: 'Constel·lació / Minimalista', EN: 'Constellation / Minimalist' },
+    meaning: { 
+      CAT: 'com la constel·lació, elegant i minimalista.',
+      ES: 'como la constelación, elegante y minimalista.',
+      EN: 'like the constellation – elegant and minimalist.'
+    },
     description: { 
       ES: 'Bolso clutch alargado tipo baguette con una elegancia marcada. Puede confeccionarse con hilo de piel vegana o con otras lanas recicladas. El punto cesto le aporta estructura y un acabado sofisticado.', 
       CAT: 'Bolso clutch allargat tipus baguette amb una elegància marcada. Es pot realitzar amb fil de pell vegana o amb altres llanes reciclades. El punto cistell li aporta estructura i un acabat sofisticat.', 
@@ -93,9 +109,9 @@ export const PRODUCTS: Product[] = [
     },
     price: 50,
     images: [
-      `${IMG_PATH}lyra_1.jpg`, // Foto del bolso negro tipo baguette
-      `${IMG_PATH}lyra_2.jpg`, // Foto del bolso iridiscente/multicolor
-      `${IMG_PATH}lyra_3.jpg`  // Foto detalle de la cadena y forma
+      `${IMG_PATH}lyra_1.jpg`,
+      `${IMG_PATH}lyra_2.jpg`,
+      `${IMG_PATH}lyra_3.jpg`
     ],
     colors: [{ name: 'Black', hex: '#000000' }, { name: 'Iridiscent', hex: '#4B0082' }],
     details: {
@@ -107,7 +123,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 'verae',
     name: 'Vérae',
-    meaning: { ES: 'Auténtica', CAT: 'Autèntica', EN: 'Authentic' },
+    meaning: { 
+      CAT: '“autèntica” en llatí, símbol d’artesania genuïna.',
+      ES: '“auténtica” en latín, símbolo de artesanía genuina.',
+      EN: '“authentic” in Latin, symbol of genuine craftsmanship.'
+    },
     description: { 
       ES: 'Clutch artesanal elaborado con hilo de camisetas recicladas. Diseño versátil que se adapta tanto al día a día como a ocasiones especiales. Sostenible y con alma artesanal.', 
       CAT: 'Clutch artesanal fet amb fil de samarretes reciclades. Disseny versàtil que s’adapta tant al dia a dia com a ocasions especials. Sostenible i amb ànima artesanal.', 
@@ -115,9 +135,9 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      `${IMG_PATH}verae_1.jpg`, // Foto grupo: Black, Animal Print, Chocolate
-      `${IMG_PATH}verae_2.jpg`, // Detalle Animal Print
-      `${IMG_PATH}verae_3.jpg`  // Detalle Black
+      `${IMG_PATH}verae_1.jpg`,
+      `${IMG_PATH}verae_2.jpg`,
+      `${IMG_PATH}verae_3.jpg`
     ],
     colors: [{ name: 'Animal Print', hex: '#D2B48C' }, { name: 'Black', hex: '#000000' }, { name: 'Chocolate', hex: '#3E2723' }],
     details: {
@@ -134,17 +154,21 @@ export const PRODUCTS: Product[] = [
   {
     id: 'nara',
     name: 'Nara',
-    meaning: { ES: 'Sencillez y equilibrio', CAT: 'Senzillesa i equilibri', EN: 'Simplicity and balance' },
+    meaning: { 
+      CAT: 'senzillesa i equilibri en essència.',
+      ES: 'sencillez y equilibrio en esencia',
+      EN: 'simplicity and balance in essence'
+    },
     description: { 
       ES: 'Bolso hecho a mano con materiales reciclados que une diseño y sostenibilidad. Con asa corta y cadena, puede llevarse colgado o bajo el brazo. Personalizable con hilo dorado opcional.', 
-      CAT: 'Bolso fet a mà amb materials reciclats que combina disseny i consciència. Amb nansa petita i cadeneta, es pot portar penjat o sota el braç. Personalitzable amb fil daurat opcional.', 
+      CAT: 'Bolso fet a mà amb materials reciclats que combina disseny i consciència. Amb nansa petita i cadeneta, es pot portar penjat o sota el braç. Personalitzatzable amb fil daurat opcional.', 
       EN: 'Handcrafted bag made from recycled materials, blending design and sustainability. Featuring a small handle and chain strap, it can be worn over the shoulder or under the arm.' 
     },
     price: 30,
     images: [
-      `${IMG_PATH}nara_1.jpg`, // Foto bicolor Blanco/Negro con cadena
-      `${IMG_PATH}nara_2.jpg`, // Foto bicolor Rosa/Granate con cadena
-      `${IMG_PATH}nara_3.jpg`  // Detalle del asa trenzada bicolor
+      `${IMG_PATH}nara_1.jpg`,
+      `${IMG_PATH}nara_2.jpg`,
+      `${IMG_PATH}nara_3.jpg`
     ],
     colors: [{ name: 'Bicolor White/Black', hex: '#F5F5F5' }, { name: 'Bicolor Burgundy', hex: '#800020' }],
     details: {
@@ -160,7 +184,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 'vela',
     name: 'Vela',
-    meaning: { ES: 'Viento y aventuras', CAT: 'Vent i aventures', EN: 'Wind and adventures' },
+    meaning: { 
+      CAT: 'inspirat pel vent, el mar i les aventures.',
+      ES: 'inspirada por el viento, el mar y las aventuras.',
+      EN: 'inspired by the wind, the sea, and adventures.'
+    },
     description: { 
       ES: 'Bolso hecho a mano con materiales reciclados, fresco y divertido. Destaca por sus mosquetones con forma de corazón o estrella que le aportan un toque original.', 
       CAT: 'Bolso fet a mà amb materials reciclats, fresc i divertit. Destaca pels seus mosquetons amb forma de cor o estrella que li donen un toc juganer.', 
@@ -168,9 +196,9 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      `${IMG_PATH}vela_1.jpg`, // Foto bolso verde con mosquetones estrella
-      `${IMG_PATH}vela_2.jpg`, // Detalle de los mosquetones
-      `${IMG_PATH}vela_3.jpg`  // Detalle del tejido
+      `${IMG_PATH}vela_1.jpg`,
+      `${IMG_PATH}vela_2.jpg`,
+      `${IMG_PATH}vela_3.jpg`
     ],
     colors: [{ name: 'Pink Pattern', hex: '#FFB6C1' }, { name: 'Blue/White Pattern', hex: '#AFDBF5' }, { name: 'Green Moss', hex: '#8A9A5B' }],
     details: {
@@ -186,7 +214,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 'velain',
     name: 'Velaïn',
-    meaning: { ES: 'Velvet + Divine', CAT: 'Velvet + Divine', EN: 'Velvet + Divine' },
+    meaning: { 
+      CAT: 'fusió entre “velvet” i “divin”.',
+      ES: 'fusión entre “velvet” y “divin”.',
+      EN: 'a fusion of “velvet” and “divine.”'
+    },
     description: { 
       ES: 'Bolso artesanal realizado con un hilo especial de terciopelo que le aporta una presencia suave y muy sofisticada. Su acabado elegante lo convierte en el complemento ideal para cualquier look.', 
       CAT: 'Bolso artesanal elaborat amb un fil especial de vellut que li aporta una presència suau i molt sofisticada. El seu acabat elegant el converteix en el complement ideal per a qualsevol look.', 
@@ -194,10 +226,10 @@ export const PRODUCTS: Product[] = [
     },
     price: 45,
     images: [
-      `${IMG_PATH}velain_1.jpg`, // Tu foto principal del bolso fucsia
-      `${IMG_PATH}velain_2.jpg`, // Tu foto detalle (top view)
-      `${IMG_PATH}velain_3.jpg`, // Tu foto siendo sujetado por la mano
-      `${IMG_PATH}velain_4.jpg`  // Foto detalle del tejido terciopelo
+      `${IMG_PATH}velain_1.jpg`,
+      `${IMG_PATH}velain_2.jpg`,
+      `${IMG_PATH}velain_3.jpg`,
+      `${IMG_PATH}velain_4.jpg`
     ],
     colors: [{ name: 'Vibrant Fuchsia', hex: '#FF00FF' }],
     details: {
@@ -216,7 +248,7 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       loading: 'Carregant...',
       notFound: 'Producte no trobat',
       backToShop: 'Tornar a la botiga',
-      artisanNote: 'Cada bolso està fet a mà, amb cura, amor i estil propi. Cada peça és exclusiva i es pot personalitzar segons el teu gust.',
+      artisanNote: 'Cada una de les meves creacions és totalment artesanal, feta íntegrament a mà amb la tècnica del crochet. Acabades i cosides a mà quan cal. Les petites imperfeccions, si n’hi ha, són naturals i garanteixen l’autenticitat del producte. Cada bolso és una peça única.',
       productionTime: 'Elaboro cada peça a mà i sota demanda en un termini de 5 a 10 dies laborables.',
       language: 'Idioma'
     },
@@ -249,7 +281,7 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       story: [
         'Tot va començar amb la meva mare. Sempre la recordo amb alguna labor a les mans, cosint amb aquella calma i delicadesa que només dona l’amor per allò que es fa a foc lent. Ella em va ensenyar els primers punts, gairebé com un joc, sense imaginar que anys més tard aquell fil invisible ens seguiria unint.',
         'Aquest estiu, obligada a fer una pausa, una amiga em va animar a reprendre el crochet. El que havia de ser una distracció s’ha convertit en una passió. Punt rere punt, vaig començar a crear bosses, primer per regalar... fins que tothom em va dir el mateix: “Les has de vendre!”',
-        'I aquí em teniu: transformant fils en històries, colors en emocions i temps en peces úniques.',
+        'I aquí em teniu: transformant fils en històries, colors en emocions i temps en peces uniques.',
         'Cada bolso està fet a mà, amb cura, amor i estil propi. Hi ha models i colors que pots triar, però també pots personalitzar la teva bossa perquè sigui tan única com tu.',
         'Perquè quan una peça es fa amb el cor, no és només un bolso —és una petita part de qui el crea.'
       ],
@@ -281,7 +313,12 @@ export const TRANSLATIONS: Record<Language, Translation> = {
         send: 'Enviar Missatge', sent: 'Enviat amb èxit', productInquiry: 'Consulta sobre'
       },
       info: { emailTitle: 'Email', atelierTitle: 'Taller', atelierLoc: 'Barcelona' },
-      care: { title: 'Consells per cuidar el teu bolso fet a mà', content: 'Desa’l amb paper a l’interior. No el rentis a la rentadora. En cas de taca, aplica un desgreixant i frega suaument amb un drap humit.' },
+      care: { 
+        title: 'Consells per cuidar el teu bolso fet a mà', 
+        content: `• Desa’l amb paper a l’interior perquè conservi la seva forma.
+• No el rentis a la rentadora, ja que el mecanisme interior podria desgastar-se. En cas de taca, aplica un desgreixant, deixa’l actuar i frega suaument amb un drap humit. Per a taques més persistents, porta’l a la tintoreria.
+• Si amb el temps el mecanisme interior comença a fer soroll, no el llencis: aplica una petita quantitat de lubricant amb un bastonet de cotó.`
+      },
       policies: { returns: 'Política de devolucions', privacy: 'Privacitat' }
     }
   },
@@ -292,7 +329,7 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       loading: 'Cargando...',
       notFound: 'Producto no encontrado',
       backToShop: 'Volver a la tienda',
-      artisanNote: 'Cada bolso está hecho a mano, con cariño, cuidado y mucho estilo. Cada pieza es exclusiva y puede personalizarse a tu gusto.',
+      artisanNote: 'Cada una de mis creaciones es totalmente artesanal, realizada íntegramente a mano con la técnica del crochet. Terminadas y cosidas a mano cuando es necesario. Las pequeñas imperfecciones, si las hay, son naturales y garantizan la autenticidad del producto. Cada bolso es una pieza única.',
       productionTime: 'Elaboro cada unidad a mano y bajo demanda en un plazo de 5 a 10 días laborables.',
       language: 'Idioma'
     },
@@ -357,7 +394,12 @@ export const TRANSLATIONS: Record<Language, Translation> = {
         send: 'Enviar Mensaje', sent: 'Enviado con éxito', productInquiry: 'Consulta sobre'
       },
       info: { emailTitle: 'Email', atelierTitle: 'Taller', atelierLoc: 'Barcelona' },
-      care: { title: 'Consejos para cuidar tu bolso hecho a mano', content: 'Guárdalo con papel en el interior. No lo laves a máquina. En caso de mancha, aplica un desengrasante y frota suavemente con un paño húmedo.' },
+      care: { 
+        title: 'Consejos para cuidar tu bolso hecho a mano', 
+        content: `• Guárdalo con papel en el interior para que conserve su forma.
+• No lo laves a máquina, ya que el mecanismo interior podría desgastarse. En caso de mancha, aplica un desengrasante, déjalo actuar y frota suavemente con un paño húmedo. Para manchas más persistentes, llévalo a la tintorería.
+• Si con el tiempo el mecanismo interior empieza a hacer ruido, no lo deseches: aplica una pequeña cantidad de lubricante con un bastoncillo de algodón.`
+      },
       policies: { returns: 'Política de devoluciones', privacy: 'Privacidad' }
     }
   },
@@ -368,7 +410,7 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       loading: 'Loading...',
       notFound: 'Product not found',
       backToShop: 'Back to shop',
-      artisanNote: 'Each bag is handmade, with love, care, and style. Each piece is exclusive and can be customized to your taste.',
+      artisanNote: 'Each of my creations is entirely handcrafted using the crochet technique, and finished and sewn by hand when necessary. Small imperfections, if any, are natural and reflect the authenticity of the product. Every bag is a unique piece.',
       productionTime: 'Each piece is handmade and made to order within 5 to 10 business days.',
       language: 'Language'
     },
@@ -433,7 +475,12 @@ export const TRANSLATIONS: Record<Language, Translation> = {
         send: 'Send Message', sent: 'Sent successfully', productInquiry: 'Inquiry about'
       },
       info: { emailTitle: 'Email', atelierTitle: 'Studio', atelierLoc: 'Barcelona' },
-      care: { title: 'Tips to care for your handmade bag', content: 'Store it with paper inside. Do not machine wash. If stained, apply a degreaser and gently rub with a damp cloth.' },
+      care: { 
+        title: 'Tips to care for your handmade bag', 
+        content: `• Store it with paper inside to help maintain its shape.
+• Do not machine wash it, as the inner mechanism may wear out. If stained, apply a degreaser, let it sit, and gently rub with a damp cloth. For more persistent stains, take it to a dry cleaner.
+• If the inner mechanism starts to make noise over time, don’t discard it: apply a small amount of lubricant using a cotton swab.`
+      },
       policies: { returns: 'Return Policy', privacy: 'Privacy Policy' }
     }
   }
