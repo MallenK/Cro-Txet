@@ -20,10 +20,12 @@ export const PRODUCTS: Product[] = [
     },
     price: 35,
     images: [
-      `${IMG_PATH}alea_1.jpg`,
-      `${IMG_PATH}alea_2.jpg`,
-      `${IMG_PATH}alea_3.jpg`,
-      `${IMG_PATH}alea_4.jpg`
+      `${IMG_PATH}alea-black+silver+gold.jpeg`,
+      `${IMG_PATH}alea-old-silver.jpeg`,
+      `${IMG_PATH}alea-negre-2.jpeg`,
+      `${IMG_PATH}alea-negre.jpeg`,
+      `${IMG_PATH}alea-silver-+negre-+old-silver.jpeg`,
+      `${IMG_PATH}alea-silver.jpeg`
     ],
     colors: [{ name: 'Silver', hex: '#C0C0C0' }, { name: 'Golden', hex: '#D4AF37' }, { name: 'Metallic Black', hex: '#2C2C2C' }],
     details: {
@@ -52,9 +54,16 @@ export const PRODUCTS: Product[] = [
     },
     price: 40,
     images: [
-      `${IMG_PATH}oraia_1.jpg`,
-      `${IMG_PATH}oraia_2.jpg`,
-      `${IMG_PATH}oraia_3.jpg`
+      `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat-2.jpeg`,
+      `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat-1.jpeg`,
+      `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat.jpeg`,
+      `${IMG_PATH}oraia-ecopell-burgundi-punt-cistell.jpeg`,
+      `${IMG_PATH}oraia-1-punt-intercalat.jpeg`,
+      `${IMG_PATH}oraia-ecopell-xocolata-2-punt-cistell.jpeg`,
+      `${IMG_PATH}oraia-ecopell-xocolata-3-punt-intercalat.jpeg`,
+      `${IMG_PATH}oraia-ecopell-xocolata-punt-cistell.jpeg`,
+      `${IMG_PATH}oraia-marro-amb-cadeneta.jpeg`,
+      `${IMG_PATH}oraia-verd.jpeg`
     ],
     colors: [{ name: 'Chocolate', hex: '#3E2723' }, { name: 'Burgundy', hex: '#800020' }, { name: 'Teal', hex: '#008080' }],
     details: {
@@ -83,9 +92,8 @@ export const PRODUCTS: Product[] = [
     },
     price: 50,
     images: [
-      `${IMG_PATH}altair_1.jpg`,
-      `${IMG_PATH}altair_2.jpg`,
-      `${IMG_PATH}altair_3.jpg`
+      `${IMG_PATH}altair-pell-rosa.jpeg`,
+      `${IMG_PATH}altair-pell-rosa-2.jpeg`
     ],
     colors: [{ name: 'Pale Pink', hex: '#FADADD' }, { name: 'Black', hex: '#000000' }],
     details: {
@@ -109,9 +117,11 @@ export const PRODUCTS: Product[] = [
     },
     price: 50,
     images: [
-      `${IMG_PATH}lyra_1.jpg`,
-      `${IMG_PATH}lyra_2.jpg`,
-      `${IMG_PATH}lyra_3.jpg`
+      `${IMG_PATH}lyra-negre-pell-2.jpeg`,
+      `${IMG_PATH}lyra-marro-fantasia-2.jpeg`,
+      `${IMG_PATH}lyra-marro-fantasia-3.jpeg`,
+      `${IMG_PATH}lyra-negre-pell.jpeg`,
+      `${IMG_PATH}lyra-marro-amb-cadeneta.jpeg`
     ],
     colors: [{ name: 'Black', hex: '#000000' }, { name: 'Iridiscent', hex: '#4B0082' }],
     details: {
@@ -135,9 +145,9 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      `${IMG_PATH}verae_1.jpg`,
-      `${IMG_PATH}verae_2.jpg`,
-      `${IMG_PATH}verae_3.jpg`
+      `${IMG_PATH}verae-marro.jpeg`,
+      `${IMG_PATH}verae-blau-+print-blau.jpeg`,
+      `${IMG_PATH}verae-marro-+negre-+print.jpeg`
     ],
     colors: [{ name: 'Animal Print', hex: '#D2B48C' }, { name: 'Black', hex: '#000000' }, { name: 'Chocolate', hex: '#3E2723' }],
     details: {
@@ -166,9 +176,10 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      `${IMG_PATH}nara_1.jpg`,
-      `${IMG_PATH}nara_2.jpg`,
-      `${IMG_PATH}nara_3.jpg`
+      `${IMG_PATH}nara-blanc+negre.jpeg`,
+      `${IMG_PATH}nara-blanc+negre-2.jpeg`,
+      `${IMG_PATH}nara-rosa+burgundy.jpeg`,
+      `${IMG_PATH}nara-vermell-+daurat.jpeg`
     ],
     colors: [{ name: 'Bicolor White/Black', hex: '#F5F5F5' }, { name: 'Bicolor Burgundy', hex: '#800020' }],
     details: {
@@ -196,9 +207,10 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      `${IMG_PATH}vela_1.jpg`,
-      `${IMG_PATH}vela_2.jpg`,
-      `${IMG_PATH}vela_3.jpg`
+      `${IMG_PATH}vela-blaus.jpeg`,
+      `${IMG_PATH}vela-rosa+vermell.jpeg`,
+      `${IMG_PATH}vela-verds.jpeg`,
+      `${IMG_PATH}vela-verds-2.jpeg`
     ],
     colors: [{ name: 'Pink Pattern', hex: '#FFB6C1' }, { name: 'Blue/White Pattern', hex: '#AFDBF5' }, { name: 'Green Moss', hex: '#8A9A5B' }],
     details: {
@@ -226,10 +238,8 @@ export const PRODUCTS: Product[] = [
     },
     price: 45,
     images: [
-      `${IMG_PATH}velain_1.jpg`,
-      `${IMG_PATH}velain_2.jpg`,
-      `${IMG_PATH}velain_3.jpg`,
-      `${IMG_PATH}velain_4.jpg`
+      `${IMG_PATH}velain-fucsia.jpeg`,
+      `${IMG_PATH}velain-fucsia-2.jpeg`
     ],
     colors: [{ name: 'Vibrant Fuchsia', hex: '#FF00FF' }],
     details: {
