@@ -14,7 +14,6 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
 
-  // Fix: Block body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -37,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
 
   return (
     <>
-      {/* Mobile Menu Button - Moved to top right */}
+      {/* Mobile Menu Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden fixed top-5 right-5 z-[100] w-12 h-12 flex items-center justify-center bg-white shadow-xl rounded-full border border-stone-200 focus:outline-none active:scale-90 transition-all duration-300"
@@ -46,14 +45,14 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
         {isOpen ? <X className="w-5 h-5 text-stone-900" /> : <Menu className="w-5 h-5 text-stone-900" />}
       </button>
 
-      {/* Backdrop with smooth fade */}
+      {/* Backdrop */}
       <div 
         className={`lg:hidden fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-40 transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} 
         onClick={closeSidebar} 
       />
 
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-80 lg:w-72 bg-[#FDFCFB] flex flex-col p-10 lg:p-14
+        fixed inset-y-0 left-0 z-50 w-[85vw] max-w-80 lg:w-72 bg-[#FDFCFB] flex flex-col p-10 lg:p-14
         sidebar-transition border-r border-stone-100 transform-gpu
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
@@ -87,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
         <div className="mt-auto pt-10 space-y-12 border-t border-stone-100">
           <div className="flex flex-col gap-5">
             <span className="text-[10px] uppercase tracking-[0.5em] text-stone-900 font-bold">{t.common.language}</span>
-            <div className="flex gap-8 text-[11px] lg:text-[10px] font-bold">
+            <div className="flex flex-wrap gap-x-8 gap-y-4 text-[11px] lg:text-[10px] font-bold">
               {(['CAT', 'ES', 'EN'] as Language[]).map((l) => (
                 <button
                   key={l}
@@ -95,7 +94,7 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
                     setLang(l);
                     closeSidebar();
                   }}
-                  className={`transition-all tracking-widest py-1 ${lang === l ? 'text-stone-950 border-b-2 border-stone-950' : 'text-stone-400 hover:text-stone-700'}`}
+                  className={`transition-all tracking-widest py-1 whitespace-nowrap ${lang === l ? 'text-stone-950 border-b-2 border-stone-950' : 'text-stone-400 hover:text-stone-700'}`}
                 >
                   {l}
                 </button>

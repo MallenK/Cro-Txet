@@ -1,14 +1,8 @@
 
 import { Product, Translation, Language } from './types';
 
-const getImgs = (id: string) => [
-  `https://picsum.photos/seed/${id}1/1000/1200`,
-  `https://picsum.photos/seed/${id}2/1000/1200`,
-  `https://picsum.photos/seed/${id}3/1000/1200`,
-  `https://picsum.photos/seed/${id}4/1000/1200`,
-  `https://picsum.photos/seed/${id}5/1000/1200`,
-  `https://picsum.photos/seed/${id}6/1000/1200`,
-];
+// Directorio base para las fotos reales de producto
+const IMG_PATH = 'img/fotos_productos/';
 
 export const PRODUCTS: Product[] = [
   {
@@ -21,7 +15,12 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted metallic bag with a semicircular shape and artisanal weave. It can feature a semicircular or square clasp, be worn by hand or with a chain, and include an integrated handle.' 
     },
     price: 35,
-    images: getImgs('alea'),
+    images: [
+      `${IMG_PATH}alea_1.jpg`, // Foto del bolso plateado semicircular
+      `${IMG_PATH}alea_2.jpg`, // Foto del grupo: Silver, Golden, Metallic Black
+      `${IMG_PATH}alea_3.jpg`, // Foto detalle del trenzado metálico
+      `${IMG_PATH}alea_4.jpg`  // Foto extra
+    ],
     colors: [{ name: 'Silver', hex: '#C0C0C0' }, { name: 'Golden', hex: '#D4AF37' }, { name: 'Metallic Black', hex: '#2C2C2C' }],
     details: {
       material: { ES: 'Hilo metálico premium', CAT: 'Fil metàl·lic premium', EN: 'Premium metallic yarn' },
@@ -44,7 +43,11 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted bag made from vegan leather yarn, woven with an elegant basket or interlaced stitch. Available in different colours and in a semicircular or square shape, with an integrated handle.' 
     },
     price: 40,
-    images: getImgs('oraia'),
+    images: [
+      `${IMG_PATH}oraia_1.jpg`, // Foto del bolso color Teal/Azul verdoso
+      `${IMG_PATH}oraia_2.jpg`, // Foto del bolso color Chocolate
+      `${IMG_PATH}oraia_3.jpg`  // Foto comparativa Bronze/Teal
+    ],
     colors: [{ name: 'Chocolate', hex: '#3E2723' }, { name: 'Burgundy', hex: '#800020' }, { name: 'Teal', hex: '#008080' }],
     details: {
       material: { ES: 'Hilo de piel vegana', CAT: 'Fil de pell vegana', EN: 'Vegan leather yarn' },
@@ -60,14 +63,18 @@ export const PRODUCTS: Product[] = [
   {
     id: 'altair',
     name: 'Altair',
-    meaning: { ES: 'Estrella brillante', CAT: 'Estrella brillant', EN: 'Bright star' },
+    meaning: { ES: 'Estrecha brillante', CAT: 'Estrella brillant', EN: 'Bright star' },
     description: { 
       ES: 'Bolso artesanal que destaca por su delicado punto estrella. Puede confeccionarse con hilo de piel vegana o con hilo reciclado de lycra, combinando diseño, sostenibilidad y calidad.', 
       CAT: 'Bolso artesanal que destaca pel seu delicat punt d’estrella. Es pot realitzar amb fil de pell vegana o amb fil reciclat de lycra, combinant disseny, sostenibilitat i qualitat.', 
       EN: 'Handcrafted bag distinguished by its delicate star stitch. It can be made using vegan leather yarn or recycled lycra yarn, combining design, sustainability and quality.' 
     },
     price: 50,
-    images: getImgs('altair'),
+    images: [
+      `${IMG_PATH}altair_1.jpg`, // Foto de la creadora con el bolso rosa punto estrella
+      `${IMG_PATH}altair_2.jpg`, // Detalle del punto estrella en rosa
+      `${IMG_PATH}altair_3.jpg`  // Foto extra de detalle
+    ],
     colors: [{ name: 'Pale Pink', hex: '#FADADD' }, { name: 'Black', hex: '#000000' }],
     details: {
       material: { ES: 'Piel vegana o lycra reciclada', CAT: 'Pell vegana o lycra reciclada', EN: 'Vegan leather or recycled lycra' },
@@ -81,11 +88,15 @@ export const PRODUCTS: Product[] = [
     meaning: { ES: 'Constelación / Minimalista', CAT: 'Constel·lació / Minimalista', EN: 'Constellation / Minimalist' },
     description: { 
       ES: 'Bolso clutch alargado tipo baguette con una elegancia marcada. Puede confeccionarse con hilo de piel vegana o con otras lanas recicladas. El punto cesto le aporta estructura y un acabado sofisticado.', 
-      CAT: 'Bolso clutch allargat tipus baguette amb una elegància marcada. Es pot realitzar amb fil de pell vegana o amb altres llanes reciclades. El punt cistell li aporta estructura i un acabat sofisticat.', 
+      CAT: 'Bolso clutch allargat tipus baguette amb una elegància marcada. Es pot realitzar amb fil de pell vegana o amb altres llanes reciclades. El punto cistell li aporta estructura i un acabat sofisticat.', 
       EN: 'Elongated baguette-style clutch with a strong, elegant presence. It can be crafted using vegan leather yarn or other recycled yarns. The basket stitch adds structure and a refined finish.' 
     },
     price: 50,
-    images: getImgs('lyra'),
+    images: [
+      `${IMG_PATH}lyra_1.jpg`, // Foto del bolso negro tipo baguette
+      `${IMG_PATH}lyra_2.jpg`, // Foto del bolso iridiscente/multicolor
+      `${IMG_PATH}lyra_3.jpg`  // Foto detalle de la cadena y forma
+    ],
     colors: [{ name: 'Black', hex: '#000000' }, { name: 'Iridiscent', hex: '#4B0082' }],
     details: {
       material: { ES: 'Piel vegana o lanas recicladas', CAT: 'Pell vegana o llanes reciclades', EN: 'Vegan leather or recycled yarns' },
@@ -103,7 +114,11 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted clutch made from recycled T-shirt yarn. Versatile design suitable for both everyday use and special occasions. Sustainable with true artisanal character.' 
     },
     price: 30,
-    images: getImgs('verae'),
+    images: [
+      `${IMG_PATH}verae_1.jpg`, // Foto grupo: Black, Animal Print, Chocolate
+      `${IMG_PATH}verae_2.jpg`, // Detalle Animal Print
+      `${IMG_PATH}verae_3.jpg`  // Detalle Black
+    ],
     colors: [{ name: 'Animal Print', hex: '#D2B48C' }, { name: 'Black', hex: '#000000' }, { name: 'Chocolate', hex: '#3E2723' }],
     details: {
       material: { ES: 'Hilo de camisetas recicladas', CAT: 'Fil de samarretes reciclades', EN: 'Recycled T-shirt yarn' },
@@ -126,7 +141,11 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted bag made from recycled materials, blending design and sustainability. Featuring a small handle and chain strap, it can be worn over the shoulder or under the arm.' 
     },
     price: 30,
-    images: getImgs('nara'),
+    images: [
+      `${IMG_PATH}nara_1.jpg`, // Foto bicolor Blanco/Negro con cadena
+      `${IMG_PATH}nara_2.jpg`, // Foto bicolor Rosa/Granate con cadena
+      `${IMG_PATH}nara_3.jpg`  // Detalle del asa trenzada bicolor
+    ],
     colors: [{ name: 'Bicolor White/Black', hex: '#F5F5F5' }, { name: 'Bicolor Burgundy', hex: '#800020' }],
     details: {
       material: { ES: 'Materiales reciclados', CAT: 'Materials reciclats', EN: 'Recycled materials' },
@@ -148,7 +167,11 @@ export const PRODUCTS: Product[] = [
       EN: 'Handmade bag crafted from recycled materials, fun and stylish. It features heart- or star-shaped clasps for a playful touch.' 
     },
     price: 30,
-    images: getImgs('vela'),
+    images: [
+      `${IMG_PATH}vela_1.jpg`, // Foto bolso verde con mosquetones estrella
+      `${IMG_PATH}vela_2.jpg`, // Detalle de los mosquetones
+      `${IMG_PATH}vela_3.jpg`  // Detalle del tejido
+    ],
     colors: [{ name: 'Pink Pattern', hex: '#FFB6C1' }, { name: 'Blue/White Pattern', hex: '#AFDBF5' }, { name: 'Green Moss', hex: '#8A9A5B' }],
     details: {
       material: { ES: 'Materiales reciclados', CAT: 'Materials reciclats', EN: 'Recycled materials' },
@@ -170,7 +193,12 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted bag made with a special velvet yarn that gives it a soft, highly sophisticated presence. Its elegant finish makes it the perfect accessory for any look.' 
     },
     price: 45,
-    images: getImgs('velain'),
+    images: [
+      `${IMG_PATH}velain_1.jpg`, // Tu foto principal del bolso fucsia
+      `${IMG_PATH}velain_2.jpg`, // Tu foto detalle (top view)
+      `${IMG_PATH}velain_3.jpg`, // Tu foto siendo sujetado por la mano
+      `${IMG_PATH}velain_4.jpg`  // Foto detalle del tejido terciopelo
+    ],
     colors: [{ name: 'Vibrant Fuchsia', hex: '#FF00FF' }],
     details: {
       material: { ES: 'Hilo de terciopelo especial', CAT: 'Fil de vellut especial', EN: 'Special velvet yarn' },
