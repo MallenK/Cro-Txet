@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Sparkles, Package } from 'lucide-react';
 import { Translation } from '../types';
+import { IMG_BASE, PRODUCTS } from '../constants';
 
 const Home: React.FC<{ t: Translation }> = ({ t }) => {
   useEffect(() => {
@@ -19,6 +20,8 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
     sections.forEach(s => observer.observe(s));
     return () => observer.disconnect();
   }, []);
+
+  const altair = PRODUCTS.find(p => p.id === 'altair');
 
   return (
     <div className="min-h-screen">
@@ -80,7 +83,7 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
               {/* Value 2 */}
               <div className="space-y-6 fade-in-section text-center md:text-left" style={{ transitionDelay: '0.2s' }}>
                 <div className="flex justify-center md:justify-start">
-                  <div className="p-5 bg-stone-950 rounded-full shadow-lg flex items-center justify-center">
+                  <div className="p-5 bg-stone-950 rounded-full shadow-lg flex -center justify-center">
                     <Sparkles className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </div>
                 </div>
@@ -111,11 +114,7 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
           <div className="lg:w-1/2 relative fade-in-section">
             <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=1200" 
-                alt="El taller" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"
-              />
+            <img src={IMG_BASE + "meritxell-2.jpeg"} alt="El taller" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"/>
             </div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-stone-100 hidden lg:block -z-10" />
           </div>
@@ -139,9 +138,9 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
       <section className="grid lg:grid-cols-2 bg-[#F9F8F6]">
         <div className="h-[70vh] lg:h-screen overflow-hidden fade-in-section">
           <img 
-            src="https://images.unsplash.com/photo-1549497538-301288c96677?auto=format&fit=crop&q=80&w=1200" 
+            src={altair?.images[1]}
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s]"
-            alt="Product Detail"
+            alt="Altair Detail"
           />
         </div>
         <div className="flex flex-col justify-center p-12 lg:p-24 space-y-10 fade-in-section">

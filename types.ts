@@ -107,3 +107,9 @@ export interface Translation {
     };
   };
 }
+
+export interface Fotos_Txell {
+  id: string;
+  src: string;
+  alt: string;
+}

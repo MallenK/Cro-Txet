@@ -1,8 +1,28 @@
 
-import { Product, Translation, Language } from './types';
+import { Product, Translation, Language, Fotos_Txell } from './types';
 
 // Directorio base para las fotos reales de producto
-const IMG_PATH = 'img/fotos_productos/';
+export const IMG_PATH = import.meta.env.BASE_URL + 'img/fotos_productos/';
+export const IMG_BASE = import.meta.env.BASE_URL + 'img/fotos_txell/';
+
+export const FOTOS_TXELL: Fotos_Txell[] = [
+  {
+    id: 'meritxell-1',
+    src: IMG_BASE + 'meritxell-1.jpeg',
+    alt: 'Meritxell trabajando en el taller'
+  },
+  {
+    id: 'meritxell-2',
+    src: IMG_BASE + 'meritxell-2.jpeg',
+    alt: 'Detalle artesanal en proceso'
+  },
+  {
+    id: 'meritxell-3',
+    src: IMG_BASE + 'meritxell.jpeg',
+    alt: 'Retrato en el taller'
+  }
+];
+
 
 export const PRODUCTS: Product[] = [
   {
@@ -19,12 +39,12 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted metallic bag with a semicircular shape and artisanal weave. It can feature a semicircular or square clasp, be worn by hand or with a chain, and include an integrated handle.' 
     },
     price: 35,
-    images: [
-      `${IMG_PATH}alea-black+silver+gold.jpeg`,
+    images: [    
       `${IMG_PATH}alea-old-silver.jpeg`,
       `${IMG_PATH}alea-negre-2.jpeg`,
       `${IMG_PATH}alea-negre.jpeg`,
-      `${IMG_PATH}alea-silver-+negre-+old-silver.jpeg`,
+      `${IMG_PATH}alea-black+silver+gold.jpeg`,
+      `${IMG_PATH}alea-silver-+-negre-+-old-silver.jpeg`,
       `${IMG_PATH}alea-silver.jpeg`
     ],
     colors: [{ name: 'Silver', hex: '#C0C0C0' }, { name: 'Golden', hex: '#D4AF37' }, { name: 'Metallic Black', hex: '#2C2C2C' }],
@@ -146,8 +166,8 @@ export const PRODUCTS: Product[] = [
     price: 30,
     images: [
       `${IMG_PATH}verae-marro.jpeg`,
-      `${IMG_PATH}verae-blau-+print-blau.jpeg`,
-      `${IMG_PATH}verae-marro-+negre-+print.jpeg`
+      `${IMG_PATH}verae-blau-+-print-blau.jpeg`,
+      `${IMG_PATH}verae-marro-+-negre-+-print.jpeg`
     ],
     colors: [{ name: 'Animal Print', hex: '#D2B48C' }, { name: 'Black', hex: '#000000' }, { name: 'Chocolate', hex: '#3E2723' }],
     details: {
@@ -179,7 +199,7 @@ export const PRODUCTS: Product[] = [
       `${IMG_PATH}nara-blanc+negre.jpeg`,
       `${IMG_PATH}nara-blanc+negre-2.jpeg`,
       `${IMG_PATH}nara-rosa+burgundy.jpeg`,
-      `${IMG_PATH}nara-vermell-+daurat.jpeg`
+      `${IMG_PATH}nara-vermell-+-daurat.jpeg`
     ],
     colors: [{ name: 'Bicolor White/Black', hex: '#F5F5F5' }, { name: 'Bicolor Burgundy', hex: '#800020' }],
     details: {
