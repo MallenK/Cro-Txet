@@ -52,6 +52,9 @@ export interface Translation {
     lookbookTitle: string;
     lookbookDesc: string;
     lookbookCta: string;
+    aboutLinkTitle: string;
+    aboutLinkDesc: string;
+    aboutLinkCta: string;
   };
   about: {
     label: string;

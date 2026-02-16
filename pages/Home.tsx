@@ -54,8 +54,8 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
         </div>
       </section>
 
-      {/* Values - Editorial Grid with Icons */}
-      <section className="py-32 lg:py-48 px-8 lg:px-24 bg-[#F9F8F6]">
+      {/* Values - Updated Background and Icons */}
+      <section className="py-32 lg:py-48 px-8 lg:px-24 bg-stone-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
             <div className="lg:col-span-4 space-y-6 fade-in-section">
@@ -69,8 +69,8 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
               {/* Value 1 */}
               <div className="space-y-6 fade-in-section text-center md:text-left" style={{ transitionDelay: '0.1s' }}>
                 <div className="flex justify-center md:justify-start">
-                  <div className="p-4 bg-stone-200 rounded-full shadow-sm flex items-center justify-center">
-                    <Clock className="w-6 h-6 text-stone-950" strokeWidth={1.5} />
+                  <div className="p-5 bg-stone-950 rounded-full shadow-lg flex items-center justify-center">
+                    <Clock className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </div>
                 </div>
                 <h4 className="text-sm uppercase tracking-widest text-stone-950 font-bold">{t.home.values.slow}</h4>
@@ -80,8 +80,8 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
               {/* Value 2 */}
               <div className="space-y-6 fade-in-section text-center md:text-left" style={{ transitionDelay: '0.2s' }}>
                 <div className="flex justify-center md:justify-start">
-                  <div className="p-4 bg-stone-200 rounded-full shadow-sm flex items-center justify-center">
-                    <Sparkles className="w-6 h-6 text-stone-950" strokeWidth={1.5} />
+                  <div className="p-5 bg-stone-950 rounded-full shadow-lg flex items-center justify-center">
+                    <Sparkles className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </div>
                 </div>
                 <h4 className="text-sm uppercase tracking-widest text-stone-950 font-bold">{t.home.values.handmade}</h4>
@@ -91,8 +91,8 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
               {/* Value 3 */}
               <div className="space-y-6 fade-in-section text-center md:text-left" style={{ transitionDelay: '0.3s' }}>
                 <div className="flex justify-center md:justify-start">
-                  <div className="p-4 bg-stone-200 rounded-full shadow-sm flex items-center justify-center">
-                    <Package className="w-6 h-6 text-stone-950" strokeWidth={1.5} />
+                  <div className="p-5 bg-stone-950 rounded-full shadow-lg flex items-center justify-center">
+                    <Package className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </div>
                 </div>
                 <h4 className="text-sm uppercase tracking-widest text-stone-950 font-bold">{t.home.values.demand}</h4>
@@ -106,8 +106,37 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
         </div>
       </section>
 
+      {/* New Section: Link to 'Qui Sóc' */}
+      <section className="py-32 lg:py-60 px-8 lg:px-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
+          <div className="lg:w-1/2 relative fade-in-section">
+            <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
+              <img 
+                src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=1200" 
+                alt="El taller" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"
+              />
+            </div>
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-stone-100 hidden lg:block -z-10" />
+          </div>
+          <div className="lg:w-1/2 space-y-10 fade-in-section" style={{ transitionDelay: '0.2s' }}>
+             <span className="text-[11px] uppercase tracking-[0.5em] text-stone-400 font-bold">{t.nav.about}</span>
+             <h3 className="text-5xl lg:text-7xl font-serif text-stone-950 leading-tight">
+               {t.home.aboutLinkTitle}
+             </h3>
+             <p className="text-stone-900 text-2xl leading-relaxed max-w-lg">
+               {t.home.aboutLinkDesc}
+             </p>
+             <Link to="/about" className="group flex items-center gap-4 text-[12px] uppercase tracking-[0.4em] font-bold text-stone-950">
+               {t.home.aboutLinkCta}
+               <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-500" />
+             </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Lookbook Style Split */}
-      <section className="grid lg:grid-cols-2 bg-white">
+      <section className="grid lg:grid-cols-2 bg-[#F9F8F6]">
         <div className="h-[70vh] lg:h-screen overflow-hidden fade-in-section">
           <img 
             src="https://images.unsplash.com/photo-1549497538-301288c96677?auto=format&fit=crop&q=80&w=1200" 

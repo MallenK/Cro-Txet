@@ -26,26 +26,26 @@ const LegalPage: React.FC<LegalPageProps> = ({ t, lang, type }) => {
             </p>
             <p>
               {lang === 'CAT'
-                ? 'Per poder tramitar una devolució, l’article ha d’estar en les mateixes condicions en què el vas rebre, sense usar, amb totes les etiquetes i en el seu embalatge original.'
+                ? 'Per poder tramitar una devolució, l’article ha d’estar en les mateixes condicions en què el vas rebre, sense usar o amb ús, amb totes les etiquetes i en el seu embalatge original.'
                 : lang === 'ES'
-                ? 'Para poder tramitar una devolución, el artículo debe encontrarse en las mismas condiciones en que fue recibido, sin usar, con todas las etiquetas y en su embalaje original.'
-                : 'To be eligible for a return, the item must be in the same condition as when received, unused, with all tags attached and in its original packaging.'}
+                ? 'Para poder tramitar una devolución, el artículo debe encontrarse en las mismas condiciones en que fue recibido, sin usar o usado, con todas las etiquetas y en su embalaje original.'
+                : 'To be eligible for a return, the item must be in the same condition as when received, unused or used, with all tags attached and in its original packaging.'}
             </p>
             <p className="bg-stone-50 p-6 border-l-4 border-stone-950 font-medium">
               {lang === 'CAT'
-                ? 'Per iniciar una devolució, contacta’ns a hola@croandtxet.cat, indicant el motiu de la devolució. Les despeses d’enviament van a càrrec del client.'
+                ? 'Per iniciar una devolució, contacta’ns a hola@croandtxet.cat, indicant el motiu de la devolució.'
                 : lang === 'ES'
-                ? 'Para solicitar una devolución, contáctanos en hola@croandtxet.cat, indicando el motivo. Los gastos de envío corren a cargo del cliente.'
-                : 'To request a return, please contact us at hola@croandtxet.cat, explaining the reason. Shipping costs are the customer’s responsibility.'}
+                ? 'Para solicitar una devolución, contáctanos en hola@croandtxet.cat, indicando el motivo de la devolución.'
+                : 'To request a return, please contact us at hola@croandtxet.cat, explaining the reason for the return.'}
             </p>
             <div className="pt-10 space-y-4 border-t border-stone-200">
                <h3 className="text-[13px] uppercase tracking-[0.3em] font-bold text-stone-950">Reemborsaments / Reembolsos / Refunds</h3>
                <p className="text-lg">
                  {lang === 'CAT'
-                   ? 'Un cop rebuda i inspeccionada la devolució, t’informarem si ha estat aprovat. El reemborsament s’efectuarà en un termini màxim de 10 dies hàbils.'
+                   ? 'Un cop rebuda i inspeccionada la devolució, t’informarem si el reemborsament ha estat aprovat. S’efectuarà en un termini màxim de 10 dies hàbils.'
                    : lang === 'ES'
-                   ? 'Una vez recibida e inspeccionada la devolución, te notificaremos si ha sido aprobado. El reembolso se realizará en un plazo de 10 días hábiles.'
-                   : 'Once we receive and inspect your return, we will notify you of the approval. The refund will be issued within 10 business days.'}
+                   ? 'Una vez recibida e inspeccionada la devolución, te notificaremos si el reembolso ha sido aprobado. Se realizará en un plazo de 10 días hábiles.'
+                   : 'Once we receive and inspect your return, we will notify you whether your refund has been approved. It will be issued within 10 business days.'}
                </p>
             </div>
           </div>
@@ -66,15 +66,12 @@ const LegalPage: React.FC<LegalPageProps> = ({ t, lang, type }) => {
               <ul className="list-disc list-inside space-y-4 text-lg">
                 <li>Gestió de comandes i facturació.</li>
                 <li>Atenció al client i consultes.</li>
-                <li>Comunicacions comercials (amb consentiment).</li>
+                <li>Millora dels serveis i anàlisi d’ús.</li>
               </ul>
             </div>
             <div className="space-y-4">
-              <h3 className="text-2xl font-serif text-stone-950">3. Drets</h3>
-              <p className="text-lg">
-                L’usuari pot exercir els seus drets d’accés, rectificació, supressió i portabilitat enviant una sol·licitud a 
-                <span className="font-bold border-b border-stone-950"> hola@croandtxet.cat</span>. Cro&Txet aplica totes les mesures tècniques necessàries per garantir la seguretat de les teves dades.
-              </p>
+              <h3 className="text-2xl font-serif text-stone-950">3. Base jurídica</h3>
+              <p className="text-lg">Execució d’un contracte, compliment d’obligacions legals i consentiment de l’interessat.</p>
             </div>
           </div>
         </article>

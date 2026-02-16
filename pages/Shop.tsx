@@ -13,7 +13,7 @@ interface ShopProps {
 const Shop: React.FC<ShopProps> = ({ t, lang }) => {
   return (
     <div className="py-20 px-6 lg:py-32 lg:px-20 max-w-[1600px] mx-auto animate-fade-in">
-      <header className="mb-20 lg:mb-32 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 border-b border-stone-100 pb-16">
+      <header className="mb-20 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 border-b border-stone-100 pb-16">
         <div className="space-y-6">
           <div className="flex items-center gap-3">
              <span className="h-[1px] w-6 bg-stone-900" />

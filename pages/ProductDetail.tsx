@@ -28,7 +28,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
   const [activeImg, setActiveImg] = useState(0);
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  // Set isDetailsOpen to true by default
   const [isDetailsOpen, setIsDetailsOpen] = useState(true);
 
   useEffect(() => {
@@ -60,7 +59,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
     <div className="min-h-screen bg-white animate-fade-in pb-32">
       {/* Mobile Sticky Back Button */}
       <div className="lg:hidden sticky top-0 z-30 bg-white/90 backdrop-blur-md px-6 py-4 flex items-center border-b border-stone-100">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-stone-950 font-bold text-[10px] uppercase tracking-[0.2em]">
+        <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-stone-950 font-bold text-[10px] uppercase tracking-[0.2em] font-sans">
           <ChevronLeft className="w-4 h-4" /> {t.common.back}
         </button>
       </div>
@@ -69,7 +68,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
         
         {/* Gallery - Sticky Scroll Layout */}
         <section className="lg:w-[60%] xl:w-[65%] flex flex-col">
-          {/* Main Visual Carousel on Mobile, List on Desktop */}
           <div className="flex flex-col lg:gap-px bg-stone-50">
             {product.images.map((img, idx) => (
               <div 
@@ -85,14 +83,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
                 {idx === 0 && (
                   <div className="absolute top-8 right-8 bg-white/90 backdrop-blur px-4 py-2 rounded-full border border-stone-200 flex items-center gap-2 shadow-sm">
                     <Award className="w-3.5 h-3.5 text-stone-950" />
-                    <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-stone-950">Peça única</span>
+                    <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-stone-950 font-sans">Peça única</span>
                   </div>
                 )}
               </div>
             ))}
           </div>
           
-          {/* Mobile indicator dots */}
           <div className="lg:hidden flex justify-center gap-2 py-4">
             {product.images.map((_, i) => (
               <div key={i} className={`w-1.5 h-1.5 rounded-full ${activeImg === i ? 'bg-stone-950' : 'bg-stone-300'}`} />
@@ -100,31 +97,30 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
           </div>
         </section>
 
-        {/* Purchase/Inquiry Info */}
+        {/* Info Section */}
         <section className="lg:w-[40%] xl:w-[35%] lg:sticky lg:top-0 lg:h-screen flex flex-col p-6 lg:p-12 xl:p-20 overflow-y-auto no-scrollbar">
           <div className="space-y-12">
             
-            {/* Header Block */}
             <header className="space-y-4">
               <div className="flex items-center gap-3">
                 <span className="h-[1px] w-6 bg-stone-900" />
-                <span className="text-[12px] uppercase tracking-[0.4em] text-stone-950 font-bold">
+                <span className="text-[12px] uppercase tracking-[0.4em] text-stone-950 font-bold font-sans">
                   {product.meaning[lang]}
                 </span>
               </div>
+
               <h1 className="text-5xl lg:text-6xl xl:text-7xl font-serif text-stone-950 leading-none">
                 {product.name}
               </h1>
-              <p className="text-3xl font-serif text-stone-950 pt-2">{product.price}€</p>
+              <p className="text-3xl font-serif text-stone-950 pt-2 font-serif">{product.price}€</p>
             </header>
 
-            {/* Narrative Block */}
             <div className="space-y-6">
-              <p className="text-stone-900 text-xl lg:text-2xl leading-relaxed">
+              <p className="text-stone-900 text-2xl lg:text-3xl font-serif leading-relaxed">
                 {product.description[lang]}
               </p>
               
-              <div className="flex flex-wrap gap-2 pt-2">
+              <div className="flex flex-wrap gap-2 pt-2 font-sans">
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-full">
                   <Sparkles className="w-3 h-3 text-stone-950" />
                   <span className="text-[10px] uppercase tracking-widest text-stone-950 font-bold">Disseny Artesanal</span>
@@ -136,13 +132,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
               </div>
             </div>
 
-            {/* Artisan Details Accordion */}
-            <div className="border-t border-stone-200 pt-8">
+            <div className="border-t border-stone-200 pt-8 font-serif">
               <button 
                 onClick={() => setIsDetailsOpen(!isDetailsOpen)}
                 className="w-full flex justify-between items-center py-4 group"
               >
-                <span className="text-[11px] uppercase tracking-[0.3em] font-bold text-stone-950">{t.shop.detailsLabel}</span>
+                <span className="text-[11px] uppercase tracking-[0.3em] font-bold text-stone-950 font-sans">{t.shop.detailsLabel}</span>
                 <ChevronDown className={`w-4 h-4 text-stone-600 transition-transform duration-500 ${isDetailsOpen ? 'rotate-180' : ''}`} />
               </button>
               
@@ -150,42 +145,34 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
                 <div className="space-y-6 text-sm">
                   {product.details?.material && (
                     <div>
-                      <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-2">{t.shop.materialLabel}</h4>
-                      <p className="text-stone-900 text-xl">{product.details.material[lang]}</p>
+                      <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-2 font-sans">{t.shop.materialLabel}</h4>
+                      <p className="text-stone-900 text-xl font-serif">{product.details.material[lang]}</p>
                     </div>
                   )}
                   {product.details?.stitch && (
                     <div>
-                      <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-2">{t.shop.stitchLabel}</h4>
-                      <p className="text-stone-900 text-xl">{product.details.stitch[lang]}</p>
+                      <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-2 font-sans">{t.shop.stitchLabel}</h4>
+                      <p className="text-stone-900 text-xl font-serif">{product.details.stitch[lang]}</p>
                     </div>
                   )}
                   {product.details?.options && (
                     <div>
-                      <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-2">{t.shop.optionsLabel}</h4>
-                      <ul className="list-disc list-inside text-stone-900 text-xl space-y-2">
+                      <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-2 font-sans">{t.shop.optionsLabel}</h4>
+                      <ul className="list-disc list-inside text-stone-900 text-xl space-y-2 font-serif">
                         {product.details.options[lang].map((opt, i) => (
                           <li key={i}>{opt}</li>
                         ))}
                       </ul>
                     </div>
                   )}
-                  {product.details?.extraChain && (
-                    <div className="p-4 bg-stone-50 border border-stone-200 rounded mt-4">
-                      <p className="text-[11px] uppercase tracking-widest text-stone-950 font-bold flex items-center gap-2">
-                        <Plus className="w-3 h-3" /> {t.shop.optionalChain}
-                      </p>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
 
-            {/* Inquiry Form Block */}
             <div className="space-y-10 pt-8 border-t border-stone-200">
               <div className="space-y-3">
                 <h3 className="text-2xl font-serif text-stone-950">Personalitza la teva peça</h3>
-                <p className="text-stone-800 text-[11px] uppercase tracking-widest font-bold">Consulta per a fabricació personalitzada</p>
+                <p className="text-stone-800 text-[11px] uppercase tracking-widest font-bold font-sans">Consulta per a fabricació personalitzada</p>
               </div>
 
               {formStatus === 'success' ? (
@@ -193,79 +180,38 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
                   <div className="flex justify-center">
                     <CheckCircle2 className="w-12 h-12 text-stone-300" />
                   </div>
-                  <div className="space-y-2">
-                    <p className="font-serif text-2xl tracking-tight">{t.contact.form.sent}</p>
-                    <p className="text-stone-300 text-[11px] uppercase tracking-widest leading-relaxed">Et contactaré aviat per confirmar detalls.</p>
-                  </div>
+                  <p className="font-serif text-2xl tracking-tight">{t.contact.form.sent}</p>
                 </div>
               ) : (
-                <form onSubmit={handleOrderSubmit} className="space-y-10">
-                  <div className="space-y-1 flex flex-col">
-                    <label htmlFor="name" className="text-[10px] uppercase tracking-widest text-stone-950 font-bold pl-1">{t.contact.form.name}</label>
-                    <input 
-                      id="name"
-                      type="text" 
-                      required
-                      placeholder={t.contact.form.namePlaceholder}
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="w-full bg-transparent border-b border-stone-400 py-3 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg placeholder:text-stone-400"
-                    />
-                  </div>
-                  <div className="space-y-1 flex flex-col">
-                    <label htmlFor="email" className="text-[10px] uppercase tracking-widest text-stone-950 font-bold pl-1">{t.contact.form.email}</label>
-                    <input 
-                      id="email"
-                      type="email" 
-                      required
-                      placeholder={t.contact.form.emailPlaceholder}
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full bg-transparent border-b border-stone-400 py-3 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg placeholder:text-stone-400"
-                    />
-                  </div>
-                  <div className="space-y-1 flex flex-col">
-                    <label htmlFor="message" className="text-[10px] uppercase tracking-widest text-stone-950 font-bold pl-1">{t.contact.form.message}</label>
-                    <textarea 
-                      id="message"
-                      required
-                      rows={2}
-                      placeholder={t.contact.form.messagePlaceholder}
-                      value={formData.message}
-                      onChange={(e) => setFormData({...formData, message: e.target.value})}
-                      className="w-full bg-transparent border-b border-stone-400 py-3 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg placeholder:text-stone-400 resize-none"
-                    />
-                  </div>
+                <form onSubmit={handleOrderSubmit} className="space-y-10 font-sans">
+                  <input 
+                    type="text" 
+                    required
+                    placeholder={t.contact.form.namePlaceholder}
+                    className="w-full bg-transparent border-b border-stone-400 py-3 focus:outline-none transition-all text-stone-950 text-lg"
+                  />
+                  <input 
+                    type="email" 
+                    required
+                    placeholder={t.contact.form.emailPlaceholder}
+                    className="w-full bg-transparent border-b border-stone-400 py-3 focus:outline-none transition-all text-stone-950 text-lg"
+                  />
+                  <textarea 
+                    required
+                    rows={2}
+                    placeholder={t.contact.form.messagePlaceholder}
+                    className="w-full bg-transparent border-b border-stone-400 py-3 focus:outline-none transition-all text-stone-950 text-lg resize-none"
+                  />
 
                   <button 
                     type="submit"
                     disabled={formStatus === 'loading'}
-                    className="w-full py-6 bg-stone-950 text-white text-[11px] uppercase tracking-[0.4em] font-bold hover:bg-black transition-all active:scale-95 flex items-center justify-center gap-4 disabled:opacity-70 group shadow-lg"
+                    className="w-full py-6 bg-stone-950 text-white text-[11px] uppercase tracking-[0.4em] font-bold hover:bg-black transition-all flex items-center justify-center gap-4 group shadow-lg"
                   >
-                    {formStatus === 'loading' ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <>
-                        {t.contact.form.send}
-                        <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </>
-                    )}
+                    {formStatus === 'loading' ? <Loader2 className="w-4 h-4 animate-spin" /> : <>{t.contact.form.send} <Send className="w-4 h-4 group-hover:translate-x-1" /></>}
                   </button>
                 </form>
               )}
-
-              {/* Guarantees Summary */}
-              <div className="space-y-6 pt-4">
-                <div className="flex items-center gap-4">
-                  <Package className="w-5 h-5 text-stone-950" />
-                  <span className="text-[11px] uppercase tracking-[0.2em] font-bold text-stone-950">
-                    Sota demanda: {t.home.values.demandSubtitle}
-                  </span>
-                </div>
-                <p className="text-lg text-stone-950 leading-relaxed border-l-2 border-stone-200 pl-4">
-                  {t.common.artisanNote}
-                </p>
-              </div>
             </div>
           </div>
         </section>
