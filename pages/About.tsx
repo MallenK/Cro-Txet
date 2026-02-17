@@ -37,28 +37,22 @@ const About: React.FC<{ t: Translation }> = ({ t }) => {
 
         {/* IMAGES SECTION */}
         <section className="flex flex-col gap-12 lg:gap-16">
-          
-          <div className="relative overflow-hidden group shadow-sm rounded-sm">
-            <img 
-              src={IMG_BASE + "meritxell-1.jpeg"}
-              alt="Creadora de Cro&Txet"
-              className="w-full aspect-[4/5] object-cover transition-transform duration-[2s] group-hover:scale-105"
-              loading="eager"
-            />
-            <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
-          </div>
-          
-          <div className="relative overflow-hidden group shadow-sm rounded-sm">
-            <img 
-              src={IMG_BASE + "meritxell.jpeg"}
-              alt="Detall artesanal en el taller"
-              className="w-full aspect-[4/5] object-cover transition-transform duration-[2s] group-hover:scale-105"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
-          </div>
+
+          {["meritxell-1.jpeg", "meritxell-2.jpeg", "meritxell.jpeg"].map((img, i) => (
+            <div key={img} className="relative overflow-hidden group shadow-sm rounded-sm max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] mx-auto">
+              <img 
+                src={IMG_BASE + img}
+                alt="Creadora de Cro&Txet"
+                className="w-full aspect-[4/5] object-cover transition-transform duration-[2s] group-hover:scale-105"
+                loading={i === 0 ? "eager" : "lazy"}
+                onError={(e) => (e.currentTarget.parentElement!.style.display = "none")}
+              />
+              <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
+            </div>
+          ))}
 
         </section>
+
       </div>
 
       {/* Visionary Quote */}

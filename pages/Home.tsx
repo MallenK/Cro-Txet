@@ -27,11 +27,11 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
     <div className="min-h-screen">
       {/* Editorial Hero */}
       <section className="relative min-h-[95vh] flex flex-col justify-center items-center overflow-hidden px-8">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 blur-[2px]">
           <img 
-            src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&q=80&w=2000" 
+            src={IMG_BASE + "Foto_Home.png"}
             alt="Craftsmanship" 
-            className="w-full h-full object-cover scale-105"
+            className="w-full h-full object-cover scale-105 blur-2"
           />
           <div className="absolute inset-0 bg-stone-950/20 backdrop-blur-[1px]" />
         </div>

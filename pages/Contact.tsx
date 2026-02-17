@@ -1,20 +1,52 @@
-
 import React from 'react';
+import emailjs from '@emailjs/browser';
 import { Translation } from '../types';
 import { Send, MapPin, Mail, Sparkles, Heart, Loader2, CheckCircle2 } from 'lucide-react';
 
 const Contact: React.FC<{ t: Translation }> = ({ t }) => {
   const [formStatus, setFormStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = React.useState({
+    from_name: '',
+    from_email: '',
+    message: ''
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('loading');
-    // Simulamos envío premium
-    setTimeout(() => {
+
+    try {
+      await emailjs.send(
+        'service_z2mi68a',
+        'template_dradehi',
+        formData,
+        'iGpB097zxE-0bBxRC'
+      );
+
       setFormStatus('success');
+      setFormData({
+        from_name: '',
+        from_email: '',
+        message: ''
+      });
+
       setTimeout(() => setFormStatus('idle'), 5000);
-    }, 1500);
+    } catch (error) {
+      console.error(error);
+      setFormStatus('idle');
+    }
   };
+
 
   return (
     <div className="animate-fade-in bg-white min-h-screen">
@@ -54,18 +86,28 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
             <form onSubmit={handleSubmit} className="space-y-10">
               <div className="grid md:grid-cols-2 gap-10">
                 <div className="space-y-3">
-                  <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">{t.contact.form.name}</label>
+                  <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
+                    {t.contact.form.name}
+                  </label>
                   <input 
-                    type="text" 
+                    type="text"
+                    name="from_name"
+                    value={formData.from_name}
+                    onChange={handleChange}
                     required
                     placeholder={t.contact.form.namePlaceholder}
                     className="w-full bg-stone-50 border border-stone-200 py-5 px-7 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg shadow-sm font-sans"
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">{t.contact.form.email}</label>
+                  <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
+                    {t.contact.form.email}
+                  </label>
                   <input 
-                    type="email" 
+                    type="email"
+                    name="from_email"
+                    value={formData.from_email}
+                    onChange={handleChange}
                     required
                     placeholder={t.contact.form.emailPlaceholder}
                     className="w-full bg-stone-50 border border-stone-200 py-5 px-7 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg shadow-sm font-sans"
@@ -74,8 +116,13 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
               </div>
               
               <div className="space-y-3">
-                <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">{t.contact.form.message}</label>
+                <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
+                  {t.contact.form.message}
+                </label>
                 <textarea 
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                   rows={5}
                   placeholder={t.contact.form.messagePlaceholder}

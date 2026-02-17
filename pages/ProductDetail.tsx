@@ -14,6 +14,7 @@ import {
   Sparkles,
   Package
 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 interface ProductDetailProps {
   t: Translation;
@@ -66,14 +67,49 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
     if (isRightSwipe) prevImg();
   };
 
+
+  const [orderData, setOrderData] = React.useState({
+    from_name: '',
+    from_email: '',
+    message: ''
+  });
+
+  const handleOrderChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setOrderData({
+      ...orderData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('loading');
-    setTimeout(() => {
+
+    try {
+      await emailjs.send(
+        'service_z2mi68a',
+        'template_dradehi',
+        orderData,
+        'iGpB097zxE-0bBxRC'
+      );
+
       setFormStatus('success');
-      setTimeout(() => setFormStatus('idle'), 8000);
-    }, 1500);
+      setOrderData({
+        from_name: '',
+        from_email: '',
+        message: ''
+      });
+
+      setTimeout(() => setFormStatus('idle'), 5000);
+
+    } catch (error) {
+      console.error(error);
+      setFormStatus('idle');
+    }
   };
+
 
   return (
     <div className="min-h-screen bg-white animate-fade-in pb-32">
@@ -223,14 +259,50 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
               ) : (
                 <div className="space-y-10">
                   <h3 className="text-3xl lg:text-4xl font-serif text-stone-950 leading-tight">Personalitza la teva peça única</h3>
-                  <form onSubmit={handleOrderSubmit} className="space-y-8">
-                    <input type="text" required placeholder={t.contact.form.namePlaceholder} className="w-full bg-stone-50 border border-stone-200 py-5 px-7 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg shadow-sm" />
-                    <input type="email" required placeholder={t.contact.form.emailPlaceholder} className="w-full bg-stone-50 border border-stone-200 py-5 px-7 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg shadow-sm" />
-                    <textarea required rows={4} placeholder={t.contact.form.messagePlaceholder} className="w-full bg-stone-50 border border-stone-200 py-5 px-7 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg resize-none shadow-sm" />
-                    <button type="submit" disabled={formStatus === 'loading'} className="w-full py-8 bg-stone-950 text-white text-[11px] uppercase tracking-[0.6em] font-bold hover:bg-black transition-all shadow-2xl flex items-center justify-center gap-4 group">
-                      {formStatus === 'loading' ? <Loader2 className="w-5 h-5 animate-spin" /> : <>{t.contact.form.send} <Send className="w-4 h-4 group-hover:translate-x-2 transition-transform" /></>}
-                    </button>
-                  </form>
+                    <form onSubmit={handleOrderSubmit} className="space-y-8">
+
+                      <input
+                        type="text"
+                        name="from_name"
+                        value={orderData.from_name}
+                        onChange={handleOrderChange}
+                        required
+                        placeholder={t.contact.form.namePlaceholder}
+                        className="w-full bg-stone-50 border border-stone-200 py-5 px-7 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg shadow-sm"
+                      />
+
+                      <input
+                        type="email"
+                        name="from_email"
+                        value={orderData.from_email}
+                        onChange={handleOrderChange}
+                        required
+                        placeholder={t.contact.form.emailPlaceholder}
+                        className="w-full bg-stone-50 border border-stone-200 py-5 px-7 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg shadow-sm"
+                      />
+
+                      <textarea
+                        name="message"
+                        value={orderData.message}
+                        onChange={handleOrderChange}
+                        required
+                        rows={4}
+                        placeholder={t.contact.form.messagePlaceholder}
+                        className="w-full bg-stone-50 border border-stone-200 py-5 px-7 focus:outline-none focus:border-stone-950 transition-all text-stone-950 text-lg resize-none shadow-sm"
+                      />
+
+                      <button
+                        type="submit"
+                        disabled={formStatus === 'loading'}
+                        className="w-full py-8 bg-stone-950 text-white text-[11px] uppercase tracking-[0.6em] font-bold hover:bg-black transition-all shadow-2xl flex items-center justify-center gap-4 group"
+                      >
+                        {formStatus === 'loading'
+                          ? <Loader2 className="w-5 h-5 animate-spin" />
+                          : <>{t.contact.form.send} <Send className="w-4 h-4 group-hover:translate-x-2 transition-transform" /></>}
+                      </button>
+
+                    </form>
+
                 </div>
               )}
             </div>

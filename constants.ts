@@ -20,6 +20,11 @@ export const FOTOS_TXELL: Fotos_Txell[] = [
     id: 'meritxell-3',
     src: IMG_BASE + 'meritxell.jpeg',
     alt: 'Retrato en el taller'
+  },
+  {
+    id: 'Home',
+    src: IMG_BASE + 'Foto_Home.png',
+    alt: 'Foto home'
   }
 ];
 
@@ -40,7 +45,7 @@ export const PRODUCTS: Product[] = [
     },
     price: 35,
     images: [    
-      `${IMG_PATH}alea-old-silver.jpeg`,
+      `${IMG_PATH}alea_gpt.png`,
       `${IMG_PATH}alea-negre-2.jpeg`,
       `${IMG_PATH}alea-negre.jpeg`,
       `${IMG_PATH}alea-black+silver+gold.jpeg`,
@@ -74,6 +79,7 @@ export const PRODUCTS: Product[] = [
     },
     price: 40,
     images: [
+      `${IMG_PATH}oraia_gpt.png`,
       `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat-2.jpeg`,
       `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat-1.jpeg`,
       `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat.jpeg`,
@@ -112,6 +118,7 @@ export const PRODUCTS: Product[] = [
     },
     price: 50,
     images: [
+      `${IMG_PATH}altair_gpt.png`,
       `${IMG_PATH}altair-pell-rosa.jpeg`,
       `${IMG_PATH}altair-pell-rosa-2.jpeg`
     ],
@@ -137,6 +144,7 @@ export const PRODUCTS: Product[] = [
     },
     price: 50,
     images: [
+      `${IMG_PATH}lyra_gpt.png`,
       `${IMG_PATH}lyra-negre-pell-2.jpeg`,
       `${IMG_PATH}lyra-marro-fantasia-2.jpeg`,
       `${IMG_PATH}lyra-marro-fantasia-3.jpeg`,
@@ -165,6 +173,7 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
+      `${IMG_PATH}verae_gpt.png`,
       `${IMG_PATH}verae-marro.jpeg`,
       `${IMG_PATH}verae-blau-+-print-blau.jpeg`,
       `${IMG_PATH}verae-marro-+-negre-+-print.jpeg`
@@ -196,6 +205,7 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
+      `${IMG_PATH}nara_gpt.png`,
       `${IMG_PATH}nara-blanc+negre.jpeg`,
       `${IMG_PATH}nara-blanc+negre-2.jpeg`,
       `${IMG_PATH}nara-rosa+burgundy.jpeg`,
@@ -227,6 +237,7 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
+      `${IMG_PATH}vela_gpt.png`,
       `${IMG_PATH}vela-blaus.jpeg`,
       `${IMG_PATH}vela-rosa+vermell.jpeg`,
       `${IMG_PATH}vela-verds.jpeg`,
@@ -258,6 +269,7 @@ export const PRODUCTS: Product[] = [
     },
     price: 45,
     images: [
+      `${IMG_PATH}velain_gpt.png`,
       `${IMG_PATH}velain-fucsia.jpeg`,
       `${IMG_PATH}velain-fucsia-2.jpeg`
     ],
