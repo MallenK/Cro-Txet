@@ -5,8 +5,10 @@ import path from 'path';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
+  const isVercel = process.env.VERCEL === '1';
+
   return {
-    base: '/Cro-Txet/', // 👈 IMPORTANTE para GitHub Pages
+    base: isVercel ? '/' : '/Cro-Txet/',
 
     server: {
       port: 3000,
@@ -17,7 +19,7 @@ export default defineConfig(({ mode }) => {
 
     define: {
       'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },
 
     resolve: {
