@@ -103,7 +103,7 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
           </div>
 
           <a 
-            href="https://instagram.com" 
+            href="https://instagram.com/cro_and_txet" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center gap-4 w-fit py-2"

@@ -294,7 +294,7 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       productionTime: 'Elaboro cada peça a mà i sota demanda en un termini de 5 a 10 dies laborables.',
       language: 'Idioma'
     },
-    nav: { home: 'Inici', about: 'Qui sóc', shop: 'Shop', contact: 'Contacte' },
+    nav: { home: 'Inici', about: 'Qui sóc', shop: 'Tenda', contact: 'Contacte' },
     home: {
       heroSubtitle: 'Bosses úniques, fetes a mà amb amor i estil',
       heroTitle: 'Fils que expliquen una història',
@@ -375,7 +375,7 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       productionTime: 'Elaboro cada unidad a mano y bajo demanda en un plazo de 5 a 10 días laborables.',
       language: 'Idioma'
     },
-    nav: { home: 'Inicio', about: 'Qui sóc', shop: 'Shop', contact: 'Contacto' },
+    nav: { home: 'Inicio', about: 'Quien soy', shop: 'Tienda', contact: 'Contacto' },
     home: {
       heroSubtitle: 'Bolsos únicos, hechos a mano con amor y estilo',
       heroTitle: 'Hilos que cuentan una historia',
@@ -399,7 +399,7 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       aboutLinkCta: 'Conocer mi historia'
     },
     about: {
-      label: 'Qui sóc',
+      label: 'Quien soy',
       title: 'Hilos que cuentan una historia',
       story: [
         'Todo empezó con mi madre. Siempre la recuerdo con alguna labor entre las manos, cosiendo con esa calma y delicadeza que solo da el amor por las cosas hechas despacio. Ella me enseñó los primeros puntos, casi como un juego, sin imaginar que aquel hilo invisible seguiría uniéndonos muchos años después.',
