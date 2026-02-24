@@ -107,7 +107,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
       `;
 
       await emailjs.send(
-        'service_z2mi68a',
+        'service_wsj9ttf',
         'template_dradehi',
         {
           ...orderData,

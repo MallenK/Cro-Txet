@@ -27,7 +27,7 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
 
     try {
       await emailjs.send(
-        'service_z2mi68a',
+        'service_wsj9ttf',
         'template_dradehi',
         formData,
         'iGpB097zxE-0bBxRC'
