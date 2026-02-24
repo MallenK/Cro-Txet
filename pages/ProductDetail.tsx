@@ -74,6 +74,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
     message: ''
   });
 
+  const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
+
   const handleOrderChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -88,10 +90,29 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
     setFormStatus('loading');
 
     try {
+      const selectedAddonLabels =
+        product.addons
+          ?.filter(a => selectedAddons.includes(a.id))
+          .map(a => a.label[lang])
+          .join(', ') || '';
+
+      const enrichedMessage = `
+      Producte: ${product.name}
+      Preu base: ${product.price}€
+      ${selectedAddonLabels ? `Extras: ${selectedAddonLabels}` : ''}
+      Preu estimat: ${finalPrice}€
+
+      Missatge del client:
+      ${orderData.message}
+      `;
+
       await emailjs.send(
         'service_z2mi68a',
         'template_dradehi',
-        orderData,
+        {
+          ...orderData,
+          message: enrichedMessage
+        },
         'iGpB097zxE-0bBxRC'
       );
 
@@ -109,6 +130,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
       setFormStatus('idle');
     }
   };
+
+  const finalPrice = product.price + (product.addons?.filter(a => selectedAddons.includes(a.id)).reduce((acc, a) => acc + a.price, 0) || 0);
 
 
   return (
@@ -203,8 +226,49 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
                   « {product.meaning[lang]} »
                 </p>
               </div>
-              <p className="text-4xl font-serif text-stone-950 font-light">{product.price}€</p>
+              <p className="text-4xl font-serif text-stone-950 font-light">
+                {finalPrice}€
+              </p>
             </header>
+
+            {product.addons?.map((addon) => {
+              const isSelected = selectedAddons.includes(addon.id);
+
+              return (
+                <button
+                  key={addon.id}
+                  type="button"
+                  onClick={() =>
+                    setSelectedAddons(prev =>
+                      isSelected
+                        ? prev.filter(id => id !== addon.id)
+                        : [...prev, addon.id]
+                    )
+                  }
+                  className={`mt-6 w-full flex justify-between items-center px-6 py-4 border transition-all duration-300
+                    ${isSelected
+                      ? 'border-stone-950 bg-stone-50'
+                      : 'border-stone-200 hover:border-stone-950'}
+                  `}
+                >
+                  <span className="text-sm uppercase tracking-widest font-bold text-stone-900">
+                    {addon.label[lang]}
+                  </span>
+
+                  <span className="text-sm font-serif">
+                    +{addon.price}€
+                  </span>
+                </button>
+              );
+            })}
+
+            {product.addons && (
+              <p className="text text-stone-500 mt-4 leading-relaxed">
+                {lang === 'CAT' && 'Si desitges afegir la cadeneta, indica-ho al missatge del formulari.'}
+                {lang === 'ES' && 'Si deseas añadir la cadena, indícalo en el mensaje del formulario.'}
+                {lang === 'EN' && 'If you would like to add the chain, please mention it in your message.'}
+              </p>
+            )}
 
             <div className="space-y-8">
               <p className="text-stone-900 text-2xl lg:text-3xl font-serif leading-relaxed">

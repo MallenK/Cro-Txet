@@ -44,30 +44,52 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted metallic bag with a semicircular shape and artisanal weave. It can feature a semicircular or square clasp, be worn by hand or with a chain, and include an integrated handle.' 
     },
     price: 35,
-    images: [    
-      `${IMG_PATH}alea_gpt.png`,
-      `${IMG_PATH}alea-negre-2.jpeg`,
-      `${IMG_PATH}alea-negre.jpeg`,
-      `${IMG_PATH}alea-black+silver+gold.jpeg`,
-      `${IMG_PATH}alea-silver-+-negre-+-old-silver.jpeg`,
-      `${IMG_PATH}alea-silver.jpeg`
+    images: [
+      `${IMG_PATH}alea/alea_gpt.png`,
+      `${IMG_PATH}alea/alea-negre-2.jpeg`,
+      `${IMG_PATH}alea/alea-negre.jpeg`,
+      `${IMG_PATH}alea/alea-black+silver+gold.jpeg`,
+      `${IMG_PATH}alea/alea-silver-+-negre-+-old-silver.jpeg`,
+      `${IMG_PATH}alea/alea-silver.jpeg`
     ],
-    colors: [{ name: 'Silver', hex: '#C0C0C0' }, { name: 'Golden', hex: '#D4AF37' }, { name: 'Metallic Black', hex: '#2C2C2C' }],
+    colors: [
+      { name: 'Silver', hex: '#C0C0C0' },
+      { name: 'Golden', hex: '#D4AF37' },
+      { name: 'Metallic Black', hex: '#2C2C2C' }
+    ],
     details: {
-      material: { ES: 'Hilo metálico premium', CAT: 'Fil metàl·lic premium', EN: 'Premium metallic yarn' },
-      stitch: { ES: 'Trenzado artesanal (Punto cesto)', CAT: 'Trenat artesanal (Punt cistell)', EN: 'Handcrafted braiding (Basket stitch)' },
+      material: {
+        ES: 'Hilo metálico premium',
+        CAT: 'Fil metàl·lic premium',
+        EN: 'Premium metallic yarn'
+      },
+      stitch: {
+        ES: 'Trenzado artesanal (Punto cesto)',
+        CAT: 'Trenat artesanal (Punt cistell)',
+        EN: 'Handcrafted braiding (Basket stitch)'
+      },
       options: { 
         ES: ['Cierre semicircular o cuadrado', 'De mano o con cadena', 'Asa integrada'],
         CAT: ['Tancament semicircular o quadrat', 'De mà o amb cadeneta', 'Nanseta integrada'],
         EN: ['Semicircular or square closure', 'Handheld or with chain', 'Integrated handle']
-      },
-      extraChain: true
-    }
+      }
+    },
+    addons: [
+      {
+        id: 'chain_120',
+        price: 5,
+        label: {
+          CAT: 'Afegir cadeneta metàl·lica 1,20m',
+          ES: 'Añadir cadena metálica 1,20m',
+          EN: 'Add metal chain 1.20m'
+        }
+      }
+    ]
   },
   {
     id: 'oraia',
     name: 'Oraïa',
-    meaning: { 
+    meaning: {
       CAT: 'del grec “bella”; calidesa i feminitat.',
       ES: 'del griego “bella”; calidez y feminidad',
       EN: 'from the Greek “beautiful”; warmth and femininity'
@@ -79,206 +101,286 @@ export const PRODUCTS: Product[] = [
     },
     price: 40,
     images: [
-      `${IMG_PATH}oraia_gpt.png`,
-      `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat-2.jpeg`,
-      `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat-1.jpeg`,
-      `${IMG_PATH}oraia-ecopell-burgundy-punt-interccalat.jpeg`,
-      `${IMG_PATH}oraia-ecopell-burgundi-punt-cistell.jpeg`,
-      `${IMG_PATH}oraia-1-punt-intercalat.jpeg`,
-      `${IMG_PATH}oraia-ecopell-xocolata-2-punt-cistell.jpeg`,
-      `${IMG_PATH}oraia-ecopell-xocolata-3-punt-intercalat.jpeg`,
-      `${IMG_PATH}oraia-ecopell-xocolata-punt-cistell.jpeg`,
-      `${IMG_PATH}oraia-marro-amb-cadeneta.jpeg`,
-      `${IMG_PATH}oraia-verd.jpeg`
+      `${IMG_PATH}oraia/oraia_gpt.png`,
+      `${IMG_PATH}oraia/oraia-ecopell-burgundy-punt-interccalat-2.jpeg`,
+      `${IMG_PATH}oraia/oraia-ecopell-burgundy-punt-interccalat-1.jpeg`,
+      `${IMG_PATH}oraia/oraia-1-punt-intercalat.jpeg`,
+      `${IMG_PATH}oraia/oraia-ecopell-burgundi-punt-cistell.jpeg`,
+      `${IMG_PATH}oraia/oraia-ecopell-xocolata-2-punt-cistell.jpeg`,
+      `${IMG_PATH}oraia/oraia-ecopell-xocolata-3-punt-intercalat.jpeg`,
+      `${IMG_PATH}oraia/oraia-ecopell-xocolata-punt-cistell.jpeg`,
+      `${IMG_PATH}oraia/oraia-marro-amb-cadeneta.jpeg`,
+      `${IMG_PATH}oraia/oraia-verd.jpeg`
     ],
     colors: [{ name: 'Chocolate', hex: '#3E2723' }, { name: 'Burgundy', hex: '#800020' }, { name: 'Teal', hex: '#008080' }],
     details: {
-      material: { ES: 'Hilo de piel vegana', CAT: 'Fil de pell vegana', EN: 'Vegan leather yarn' },
-      stitch: { ES: 'Punto cesto o intercalado', CAT: 'Punt cistell o intercalat', EN: 'Basket or interleaved stitch' },
-      options: {
-        ES: ['Forma semicircular o cuadrada', 'Asa integrada'],
-        CAT: ['Forma semicircular o quadrada', 'Nanseta integrada'],
-        EN: ['Semicircular or square shape', 'Integrated handle']
+      material: {
+        ES: 'Hilo de piel vegana',
+        CAT: 'Fil de pell vegana',
+        EN: 'Vegan leather yarn'
       },
-      extraChain: true
-    }
+      stitch: {
+        ES: 'Punto cesto o intercalado',
+        CAT: 'Punt cistell o intercalat',
+        EN: 'Basket or interleaved stitch'
+      },
+      options: { 
+        ES: ['Cierre semicircular o cuadrado', 'De mano o con cadena', 'Asa integrada'],
+        CAT: ['Tancament semicircular o quadrat', 'De mà o amb cadeneta', 'Nanseta integrada'],
+        EN: ['Semicircular or square closure', 'Handheld or with chain', 'Integrated handle']
+      },
+    },
+    addons: [
+      {
+        id: 'chain_120',
+        price: 5,
+        label: {
+          CAT: 'Afegir cadeneta metàl·lica 1,20m',
+          ES: 'Añadir cadena metálica 1,20m',
+          EN: 'Add metal chain 1.20m'
+        }
+      }
+    ]
   },
+
   {
     id: 'altair',
     name: 'Altair',
-    meaning: { 
-      CAT: 'una de les estrelles més brillants del cel. Simbolitza llum, elegància i llibertat.',
-      ES: 'una de las estrellas más brillantes del cielo. Simboliza luz, elegancia y libertad.',
-      EN: 'one of the brightest stars in the night sky. Its name symbolizes light, elegance and freedom.'
+    meaning: {
+      CAT: 'una de les estrelles més brillants del cel...',
+      ES: 'una de las estrellas más brillantes del cielo...',
+      EN: 'one of the brightest stars in the night sky...'
     },
-    description: { 
-      ES: 'Bolso artesanal que destaca por su delicado punto estrella. Puede confeccionarse con hilo de piel vegana o con hilo reciclado de lycra, combinando diseño, sostenibilidad y calidad.', 
-      CAT: 'Bolso artesanal que destaca pel seu delicat punt d’estrella. Es pot realitzar amb fil de pell vegana o amb fil reciclat de lycra, combinant disseny, sostenibilitat i qualitat.', 
-      EN: 'Handcrafted bag distinguished by its delicate star stitch. It can be made using vegan leather yarn or recycled lycra yarn, combining design, sustainability and quality.' 
+    description: {
+      ES: 'Bolso artesanal que destaca por su delicado punto estrella...',
+      CAT: 'Bolso artesanal que destaca pel seu delicat punt d’estrella...',
+      EN: 'Handcrafted bag distinguished by its delicate star stitch...'
     },
     price: 50,
     images: [
-      `${IMG_PATH}altair_gpt.png`,
-      `${IMG_PATH}altair-pell-rosa.jpeg`,
-      `${IMG_PATH}altair-pell-rosa-2.jpeg`
+      `${IMG_PATH}altair/altair_gpt.png`,
+      `${IMG_PATH}altair/altair-pell-rosa.jpeg`,
+      `${IMG_PATH}altair/altair-pell-rosa-2.jpeg`
     ],
-    colors: [{ name: 'Pale Pink', hex: '#FADADD' }, { name: 'Black', hex: '#000000' }],
+    colors: [
+      { name: 'Pale Pink', hex: '#FADADD' },
+      { name: 'Black', hex: '#000000' }
+    ],
     details: {
-      material: { ES: 'Piel vegana o lycra reciclada', CAT: 'Pell vegana o lycra reciclada', EN: 'Vegan leather or recycled lycra' },
-      stitch: { ES: 'Punto estrella sofisticado', CAT: 'Punt estrella sofisticat', EN: 'Sophisticated star stitch' },
-      extraChain: true
-    }
+      material: {
+        ES: 'Piel vegana o lycra reciclada',
+        CAT: 'Pell vegana o lycra reciclada',
+        EN: 'Vegan leather or recycled lycra'
+      }
+    },
+    addons: [
+      {
+        id: 'chain_120',
+        price: 5,
+        label: {
+          CAT: 'Afegir cadeneta metàl·lica 1,20m',
+          ES: 'Añadir cadena metálica 1,20m',
+          EN: 'Add metal chain 1.20m'
+        }
+      }
+    ]
   },
+
   {
     id: 'lyra',
     name: 'Lyra',
-    meaning: { 
+    meaning: {
       CAT: 'com la constel·lació, elegant i minimalista.',
       ES: 'como la constelación, elegante y minimalista.',
       EN: 'like the constellation – elegant and minimalist.'
     },
-    description: { 
-      ES: 'Bolso clutch alargado tipo baguette con una elegancia marcada. Puede confeccionarse con hilo de piel vegana o con otras lanas recicladas. El punto cesto le aporta estructura y un acabado sofisticado.', 
-      CAT: 'Bolso clutch allargat tipus baguette amb una elegància marcada. Es pot realitzar amb fil de pell vegana o amb altres llanes reciclades. El punto cistell li aporta estructura i un acabat sofisticat.', 
-      EN: 'Elongated baguette-style clutch with a strong, elegant presence. It can be crafted using vegan leather yarn or other recycled yarns. The basket stitch adds structure and a refined finish.' 
+    description: {
+      ES: 'Bolso clutch alargado tipo baguette...',
+      CAT: 'Bolso clutch allargat tipus baguette...',
+      EN: 'Elongated baguette-style clutch...'
     },
     price: 50,
     images: [
-      `${IMG_PATH}lyra_gpt.png`,
-      `${IMG_PATH}lyra-negre-pell-2.jpeg`,
-      `${IMG_PATH}lyra-marro-fantasia-2.jpeg`,
-      `${IMG_PATH}lyra-marro-fantasia-3.jpeg`,
-      `${IMG_PATH}lyra-negre-pell.jpeg`,
-      `${IMG_PATH}lyra-marro-amb-cadeneta.jpeg`
+      `${IMG_PATH}lyra/lyra_gpt.png`,
+      `${IMG_PATH}lyra/lyra-negre-pell.jpeg`,
+      `${IMG_PATH}lyra/lyra-negre-pell-2.jpeg`,
+      `${IMG_PATH}lyra/lyra-marro-fantasia-2.jpeg`,
+      `${IMG_PATH}lyra/lyra-marro-fantasia-3.jpeg`,
+      `${IMG_PATH}lyra/lyra-marro-amb-cadeneta.jpeg`
     ],
-    colors: [{ name: 'Black', hex: '#000000' }, { name: 'Iridiscent', hex: '#4B0082' }],
+    colors: [
+      { name: 'Black', hex: '#000000' }
+    ],
     details: {
-      material: { ES: 'Piel vegana o lanas recicladas', CAT: 'Pell vegana o llanes reciclades', EN: 'Vegan leather or recycled yarns' },
-      stitch: { ES: 'Punto cesto estructural', CAT: 'Punt cistell estructural', EN: 'Structural basket stitch' },
-      extraChain: true
-    }
+      material: {
+        ES: 'Piel vegana o lanas recicladas',
+        CAT: 'Pell vegana o llanes reciclades',
+        EN: 'Vegan leather or recycled yarns'
+      }
+    },
+    addons: [
+      {
+        id: 'chain_120',
+        price: 5,
+        label: {
+          CAT: 'Afegir cadeneta metàl·lica 1,20m',
+          ES: 'Añadir cadena metálica 1,20m',
+          EN: 'Add metal chain 1.20m'
+        }
+      }
+    ]
   },
+
   {
     id: 'verae',
     name: 'Vérae',
-    meaning: { 
-      CAT: '“autèntica” en llatí, símbol d’artesania genuïna.',
-      ES: '“auténtica” en latín, símbolo de artesanía genuina.',
-      EN: '“authentic” in Latin, symbol of genuine craftsmanship.'
+    meaning: {
+      CAT: '“autèntica” en llatí...',
+      ES: '“auténtica” en latín...',
+      EN: '“authentic” in Latin...'
     },
-    description: { 
-      ES: 'Clutch artesanal elaborado con hilo de camisetas recicladas. Diseño versátil que se adapta tanto al día a día como a ocasiones especiales. Sostenible y con alma artesanal.', 
-      CAT: 'Clutch artesanal fet amb fil de samarretes reciclades. Disseny versàtil que s’adapta tant al dia a dia com a ocasions especials. Sostenible i amb ànima artesanal.', 
-      EN: 'Handcrafted clutch made from recycled T-shirt yarn. Versatile design suitable for both everyday use and special occasions. Sustainable with true artisanal character.' 
+    description: {
+      ES: 'Clutch artesanal elaborado con hilo de camisetas recicladas...',
+      CAT: 'Clutch artesanal fet amb fil de samarretes reciclades...',
+      EN: 'Handcrafted clutch made from recycled T-shirt yarn...'
     },
     price: 30,
     images: [
-      `${IMG_PATH}verae_gpt.png`,
-      `${IMG_PATH}verae-marro.jpeg`,
-      `${IMG_PATH}verae-blau-+-print-blau.jpeg`,
-      `${IMG_PATH}verae-marro-+-negre-+-print.jpeg`
+      `${IMG_PATH}verae/verae_gpt.png`,
+      `${IMG_PATH}verae/verae-marro.jpeg`,
+      `${IMG_PATH}verae/verae-blau-+-print-blau.jpeg`,
+      `${IMG_PATH}verae/verae-marro-+-negre-+-print.jpeg`
     ],
-    colors: [{ name: 'Animal Print', hex: '#D2B48C' }, { name: 'Black', hex: '#000000' }, { name: 'Chocolate', hex: '#3E2723' }],
+    colors: [
+      { name: 'Animal Print', hex: '#D2B48C' },
+      { name: 'Black', hex: '#000000' }
+    ],
     details: {
-      material: { ES: 'Hilo de camisetas recicladas', CAT: 'Fil de samarretes reciclades', EN: 'Recycled T-shirt yarn' },
-      stitch: { ES: 'Punto sólido versátil', CAT: 'Punt sòlid versàtil', EN: 'Versatile solid stitch' },
-      options: {
-        ES: ['Forma ovalada o cuadrada'],
-        CAT: ['Forma ovalada o quadrada'],
-        EN: ['Oval or square shape']
-      },
-      extraChain: true
-    }
+      material: {
+        ES: 'Hilo de camisetas recicladas',
+        CAT: 'Fil de samarretes reciclades',
+        EN: 'Recycled T-shirt yarn'
+      }
+    },
+    addons: [
+      {
+        id: 'chain_120',
+        price: 5,
+        label: {
+          CAT: 'Afegir cadeneta metàl·lica 1,20m',
+          ES: 'Añadir cadena metálica 1,20m',
+          EN: 'Add metal chain 1.20m'
+        }
+      }
+    ]
   },
+
   {
     id: 'nara',
     name: 'Nara',
-    meaning: { 
+    meaning: {
       CAT: 'senzillesa i equilibri en essència.',
       ES: 'sencillez y equilibrio en esencia',
       EN: 'simplicity and balance in essence'
     },
-    description: { 
-      ES: 'Bolso hecho a mano con materiales reciclados que une diseño y sostenibilidad. Con asa corta y cadena, puede llevarse colgado o bajo el brazo. Personalizable con hilo dorado opcional.', 
-      CAT: 'Bolso fet a mà amb materials reciclats que combina disseny i consciència. Amb nansa petita i cadeneta, es pot portar penjat o sota el braç. Personalitzatzable amb fil daurat opcional.', 
-      EN: 'Handcrafted bag made from recycled materials, blending design and sustainability. Featuring a small handle and chain strap, it can be worn over the shoulder or under the arm.' 
+    description: {
+      ES: 'Bolso hecho a mano con materiales reciclados...',
+      CAT: 'Bolso fet a mà amb materials reciclats...',
+      EN: 'Handcrafted bag made from recycled materials...'
     },
     price: 30,
     images: [
-      `${IMG_PATH}nara_gpt.png`,
-      `${IMG_PATH}nara-blanc+negre.jpeg`,
-      `${IMG_PATH}nara-blanc+negre-2.jpeg`,
-      `${IMG_PATH}nara-rosa+burgundy.jpeg`,
-      `${IMG_PATH}nara-vermell-+-daurat.jpeg`
+      `${IMG_PATH}nara/nara_gpt.png`,
+      `${IMG_PATH}nara/nara-blanc+negre.jpeg`,
+      `${IMG_PATH}nara/nara-blanc+negre-2.jpeg`,
+      `${IMG_PATH}nara/nara-rosa+burgundy.jpeg`,
+      `${IMG_PATH}nara/nara-vermell-+-daurat.jpeg`
     ],
-    colors: [{ name: 'Bicolor White/Black', hex: '#F5F5F5' }, { name: 'Bicolor Burgundy', hex: '#800020' }],
+    colors: [
+      { name: 'Bicolor White/Black', hex: '#F5F5F5' }
+    ],
     details: {
-      material: { ES: 'Materiales reciclados', CAT: 'Materials reciclats', EN: 'Recycled materials' },
-      stitch: { ES: 'Punto entrelazado', CAT: 'Punt entrellaçat', EN: 'Intertwined stitch' },
-      options: {
-        ES: ['Hilo dorado o brillante opcional', 'Asa corta y cadena'],
-        CAT: ['Fil daurat o brillant opcional', 'Nansa petita i cadeneta'],
-        EN: ['Optional gold or shimmering thread', 'Small handle and chain']
+      material: {
+        ES: 'Materiales reciclados',
+        CAT: 'Materials reciclats',
+        EN: 'Recycled materials'
       }
     }
   },
+
   {
     id: 'vela',
     name: 'Vela',
-    meaning: { 
+    meaning: {
       CAT: 'inspirat pel vent, el mar i les aventures.',
-      ES: 'inspirada por el viento, el mar y las aventuras.',
-      EN: 'inspired by the wind, the sea, and adventures.'
+      ES: 'inspirada por el viento...',
+      EN: 'inspired by the wind...'
     },
-    description: { 
-      ES: 'Bolso hecho a mano con materiales reciclados, fresco y divertido. Destaca por sus mosquetones con forma de corazón o estrella que le aportan un toque original.', 
-      CAT: 'Bolso fet a mà amb materials reciclats, fresc i divertit. Destaca pels seus mosquetons amb forma de cor o estrella que li donen un toc juganer.', 
-      EN: 'Handmade bag crafted from recycled materials, fun and stylish. It features heart- or star-shaped clasps for a playful touch.' 
+    description: {
+      ES: 'Bolso hecho a mano con materiales reciclados...',
+      CAT: 'Bolso fet a mà amb materials reciclats...',
+      EN: 'Handmade bag crafted from recycled materials...'
     },
     price: 30,
     images: [
-      `${IMG_PATH}vela_gpt.png`,
-      `${IMG_PATH}vela-blaus.jpeg`,
-      `${IMG_PATH}vela-rosa+vermell.jpeg`,
-      `${IMG_PATH}vela-verds.jpeg`,
-      `${IMG_PATH}vela-verds-2.jpeg`
+      `${IMG_PATH}vela/vela_gpt.png`,
+      `${IMG_PATH}vela/vela-blaus.jpeg`,
+      `${IMG_PATH}vela/vela-rosa+vermell.jpeg`,
+      `${IMG_PATH}vela/vela-verds.jpeg`,
+      `${IMG_PATH}vela/vela-verds-2.jpeg`
     ],
-    colors: [{ name: 'Pink Pattern', hex: '#FFB6C1' }, { name: 'Blue/White Pattern', hex: '#AFDBF5' }, { name: 'Green Moss', hex: '#8A9A5B' }],
+    colors: [
+      { name: 'Pink Pattern', hex: '#FFB6C1' }
+    ],
     details: {
-      material: { ES: 'Materiales reciclados', CAT: 'Materials reciclats', EN: 'Recycled materials' },
-      stitch: { ES: 'Punto fresco y ligero', CAT: 'Punt fresc i lleuger', EN: 'Fresh and light stitch' },
-      options: {
-        ES: ['Mosquetones de corazón o estrella'],
-        CAT: ['Mosquetons de cor o estrella'],
-        EN: ['Heart or star-shaped clasps']
+      material: {
+        ES: 'Materiales reciclados',
+        CAT: 'Materials reciclats',
+        EN: 'Recycled materials'
       }
     }
   },
+
   {
     id: 'velain',
     name: 'Velaïn',
-    meaning: { 
+    meaning: {
       CAT: 'fusió entre “velvet” i “divin”.',
       ES: 'fusión entre “velvet” y “divin”.',
       EN: 'a fusion of “velvet” and “divine.”'
     },
-    description: { 
-      ES: 'Bolso artesanal realizado con un hilo especial de terciopelo que le aporta una presencia suave y muy sofisticada. Su acabado elegante lo convierte en el complemento ideal para cualquier look.', 
-      CAT: 'Bolso artesanal elaborat amb un fil especial de vellut que li aporta una presència suau i molt sofisticada. El seu acabat elegant el converteix en el complement ideal per a qualsevol look.', 
-      EN: 'Handcrafted bag made with a special velvet yarn that gives it a soft, highly sophisticated presence. Its elegant finish makes it the perfect accessory for any look.' 
+    description: {
+      ES: 'Bolso artesanal realizado con un hilo especial de terciopelo...',
+      CAT: 'Bolso artesanal elaborat amb un fil especial de vellut...',
+      EN: 'Handcrafted bag made with a special velvet yarn...'
     },
     price: 45,
     images: [
-      `${IMG_PATH}velain_gpt.png`,
-      `${IMG_PATH}velain-fucsia.jpeg`,
-      `${IMG_PATH}velain-fucsia-2.jpeg`
+      `${IMG_PATH}velain/velain_gpt.png`,
+      `${IMG_PATH}velain/velain-fucsia.jpeg`,
+      `${IMG_PATH}velain/velain-fucsia-2.jpeg`
     ],
-    colors: [{ name: 'Vibrant Fuchsia', hex: '#FF00FF' }],
+    colors: [
+      { name: 'Vibrant Fuchsia', hex: '#FF00FF' }
+    ],
     details: {
-      material: { ES: 'Hilo de terciopelo especial', CAT: 'Fil de vellut especial', EN: 'Special velvet yarn' },
-      stitch: { ES: 'Punto relieve suave', CAT: 'Punt relleu suau', EN: 'Soft relief stitch' },
-      extraChain: true
-    }
+      material: {
+        ES: 'Hilo de terciopelo especial',
+        CAT: 'Fil de vellut especial',
+        EN: 'Special velvet yarn'
+      }
+    },
+    addons: [
+      {
+        id: 'chain_120',
+        price: 5,
+        label: {
+          CAT: 'Afegir cadeneta metàl·lica 1,20m',
+          ES: 'Añadir cadena metálica 1,20m',
+          EN: 'Add metal chain 1.20m'
+        }
+      }
+    ]
   }
 ];
 

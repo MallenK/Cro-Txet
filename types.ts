@@ -1,6 +1,12 @@
 
 export type Language = 'CAT' | 'ES' | 'EN';
 
+export interface ProductAddon {
+  id: string;
+  price: number;
+  label: Record<Language, string>;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -10,11 +16,11 @@ export interface Product {
   images: string[];
   colors: { name: string; hex: string }[];
   details?: {
-    material: Record<Language, string>;
-    stitch: Record<Language, string>;
+    material?: Record<Language, string>;
+    stitch?: Record<Language, string>;
     options?: Record<Language, string[]>;
-    extraChain?: boolean;
   };
+  addons?: ProductAddon[];
 }
 
 export interface Translation {
