@@ -32,6 +32,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
   
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -48,8 +49,15 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
     );
   }
 
-  const nextImg = () => setActiveImg((prev) => (prev + 1) % product.images.length);
-  const prevImg = () => setActiveImg((prev) => (prev - 1 + product.images.length) % product.images.length);
+  const imagesToShow = selectedColor
+    ? product.images.filter(img => img.color === selectedColor)
+    : product.images;
+
+  const nextImg = () =>
+    setActiveImg(prev => (prev + 1) % imagesToShow.length);
+
+  const prevImg = () =>
+    setActiveImg(prev => (prev - 1 + imagesToShow.length) % imagesToShow.length);
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
@@ -145,6 +153,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
       <div className="flex flex-col lg:flex-row">
         {/* Gallery Section with Consistent Proportions */}
         <section className="lg:w-[60%] xl:w-[65%] flex flex-col relative overflow-hidden bg-stone-50">
+          
           {/* Mobile View Slider */}
           <div 
             className="lg:hidden relative aspect-[4/5] w-full touch-pan-y overflow-hidden"
@@ -156,10 +165,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
               className="flex h-full transition-transform duration-500 ease-out" 
               style={{ transform: `translateX(-${activeImg * 100}%)` }}
             >
-              {product.images.map((img, idx) => (
+              {imagesToShow.map((img, idx) => (
                 <div key={idx} className="w-full h-full flex-shrink-0 overflow-hidden">
                   <img 
-                    src={img} 
+                    src={img.src}
                     alt={`${product.name} perspective ${idx + 1}`} 
                     className="w-full h-full object-cover transition-transform duration-700 active:scale-105"
                   />
@@ -180,15 +189,15 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
             </div>
           </div>
 
-          {/* Desktop View with Hover Zoom and Fixed Aspect-Ratio */}
+          {/* Desktop View */}
           <div className="hidden lg:flex flex-col gap-16 p-12 xl:p-24">
-            {product.images.map((img, idx) => (
+            {imagesToShow.map((img, idx) => (
               <div 
                 key={idx} 
                 className="relative overflow-hidden w-full aspect-[4/5] bg-stone-100 rounded-sm group shadow-md"
               >
                 <img 
-                  src={img} 
+                  src={img.src}
                   alt={`${product.name} detail ${idx + 1}`} 
                   className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
                   loading={idx === 0 ? "eager" : "lazy"}
@@ -203,33 +212,64 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
             ))}
           </div>
           
+          {/* Dots */}
           <div className="lg:hidden flex justify-center gap-3 py-8 bg-white">
-            {product.images.map((_, i) => (
+            {imagesToShow.map((_, i) => (
               <button 
                 key={i} 
                 onClick={() => setActiveImg(i)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${activeImg === i ? 'bg-stone-950 scale-125' : 'bg-stone-300'}`} 
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  activeImg === i ? 'bg-stone-950 scale-125' : 'bg-stone-300'
+                }`} 
               />
             ))}
           </div>
+
         </section>
 
         {/* Info Section with Better Spacing */}
         <section className="lg:w-[40%] xl:w-[35%] lg:sticky lg:top-0 lg:h-screen flex flex-col p-10 lg:p-16 xl:p-24 overflow-y-auto no-scrollbar bg-white">
           <div className="space-y-16">
-            <header className="space-y-6">
-              <div className="space-y-3">
-                <h1 className="text-6xl lg:text-7xl xl:text-8xl font-serif text-stone-950 leading-none tracking-tighter">
-                  {product.name}
-                </h1>
-                <p className="italic-serif text-stone-500 text-2xl lg:text-3xl tracking-tight mt-4 leading-relaxed">
-                  « {product.meaning[lang]} »
-                </p>
-              </div>
-              <p className="text-4xl font-serif text-stone-950 font-light">
-                {finalPrice}€
+          <header className="space-y-6">
+            <div className="space-y-3">
+              <h1 className="text-6xl lg:text-7xl xl:text-8xl font-serif text-stone-950 leading-none tracking-tighter">
+                {product.name}
+              </h1>
+              <p className="italic-serif text-stone-500 text-2xl lg:text-3xl tracking-tight mt-4 leading-relaxed">
+                « {product.meaning[lang]} »
               </p>
-            </header>
+            </div>
+
+            <p className="text-4xl font-serif text-stone-950 font-light">
+              {finalPrice}€
+            </p>
+
+            {/* 🔥 SELECTOR DE COLOR */}
+            {product.colors && (
+              <div className="flex gap-3 pt-4">
+                {product.colors.map(color => (
+                  <button
+                    key={color.name}
+                    onClick={() => {
+                      if (selectedColor === color.name) {
+                        setSelectedColor(null); // 👈 quitar filtro
+                      } else {
+                        setSelectedColor(color.name); // 👈 aplicar filtro
+                      }
+                      setActiveImg(0);
+                    }}
+                    className={`w-8 h-8 rounded-full border-2 transition-all ${
+                      selectedColor === color.name
+                        ? 'border-stone-950 scale-110'
+                        : 'border-transparent opacity-70 hover:opacity-100'
+                    }`}
+                    style={{ backgroundColor: color.hex }}
+                    title={color.name}
+                  />
+                ))}
+              </div>
+            )}
+          </header>
 
             {product.addons?.map((addon) => {
               const isSelected = selectedAddons.includes(addon.id);

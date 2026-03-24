@@ -13,15 +13,23 @@ export interface Product {
   meaning: Record<Language, string>;
   description: Record<Language, string>;
   price: number;
-  images: string[];
+
+  images: {
+    src: string;
+    color?: string; // 👈 opcional
+  }[];
+
   colors: { name: string; hex: string }[];
+
   details?: {
     material?: Record<Language, string>;
     stitch?: Record<Language, string>;
     options?: Record<Language, string[]>;
   };
+
   addons?: ProductAddon[];
 }
+
 
 export interface Translation {
   common: {

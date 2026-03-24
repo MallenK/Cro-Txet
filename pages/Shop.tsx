@@ -36,7 +36,7 @@ const Shop: React.FC<ShopProps> = ({ t, lang }) => {
           >
             <div className="aspect-[3/4] mb-8 bg-stone-50 overflow-hidden rounded-sm transition-transform duration-700">
               <img 
-                src={product.images[0]} 
+                src={product.images[0].src} 
                 alt={product.name} 
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />

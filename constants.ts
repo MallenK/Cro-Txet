@@ -44,19 +44,40 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted metallic bag with a semicircular shape and artisanal weave. It can feature a semicircular or square clasp, be worn by hand or with a chain, and include an integrated handle.' 
     },
     price: 35,
+
     images: [
-      `${IMG_PATH}alea/alea_gpt.png`,
-      `${IMG_PATH}alea/alea-negre-2.jpeg`,
-      `${IMG_PATH}alea/alea-negre.jpeg`,
-      `${IMG_PATH}alea/alea-black+silver+gold.jpeg`,
-      `${IMG_PATH}alea/alea-silver-+-negre-+-old-silver.jpeg`,
-      `${IMG_PATH}alea/alea-silver.jpeg`
+      {
+        color: 'Silver',
+        src: `${IMG_PATH}alea/alea_gpt.png`
+      },
+      {
+        color: 'Metallic Black',
+        src: `${IMG_PATH}alea/alea-negre.jpeg`
+      },
+      {
+        color: 'Metallic Black',
+        src: `${IMG_PATH}alea/alea-negre-2.jpeg`
+      },
+      {
+        color: 'Silver',
+        src: `${IMG_PATH}alea/alea-silver.jpeg`
+      },
+      {
+        color: 'Silver',
+        src: `${IMG_PATH}alea/alea-silver-+-negre-+-old-silver.jpeg`
+      },
+      {
+        color: 'Golden',
+        src: `${IMG_PATH}alea/alea-black+silver+gold.jpeg`
+      },
     ],
+
     colors: [
       { name: 'Silver', hex: '#C0C0C0' },
       { name: 'Golden', hex: '#D4AF37' },
       { name: 'Metallic Black', hex: '#2C2C2C' }
     ],
+
     details: {
       material: {
         ES: 'Hilo metálico premium',
@@ -74,6 +95,7 @@ export const PRODUCTS: Product[] = [
         EN: ['Semicircular or square closure', 'Handheld or with chain', 'Integrated handle']
       }
     },
+
     addons: [
       {
         id: 'chain_120',
@@ -86,6 +108,8 @@ export const PRODUCTS: Product[] = [
       }
     ]
   },
+
+
   {
     id: 'oraia',
     name: 'Oraïa',
@@ -100,19 +124,34 @@ export const PRODUCTS: Product[] = [
       EN: 'Handcrafted bag made from vegan leather yarn, woven with an elegant basket or interlaced stitch. Available in different colours and in a semicircular or square shape, with an integrated handle.' 
     },
     price: 40,
+
     images: [
-      `${IMG_PATH}oraia/oraia_gpt.png`,
-      `${IMG_PATH}oraia/oraia-ecopell-burgundy-punt-interccalat-2.jpeg`,
-      `${IMG_PATH}oraia/oraia-ecopell-burgundy-punt-interccalat-1.jpeg`,
-      `${IMG_PATH}oraia/oraia-1-punt-intercalat.jpeg`,
-      `${IMG_PATH}oraia/oraia-ecopell-burgundi-punt-cistell.jpeg`,
-      `${IMG_PATH}oraia/oraia-ecopell-xocolata-2-punt-cistell.jpeg`,
-      `${IMG_PATH}oraia/oraia-ecopell-xocolata-3-punt-intercalat.jpeg`,
-      `${IMG_PATH}oraia/oraia-ecopell-xocolata-punt-cistell.jpeg`,
-      `${IMG_PATH}oraia/oraia-marro-amb-cadeneta.jpeg`,
-      `${IMG_PATH}oraia/oraia-verd.jpeg`
+      { color: 'Burgundy', src: `${IMG_PATH}oraia/oraia_gpt.png` },
+
+      // Burgundy
+      { color: 'Burgundy', src: `${IMG_PATH}oraia/oraia-ecopell-burgundy-punt-interccalat-2.jpeg` },
+      { color: 'Burgundy', src: `${IMG_PATH}oraia/oraia-ecopell-burgundy-punt-interccalat-1.jpeg` },
+
+      // Chocolate
+      { color: 'Chocolate', src: `${IMG_PATH}oraia/oraia-ecopell-xocolata-2-punt-cistell.jpeg` },
+      { color: 'Chocolate', src: `${IMG_PATH}oraia/oraia-ecopell-xocolata-3-punt-intercalat.jpeg` },
+      { color: 'Chocolate', src: `${IMG_PATH}oraia/oraia-ecopell-xocolata-punt-cistell.jpeg` },
+      { color: 'Chocolate', src: `${IMG_PATH}oraia/oraia-marro-amb-cadeneta.jpeg` },
+
+      // Teal (aproximado)
+      { color: 'Teal', src: `${IMG_PATH}oraia/oraia-verd.jpeg` },
+
+      // Sin color (fallback)
+      { src: `${IMG_PATH}oraia/oraia-1-punt-intercalat.jpeg` },
+      { src: `${IMG_PATH}oraia/oraia-ecopell-burgundi-punt-cistell.jpeg` }
     ],
-    colors: [{ name: 'Chocolate', hex: '#3E2723' }, { name: 'Burgundy', hex: '#800020' }, { name: 'Teal', hex: '#008080' }],
+
+    colors: [
+      { name: 'Chocolate', hex: '#3E2723' },
+      { name: 'Burgundy', hex: '#800020' },
+      { name: 'Teal', hex: '#008080' }
+    ],
+
     details: {
       material: {
         ES: 'Hilo de piel vegana',
@@ -130,6 +169,7 @@ export const PRODUCTS: Product[] = [
         EN: ['Semicircular or square closure', 'Handheld or with chain', 'Integrated handle']
       },
     },
+
     addons: [
       {
         id: 'chain_120',
@@ -158,9 +198,12 @@ export const PRODUCTS: Product[] = [
     },
     price: 50,
     images: [
-      `${IMG_PATH}altair/altair_gpt.png`,
-      `${IMG_PATH}altair/altair-pell-rosa.jpeg`,
-      `${IMG_PATH}altair/altair-pell-rosa-2.jpeg`
+      // fallback (general)
+      { color: 'Pale Pink', src: `${IMG_PATH}altair/altair_gpt.png` },
+
+      // Pale Pink
+      { color: 'Pale Pink', src: `${IMG_PATH}altair/altair-pell-rosa.jpeg` },
+      { color: 'Pale Pink', src: `${IMG_PATH}altair/altair-pell-rosa-2.jpeg` }
     ],
     colors: [
       { name: 'Pale Pink', hex: '#FADADD' },
@@ -201,12 +244,17 @@ export const PRODUCTS: Product[] = [
     },
     price: 50,
     images: [
-      `${IMG_PATH}lyra/lyra_gpt.png`,
-      `${IMG_PATH}lyra/lyra-negre-pell.jpeg`,
-      `${IMG_PATH}lyra/lyra-negre-pell-2.jpeg`,
-      `${IMG_PATH}lyra/lyra-marro-fantasia-2.jpeg`,
-      `${IMG_PATH}lyra/lyra-marro-fantasia-3.jpeg`,
-      `${IMG_PATH}lyra/lyra-marro-amb-cadeneta.jpeg`
+      // fallback
+      { color: 'Black', src: `${IMG_PATH}lyra/lyra_gpt.png` },
+
+      // Black
+      { color: 'Black', src: `${IMG_PATH}lyra/lyra-negre-pell.jpeg` },
+      { color: 'Black', src: `${IMG_PATH}lyra/lyra-negre-pell-2.jpeg` },
+
+      // Brown
+      { color: 'Brown', src: `${IMG_PATH}lyra/lyra-marro-fantasia-2.jpeg` },
+      { color: 'Brown', src: `${IMG_PATH}lyra/lyra-marro-fantasia-3.jpeg` },
+      { color: 'Brown', src: `${IMG_PATH}lyra/lyra-marro-amb-cadeneta.jpeg` }
     ],
     colors: [
       { name: 'Black', hex: '#000000' }
@@ -246,10 +294,17 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      `${IMG_PATH}verae/verae_gpt.png`,
-      `${IMG_PATH}verae/verae-marro.jpeg`,
-      `${IMG_PATH}verae/verae-blau-+-print-blau.jpeg`,
-      `${IMG_PATH}verae/verae-marro-+-negre-+-print.jpeg`
+      // fallback
+      { color: 'Brown', src: `${IMG_PATH}verae/verae_gpt.png` },
+
+      // Brown
+      { color: 'Brown', src: `${IMG_PATH}verae/verae-marro.jpeg` },
+
+      // Blue
+      { color: 'Blue', src: `${IMG_PATH}verae/verae-blau-+-print-blau.jpeg` },
+
+      // Animal Print (mixto)
+      { color: 'Animal Print', src: `${IMG_PATH}verae/verae-marro-+-negre-+-print.jpeg` }
     ],
     colors: [
       { name: 'Animal Print', hex: '#D2B48C' },
@@ -290,14 +345,19 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      `${IMG_PATH}nara/nara_gpt.png`,
-      `${IMG_PATH}nara/nara-blanc+negre.jpeg`,
-      `${IMG_PATH}nara/nara-blanc+negre-2.jpeg`,
-      `${IMG_PATH}nara/nara-rosa+burgundy.jpeg`,
-      `${IMG_PATH}nara/nara-vermell-+-daurat.jpeg`
+      { color: 'Black & White', src: `${IMG_PATH}nara/nara_gpt.png` },
+
+      { color: 'Black & White', src: `${IMG_PATH}nara/nara-blanc+negre.jpeg` },
+      { color: 'Black & White', src: `${IMG_PATH}nara/nara-blanc+negre-2.jpeg` },
+
+      { color: 'Pink & Burgundy', src: `${IMG_PATH}nara/nara-rosa+burgundy.jpeg` },
+
+      { color: 'Red & Gold', src: `${IMG_PATH}nara/nara-vermell-+-daurat.jpeg` }
     ],
     colors: [
-      { name: 'Bicolor White/Black', hex: '#F5F5F5' }
+      { name: 'Black & White', hex: '#000000' },
+      { name: 'Pink & Burgundy', hex: '#C2185B' },
+      { name: 'Red & Gold', hex: '#B71C1C' }
     ],
     details: {
       material: {
@@ -323,14 +383,19 @@ export const PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      `${IMG_PATH}vela/vela_gpt.png`,
-      `${IMG_PATH}vela/vela-blaus.jpeg`,
-      `${IMG_PATH}vela/vela-rosa+vermell.jpeg`,
-      `${IMG_PATH}vela/vela-verds.jpeg`,
-      `${IMG_PATH}vela/vela-verds-2.jpeg`
+      { color: 'Green', src: `${IMG_PATH}vela/vela_gpt.png` },
+
+      { color: 'Blue', src: `${IMG_PATH}vela/vela-blaus.jpeg` },
+
+      { color: 'Pink & Red', src: `${IMG_PATH}vela/vela-rosa+vermell.jpeg` },
+
+      { color: 'Green', src: `${IMG_PATH}vela/vela-verds.jpeg` },
+      { color: 'Green', src: `${IMG_PATH}vela/vela-verds-2.jpeg` }
     ],
     colors: [
-      { name: 'Pink Pattern', hex: '#FFB6C1' }
+      { name: 'Blue', hex: '#1E3A8A' },
+      { name: 'Pink & Red', hex: '#E91E63' },
+      { name: 'Green', hex: '#2E7D32' }
     ],
     details: {
       material: {
@@ -356,12 +421,13 @@ export const PRODUCTS: Product[] = [
     },
     price: 45,
     images: [
-      `${IMG_PATH}velain/velain_gpt.png`,
-      `${IMG_PATH}velain/velain-fucsia.jpeg`,
-      `${IMG_PATH}velain/velain-fucsia-2.jpeg`
+      { color: 'Fuchsia', src: `${IMG_PATH}velain/velain_gpt.png` },
+
+      { color: 'Fuchsia', src: `${IMG_PATH}velain/velain-fucsia.jpeg` },
+      { color: 'Fuchsia', src: `${IMG_PATH}velain/velain-fucsia-2.jpeg` }
     ],
     colors: [
-      { name: 'Vibrant Fuchsia', hex: '#FF00FF' }
+      { name: 'Fuchsia', hex: '#C2185B' }
     ],
     details: {
       material: {
