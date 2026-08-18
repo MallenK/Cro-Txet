@@ -138,7 +138,7 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
       <section className="grid lg:grid-cols-2 bg-[#F9F8F6]">
         <div className="h-[70vh] lg:h-screen overflow-hidden fade-in-section">
           <img 
-            src={altair?.images[1]}
+            src={altair?.images[1]?.src}
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s]"
             alt="Altair Detail"
           />
