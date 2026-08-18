@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+    --color-bg: #FDFCFB;
+    --color-block: #F7F3F0;
+    --color-accent: #EAD9D9;
+    --color-sage: #DCE2D8;
+    --color-text: #171717;
+    --color-text-muted: #262626;
+}
+
+/*
+ * All custom base styles live in Tailwind's own `base` layer so utility classes
+ * (text-5xl, font-serif, etc.) keep winning over these bare-tag defaults — matching
+ * normal CSS specificity, and matching how the old CDN Tailwind setup cascaded.
+ * Unlayered CSS always beats layered CSS regardless of specificity, so leaving these
+ * rules unlayered silently broke any element that mixed a Tailwind size/weight utility
+ * with a tag this stylesheet also targets (e.g. <p className="text-5xl"> rendered at
+ * the base 1.35rem p{} size instead of Tailwind's 3rem).
+ */
+@layer base {
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+        position: relative;
+    }
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        -webkit-font-smoothing: antialiased;
+    }
+    p {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.35rem;
+        line-height: 1.7;
+        color: var(--color-text-muted);
+        font-weight: 400;
+    }
+    h1, h2, h3, h4, .font-serif {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 400;
+    }
+    .italic-serif {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+    }
+    .sidebar-transition {
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .fade-in-section {
+        opacity: 0;
+        transform: translateY(15px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .product-image-container {
+        aspect-ratio: 4 / 5;
+        position: relative;
+        overflow: hidden;
+        background-color: var(--color-block);
+    }
+
+    .btn-premium {
+        position: relative;
+        overflow: hidden;
+        transition: color 0.4s ease;
+        color: var(--color-text);
+        border-bottom: 2px solid var(--color-text);
+        padding-bottom: 4px;
+        font-weight: 600;
+    }
+    .btn-premium:hover {
+        color: #000;
+        border-color: #000;
+    }
+
+    .hero-text-shadow {
+        text-shadow: 0 4px 50px rgba(0,0,0,0.5);
+    }
+
+    input, textarea {
+        border-color: #737373 !important;
+        color: var(--color-text) !important;
+        font-size: 1.125rem !important;
+        font-family: 'Inter', sans-serif;
+    }
+    input:focus, textarea:focus {
+        border-color: var(--color-text) !important;
+        box-shadow: 0 2px 0 var(--color-text);
+    }
+}

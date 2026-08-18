@@ -2,17 +2,14 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Instagram, Menu, X } from 'lucide-react';
-import { Language, Translation } from '../types';
+import { Language } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
-interface SidebarProps {
-  lang: Language;
-  setLang: (lang: Language) => void;
-  t: Translation;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
+const Sidebar: React.FC = () => {
+  const { t, lang, urlLang, setLang } = useLanguage();
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
+  const base = `/${urlLang}`;
 
   useEffect(() => {
     if (isOpen) {
@@ -26,10 +23,10 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
   }, [isOpen]);
 
   const navItems = [
-    { name: t.nav.home, path: '/' },
-    { name: t.nav.shop, path: '/shop' },
-    { name: t.nav.about, path: '/about' },
-    { name: t.nav.contact, path: '/contact' },
+    { name: t.nav.home, path: base },
+    { name: t.nav.shop, path: `${base}/shop` },
+    { name: t.nav.about, path: `${base}/about` },
+    { name: t.nav.contact, path: `${base}/contact` },
   ];
 
   const closeSidebar = () => setIsOpen(false);
@@ -57,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div className="mb-20 text-center lg:text-left">
-          <Link to="/" onClick={closeSidebar} className="group inline-block">
+          <Link to={base} onClick={closeSidebar} className="group inline-block">
             <h1 className="text-4xl font-serif tracking-tighter text-stone-950 mb-1">Cro&Txet</h1>
             <p className="text-[10px] uppercase tracking-[0.4em] text-stone-900 font-bold pl-1">Disseny Artesanal</p>
           </Link>
@@ -70,13 +67,13 @@ const Sidebar: React.FC<SidebarProps> = ({ lang, setLang, t }) => {
               to={item.path}
               onClick={closeSidebar}
               className={`relative inline-block text-[13px] lg:text-[11px] uppercase tracking-[0.4em] font-bold transition-all duration-300 w-fit ${
-                location.pathname === item.path || (item.path === '/shop' && location.pathname.startsWith('/product'))
-                  ? 'text-stone-950' 
+                location.pathname === item.path || (item.path === `${base}/shop` && location.pathname.startsWith(`${base}/product`))
+                  ? 'text-stone-950'
                   : 'text-stone-500 hover:text-stone-950'
               }`}
             >
               {item.name}
-              {(location.pathname === item.path || (item.path === '/shop' && location.pathname.startsWith('/product'))) && (
+              {(location.pathname === item.path || (item.path === `${base}/shop` && location.pathname.startsWith(`${base}/product`))) && (
                 <span className="absolute -bottom-2 left-0 w-8 h-[2.5px] bg-stone-950" />
               )}
             </Link>

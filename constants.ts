@@ -2,10 +2,15 @@
 import { Product, Translation, Language, Fotos_Txell } from './types';
 
 // Directorio base para las fotos reales de producto
-export const IMG_PATH = import.meta.env.BASE_URL + 'img/fotos_productos/';
-export const IMG_BASE = import.meta.env.BASE_URL + 'img/fotos_txell/';
+// `import.meta.env` solo existe bajo Vite; el script de sitemap (scripts/generate-sitemap.ts)
+// importa este módulo con tsx, fuera de Vite, de ahí el fallback a '/'.
+const BASE_URL = (import.meta as any).env?.BASE_URL ?? '/';
+export const IMG_PATH = BASE_URL + 'img/fotos_productos/';
+export const IMG_BASE = BASE_URL + 'img/fotos_txell/';
 
-export const FOTOS_TXELL: Fotos_Txell[] = [
+export const toWebp = (src: string) => src.replace(/\.(jpe?g|png)$/i, '.webp');
+
+const RAW_FOTOS_TXELL: Fotos_Txell[] = [
   {
     id: 'meritxell-1',
     src: IMG_BASE + 'meritxell-1.jpeg',
@@ -28,8 +33,10 @@ export const FOTOS_TXELL: Fotos_Txell[] = [
   }
 ];
 
+export const FOTOS_TXELL: Fotos_Txell[] = RAW_FOTOS_TXELL.map(f => ({ ...f, src: toWebp(f.src) }));
 
-export const PRODUCTS: Product[] = [
+
+const RAW_PRODUCTS: Product[] = [
   {
     id: 'alea',
     name: 'Aléa',
@@ -77,6 +84,17 @@ export const PRODUCTS: Product[] = [
       { name: 'Golden', hex: '#D4AF37' },
       { name: 'Metallic Black', hex: '#2C2C2C' }
     ],
+
+    dimensions: {
+      CAT: '24 x 14 cm aprox. (diàmetre x alt)',
+      ES: '24 x 14 cm aprox. (diámetro x alto)',
+      EN: 'Approx. 24 x 14 cm (diameter x height)'
+    },
+    careInstructions: {
+      CAT: 'Evita l’exposició prolongada al sol per mantenir la brillantor del fil metàl·lic. Neteja amb un drap sec.',
+      ES: 'Evita la exposición prolongada al sol para mantener el brillo del hilo metálico. Limpia con un paño seco.',
+      EN: 'Avoid prolonged sun exposure to preserve the shine of the metallic thread. Clean with a dry cloth.'
+    },
 
     details: {
       material: {
@@ -205,6 +223,16 @@ export const PRODUCTS: Product[] = [
       { color: 'Pale Pink', src: `${IMG_PATH}altair/altair-pell-rosa.jpeg` },
       { color: 'Pale Pink', src: `${IMG_PATH}altair/altair-pell-rosa-2.jpeg` }
     ],
+    dimensions: {
+      CAT: '28 x 22 x 10 cm aprox. (llarg x alt x fons)',
+      ES: '28 x 22 x 10 cm aprox. (largo x alto x fondo)',
+      EN: 'Approx. 28 x 22 x 10 cm (width x height x depth)'
+    },
+    careInstructions: {
+      CAT: 'Neteja en sec o amb un drap humit. Deixa’l assecar lluny de fonts de calor directa.',
+      ES: 'Limpieza en seco o con un paño húmedo. Deja que se seque lejos de fuentes de calor directa.',
+      EN: 'Spot clean or wipe with a damp cloth. Let it air dry away from direct heat.'
+    },
     colors: [
       { name: 'Pale Pink', hex: '#FADADD' },
       { name: 'Black', hex: '#000000' }
@@ -450,6 +478,11 @@ export const PRODUCTS: Product[] = [
   }
 ];
 
+export const PRODUCTS: Product[] = RAW_PRODUCTS.map(p => ({
+  ...p,
+  images: p.images.map(img => ({ ...img, src: toWebp(img.src) })),
+}));
+
 export const TRANSLATIONS: Record<Language, Translation> = {
   CAT: {
     common: {
@@ -483,7 +516,12 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       lookbookCta: 'Explorar',
       aboutLinkTitle: 'L’ànima darrere el fil',
       aboutLinkDesc: 'Descobreix com un llegat familiar i una pausa necessària es van convertir en passió pel crochet.',
-      aboutLinkCta: 'Conèixer la meva història'
+      aboutLinkCta: 'Conèixer la meva història',
+      seoTitle: 'Bosses de crochet fetes a mà',
+      seoDescription: 'Bosses de crochet fetes a mà, peces úniques de disseny artesanal. Cro&Txet — Barcelona, slow fashion i producció sota demanda.',
+      heroImageAlt: 'Bossa de crochet artesanal feta a mà per Cro&Txet',
+      workshopImageAlt: 'Taller artesanal de Cro&Txet a Barcelona',
+      lookbookImageAlt: 'detall de bossa de crochet'
     },
     about: {
       label: 'Qui sóc',
@@ -497,7 +535,10 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       ],
       inspirationLabel: 'Inspiració',
       inspirationDesc: 'Llum i calma del mediterrani.',
-      quote: '“No només teixeixo fils, teixeixo moments de calma en un món que corre massa ràpid.”'
+      quote: '“No només teixeixo fils, teixeixo moments de calma en un món que corre massa ràpid.”',
+      seoTitle: 'Qui sóc — la creadora de Cro&Txet',
+      seoDescription: 'Coneix la història darrere de Cro&Txet: un llegat familiar, una passió pel crochet i bosses fetes a mà amb amor a Barcelona.',
+      founderImageAlt: 'Meritxell, creadora de Cro&Txet, treballant al taller'
     },
     shop: {
       label: 'Col·lecció',
@@ -510,12 +551,22 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       detailsLabel: 'Detalls de la peça',
       materialLabel: 'Material',
       stitchLabel: 'Tipus de punt',
-      optionsLabel: 'Opcions'
+      optionsLabel: 'Opcions',
+      dimensionsLabel: 'Mides',
+      careLabel: 'Cura de la peça',
+      seoTitle: 'Catàleg de bosses de crochet fetes a mà',
+      seoDescription: 'Descobreix el catàleg de bosses de crochet fetes a mà de Cro&Txet: peces úniques, personalitzables i sota demanda.'
+    },
+    legal: {
+      returnsSeoDescription: 'Política de devolucions de Cro&Txet.',
+      privacySeoDescription: 'Política de privacitat de Cro&Txet.'
     },
     contact: {
       label: 'Contacte',
       title: '¿Necessites que t’ajudem?',
       subtitle: 'Sempre estic disponible per ajudar-te. Pots contactar amb nosaltres omplint el formulari següent.',
+      seoTitle: 'Contacte',
+      seoDescription: 'Contacta amb Cro&Txet per demanar pressupost o personalitzar la teva bossa de crochet feta a mà.',
       form: { 
         name: 'Nom', namePlaceholder: 'El teu nom',
         email: 'Email', emailPlaceholder: 'hola@croandtxet.cat',
@@ -564,7 +615,12 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       lookbookCta: 'Explorar',
       aboutLinkTitle: 'El alma detrás del hilo',
       aboutLinkDesc: 'Descubre cómo un legado familiar y una pausa necesaria se transformaron en pasión por el crochet.',
-      aboutLinkCta: 'Conocer mi historia'
+      aboutLinkCta: 'Conocer mi historia',
+      seoTitle: 'Bolsos de crochet hechos a mano',
+      seoDescription: 'Bolsos de crochet hechos a mano, piezas únicas de diseño artesanal. Cro&Txet — Barcelona, slow fashion y producción bajo demanda.',
+      heroImageAlt: 'Bolso de crochet artesanal hecho a mano por Cro&Txet',
+      workshopImageAlt: 'Taller artesanal de Cro&Txet en Barcelona',
+      lookbookImageAlt: 'detalle de bolso de crochet'
     },
     about: {
       label: 'Quien soy',
@@ -578,7 +634,10 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       ],
       inspirationLabel: 'Inspiración',
       inspirationDesc: 'Luz y calma del mediterráneo.',
-      quote: '“No solo tejo hilos, tejo momentos de calma en un mundo que corre demasiado rápido.”'
+      quote: '“No solo tejo hilos, tejo momentos de calma en un mundo que corre demasiado rápido.”',
+      seoTitle: 'Quién soy — la creadora de Cro&Txet',
+      seoDescription: 'Conoce la historia detrás de Cro&Txet: un legado familiar, una pasión por el crochet y bolsos hechos a mano con amor en Barcelona.',
+      founderImageAlt: 'Meritxell, creadora de Cro&Txet, trabajando en el taller'
     },
     shop: {
       label: 'Colección',
@@ -591,12 +650,22 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       detailsLabel: 'Detalles de la pieza',
       materialLabel: 'Material',
       stitchLabel: 'Tipo de punto',
-      optionsLabel: 'Opciones'
+      optionsLabel: 'Opciones',
+      dimensionsLabel: 'Medidas',
+      careLabel: 'Cuidado de la pieza',
+      seoTitle: 'Catálogo de bolsos de crochet hechos a mano',
+      seoDescription: 'Descubre el catálogo de bolsos de crochet hechos a mano de Cro&Txet: piezas únicas, personalizables y bajo demanda.'
+    },
+    legal: {
+      returnsSeoDescription: 'Política de devoluciones de Cro&Txet.',
+      privacySeoDescription: 'Política de privacidad de Cro&Txet.'
     },
     contact: {
       label: 'Contacto',
       title: '¿Necesitas que te ayudemos?',
       subtitle: 'Estoy siempre disponible para ayudarte. Puedes contactarnos rellenando el formulario a continuación.',
+      seoTitle: 'Contacto',
+      seoDescription: 'Contacta con Cro&Txet para pedir presupuesto o personalizar tu bolso de crochet hecho a mano.',
       form: { 
         name: 'Nombre', namePlaceholder: 'Tu nombre',
         email: 'Correo electrónico', emailPlaceholder: 'hola@croandtxet.cat',
@@ -645,7 +714,12 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       lookbookCta: 'Explore',
       aboutLinkTitle: 'The soul behind the thread',
       aboutLinkDesc: 'Discover how a family legacy and a necessary pause turned into a passion for crochet.',
-      aboutLinkCta: 'Meet my story'
+      aboutLinkCta: 'Meet my story',
+      seoTitle: 'Handmade crochet bags',
+      seoDescription: 'Handmade crochet bags, one-of-a-kind artisan pieces. Cro&Txet — Barcelona, slow fashion and made-to-order production.',
+      heroImageAlt: 'Handmade crochet bag by Cro&Txet',
+      workshopImageAlt: 'Cro&Txet handmade atelier in Barcelona',
+      lookbookImageAlt: 'bag detail'
     },
     about: {
       label: 'About Me',
@@ -659,7 +733,10 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       ],
       inspirationLabel: 'Inspiration',
       inspirationDesc: 'Light and calm of the Mediterranean.',
-      quote: '“I don\'t just weave threads, I weave moments of calm in a world that runs too fast.”'
+      quote: '“I don\'t just weave threads, I weave moments of calm in a world that runs too fast.”',
+      seoTitle: 'About — the maker behind Cro&Txet',
+      seoDescription: 'Discover the story behind Cro&Txet: a family legacy, a passion for crochet, and handmade bags crafted with love in Barcelona.',
+      founderImageAlt: 'Meritxell, founder of Cro&Txet, working in her atelier'
     },
     shop: {
       label: 'Collection',
@@ -672,12 +749,22 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       detailsLabel: 'Piece Details',
       materialLabel: 'Material',
       stitchLabel: 'Stitch Type',
-      optionsLabel: 'Options'
+      optionsLabel: 'Options',
+      dimensionsLabel: 'Dimensions',
+      careLabel: 'Care instructions',
+      seoTitle: 'Handmade crochet bags catalog',
+      seoDescription: 'Browse the Cro&Txet catalog of handmade crochet bags: unique, customizable, made-to-order pieces.'
+    },
+    legal: {
+      returnsSeoDescription: 'Cro&Txet return policy.',
+      privacySeoDescription: 'Cro&Txet privacy policy.'
     },
     contact: {
       label: 'Contact',
       title: 'Need help?',
       subtitle: 'I’m always here to help. You can get in touch with us by filling out the form below.',
+      seoTitle: 'Contact',
+      seoDescription: 'Get in touch with Cro&Txet to request a quote or customize your handmade crochet bag.',
       form: { 
         name: 'Name', namePlaceholder: 'Your name',
         email: 'Email address', emailPlaceholder: 'hello@croandtxet.cat',

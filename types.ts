@@ -27,6 +27,9 @@ export interface Product {
     options?: Record<Language, string[]>;
   };
 
+  dimensions?: Record<Language, string>;
+  careInstructions?: Record<Language, string>;
+
   addons?: ProductAddon[];
 }
 
@@ -69,6 +72,11 @@ export interface Translation {
     aboutLinkTitle: string;
     aboutLinkDesc: string;
     aboutLinkCta: string;
+    seoTitle: string;
+    seoDescription: string;
+    heroImageAlt: string;
+    workshopImageAlt: string;
+    lookbookImageAlt: string;
   };
   about: {
     label: string;
@@ -77,6 +85,9 @@ export interface Translation {
     inspirationLabel: string;
     inspirationDesc: string;
     quote: string;
+    seoTitle: string;
+    seoDescription: string;
+    founderImageAlt: string;
   };
   shop: {
     label: string;
@@ -90,11 +101,21 @@ export interface Translation {
     materialLabel: string;
     stitchLabel: string;
     optionsLabel: string;
+    dimensionsLabel: string;
+    careLabel: string;
+    seoTitle: string;
+    seoDescription: string;
+  };
+  legal: {
+    returnsSeoDescription: string;
+    privacySeoDescription: string;
   };
   contact: {
     label: string;
     title: string;
     subtitle: string;
+    seoTitle: string;
+    seoDescription: string;
     form: {
       name: string;
       namePlaceholder: string;

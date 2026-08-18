@@ -2,10 +2,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Sparkles, Package } from 'lucide-react';
-import { Translation } from '../types';
-import { IMG_BASE, PRODUCTS } from '../constants';
+import { IMG_BASE, PRODUCTS, toWebp } from '../constants';
+import { useLanguage } from '../context/LanguageContext';
+import SEO from '../components/SEO';
 
-const Home: React.FC<{ t: Translation }> = ({ t }) => {
+const Home: React.FC = () => {
+  const { t, urlLang } = useLanguage();
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -25,12 +28,13 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
 
   return (
     <div className="min-h-screen">
+      <SEO title={t.home.seoTitle} description={t.home.seoDescription} path="" />
       {/* Editorial Hero */}
       <section className="relative min-h-[95vh] flex flex-col justify-center items-center overflow-hidden px-8">
         <div className="absolute inset-0 z-0 blur-[2px]">
-          <img 
-            src={IMG_BASE + "Foto_Home.png"}
-            alt="Craftsmanship" 
+          <img
+            src={toWebp(IMG_BASE + "Foto_Home.png")}
+            alt={t.home.heroImageAlt}
             className="w-full h-full object-cover scale-105 blur-2"
           />
           <div className="absolute inset-0 bg-stone-950/20 backdrop-blur-[1px]" />
@@ -41,13 +45,13 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
             <span className="block text-[12px] uppercase tracking-[0.6em] text-white font-bold fade-in-section hero-text-shadow">
               {t.home.heroSubtitle}
             </span>
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white leading-[0.9] fade-in-section hero-text-shadow">
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white fade-in-section hero-text-shadow">
               {t.home.heroTitle}
             </h2>
           </div>
           <div className="fade-in-section" style={{ transitionDelay: '0.4s' }}>
-            <Link 
-              to="/shop" 
+            <Link
+              to={`/${urlLang}/shop`}
               className="inline-flex items-center text-[13px] uppercase tracking-[0.4em] text-white border-b-2 border-white pb-3 font-bold group hover:text-stone-200 hover:border-stone-200 transition-all"
             >
               {t.home.cta}
@@ -62,8 +66,8 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
             <div className="lg:col-span-4 space-y-6 fade-in-section">
-              <span className="text-[12px] uppercase tracking-[0.4em] text-stone-900 font-bold">{t.home.philosophyTitle}</span>
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-stone-950 leading-tight">
+              <span className="inline-block text-[12px] uppercase tracking-[0.4em] text-stone-900 font-bold">{t.home.philosophyTitle}</span>
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-stone-950">
                 {t.home.philosophySubtitle}
               </h3>
             </div>
@@ -114,19 +118,19 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
           <div className="lg:w-1/2 relative fade-in-section">
             <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
-            <img src={IMG_BASE + "meritxell-2.jpeg"} alt="El taller" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"/>
+            <img src={toWebp(IMG_BASE + "meritxell-2.jpeg")} alt={t.home.workshopImageAlt} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"/>
             </div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-stone-100 hidden lg:block -z-10" />
           </div>
           <div className="lg:w-1/2 space-y-10 fade-in-section" style={{ transitionDelay: '0.2s' }}>
-             <span className="text-[11px] uppercase tracking-[0.5em] text-stone-400 font-bold">{t.nav.about}</span>
-             <h3 className="text-5xl lg:text-7xl font-serif text-stone-950 leading-tight">
+             <span className="inline-block text-[11px] uppercase tracking-[0.5em] text-stone-400 font-bold">{t.nav.about}</span>
+             <h3 className="text-5xl lg:text-7xl font-serif text-stone-950">
                {t.home.aboutLinkTitle}
              </h3>
              <p className="text-stone-900 text-2xl leading-relaxed max-w-lg">
                {t.home.aboutLinkDesc}
              </p>
-             <Link to="/about" className="group flex items-center gap-4 text-[12px] uppercase tracking-[0.4em] font-bold text-stone-950">
+             <Link to={`/${urlLang}/about`} className="group flex items-center gap-4 text-[12px] uppercase tracking-[0.4em] font-bold text-stone-950">
                {t.home.aboutLinkCta}
                <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-500" />
              </Link>
@@ -137,20 +141,20 @@ const Home: React.FC<{ t: Translation }> = ({ t }) => {
       {/* Lookbook Style Split */}
       <section className="grid lg:grid-cols-2 bg-[#F9F8F6]">
         <div className="h-[70vh] lg:h-screen overflow-hidden fade-in-section">
-          <img 
+          <img
             src={altair?.images[1]?.src}
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s]"
-            alt="Altair Detail"
+            alt={`${altair?.name ?? 'Altair'} — ${t.home.lookbookImageAlt}`}
           />
         </div>
         <div className="flex flex-col justify-center p-12 lg:p-24 space-y-10 fade-in-section">
-          <h3 className="text-4xl lg:text-7xl font-serif text-stone-950 leading-[1.1]">
+          <h3 className="text-4xl lg:text-7xl font-serif text-stone-950">
             {t.home.lookbookTitle}
           </h3>
           <p className="text-stone-900 text-xl max-w-md leading-relaxed">
             {t.home.lookbookDesc}
           </p>
-          <Link to="/shop" className="btn-premium w-fit text-xs uppercase tracking-[0.3em] pt-4 font-bold">
+          <Link to={`/${urlLang}/shop`} className="btn-premium w-fit text-xs uppercase tracking-[0.3em] pt-4 font-bold">
             {t.home.lookbookCta}
           </Link>
         </div>

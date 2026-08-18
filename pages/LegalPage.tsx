@@ -1,16 +1,22 @@
 
 import React from 'react';
-import { Translation, Language } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import SEO from '../components/SEO';
 
 interface LegalPageProps {
-  t: Translation;
-  lang: Language;
   type: 'privacy' | 'returns';
 }
 
-const LegalPage: React.FC<LegalPageProps> = ({ t, lang, type }) => {
+const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
+  const { t, lang } = useLanguage();
   return (
     <div className="py-24 px-8 lg:px-24 max-w-4xl mx-auto animate-fade-in bg-white min-h-screen">
+      <SEO
+        title={type === 'returns' ? t.contact.policies.returns : t.contact.policies.privacy}
+        description={type === 'returns' ? t.legal.returnsSeoDescription : t.legal.privacySeoDescription}
+        path={type === 'returns' ? '/returns' : '/privacy'}
+        noindex
+      />
       {type === 'returns' ? (
         <article className="space-y-10">
           <header className="space-y-4 border-b border-stone-200 pb-10">

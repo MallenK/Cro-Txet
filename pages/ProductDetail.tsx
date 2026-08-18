@@ -2,30 +2,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { PRODUCTS } from '../constants';
-import { Translation, Language } from '../types';
-import { 
-  ChevronLeft, 
+import {
+  ChevronLeft,
   ChevronRight,
-  Send, 
-  CheckCircle2, 
-  Loader2, 
-  Award, 
+  Send,
+  CheckCircle2,
+  Loader2,
+  Award,
   ChevronDown,
   Sparkles,
   Package
 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { useLanguage } from '../context/LanguageContext';
+import SEO from '../components/SEO';
 
-interface ProductDetailProps {
-  t: Translation;
-  lang: Language;
-}
-
-const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
+const ProductDetail: React.FC = () => {
+  const { t, lang, urlLang } = useLanguage();
   const { id } = useParams();
   const navigate = useNavigate();
   const product = PRODUCTS.find(p => p.id === id);
-  
+
   const [activeImg, setActiveImg] = useState(0);
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [isDetailsOpen, setIsDetailsOpen] = useState(true);
@@ -38,11 +35,22 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
     window.scrollTo(0, 0);
   }, [id]);
 
+  useEffect(() => {
+    if (!product) return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'view_item',
+      ecommerce: {
+        items: [{ item_id: product.id, item_name: product.name, price: product.price, item_category: 'bags' }],
+      },
+    });
+  }, [product]);
+
   if (!product) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center space-y-6">
         <h2 className="text-3xl font-serif text-stone-900">{t.common.notFound}</h2>
-        <Link to="/shop" className="text-stone-900 border-b-2 border-stone-900 pb-2 uppercase tracking-widest text-xs font-bold hover:text-stone-500 hover:border-stone-500 transition-all">
+        <Link to={`/${urlLang}/shop`} className="text-stone-900 border-b-2 border-stone-900 pb-2 uppercase tracking-widest text-xs font-bold hover:text-stone-500 hover:border-stone-500 transition-all">
           {t.common.backToShop}
         </Link>
       </div>
@@ -131,6 +139,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
         message: ''
       });
 
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'generate_lead', form_type: 'product_inquiry', item_id: product.id });
+
       setTimeout(() => setFormStatus('idle'), 5000);
 
     } catch (error) {
@@ -144,6 +155,18 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
 
   return (
     <div className="min-h-screen bg-white animate-fade-in pb-32">
+      <SEO
+        title={product.name}
+        description={product.description[lang]}
+        path={`/product/${product.id}`}
+        image={product.images[0]?.src}
+        type="product"
+        product={product}
+        breadcrumb={[
+          { name: t.nav.shop, path: '/shop' },
+          { name: product.name, path: `/product/${product.id}` },
+        ]}
+      />
       <div className="lg:hidden sticky top-0 z-30 bg-white/90 backdrop-blur-md px-6 py-4 flex items-center border-b border-stone-100">
         <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-stone-950 font-bold text-[10px] uppercase tracking-[0.2em] font-sans">
           <ChevronLeft className="w-4 h-4" /> {t.common.back}
@@ -235,7 +258,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
               <h1 className="text-6xl lg:text-7xl xl:text-8xl font-serif text-stone-950 leading-none tracking-tighter">
                 {product.name}
               </h1>
-              <p className="italic-serif text-stone-500 text-2xl lg:text-3xl tracking-tight mt-4 leading-relaxed">
+              <p className="italic-serif text-stone-500 text-2xl lg:text-3xl tracking-tight mt-4">
                 « {product.meaning[lang]} »
               </p>
             </div>
@@ -255,6 +278,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
                         setSelectedColor(null); // 👈 quitar filtro
                       } else {
                         setSelectedColor(color.name); // 👈 aplicar filtro
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                          event: 'select_content',
+                          content_type: 'product_color',
+                          item_id: product.id,
+                          color: color.name,
+                        });
                       }
                       setActiveImg(0);
                     }}
@@ -311,7 +341,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
             )}
 
             <div className="space-y-8">
-              <p className="text-stone-900 text-2xl lg:text-3xl font-serif leading-relaxed">
+              <p className="text-stone-900 text-2xl lg:text-3xl font-serif">
                 {product.description[lang]}
               </p>
               
@@ -336,7 +366,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
                 <ChevronDown className={`w-4 h-4 text-stone-600 transition-transform duration-500 ${isDetailsOpen ? 'rotate-180' : ''}`} />
               </button>
               
-              <div className={`overflow-hidden transition-all duration-700 ease-in-out ${isDetailsOpen ? 'max-h-[600px] opacity-100 pt-8 pb-10' : 'max-h-0 opacity-0'}`}>
+              <div className={`overflow-hidden transition-all duration-700 ease-in-out ${isDetailsOpen ? 'max-h-[900px] opacity-100 pt-8 pb-10' : 'max-h-0 opacity-0'}`}>
                 <div className="space-y-12">
                   {product.details?.material && (
                     <div>
@@ -348,6 +378,18 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
                     <div>
                       <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-4 font-sans opacity-60">{t.shop.stitchLabel}</h4>
                       <p className="text-stone-900 text-2xl lg:text-3xl font-serif">{product.details.stitch[lang]}</p>
+                    </div>
+                  )}
+                  {product.dimensions && (
+                    <div>
+                      <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-4 font-sans opacity-60">{t.shop.dimensionsLabel}</h4>
+                      <p className="text-stone-900 text-2xl lg:text-3xl font-serif">{product.dimensions[lang]}</p>
+                    </div>
+                  )}
+                  {product.careInstructions && (
+                    <div>
+                      <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-4 font-sans opacity-60">{t.shop.careLabel}</h4>
+                      <p className="text-stone-900 text-2xl lg:text-3xl font-serif">{product.careInstructions[lang]}</p>
                     </div>
                   )}
                 </div>
@@ -362,7 +404,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ t, lang }) => {
                 </div>
               ) : (
                 <div className="space-y-10">
-                  <h3 className="text-3xl lg:text-4xl font-serif text-stone-950 leading-tight">Personalitza la teva peça única</h3>
+                  <h3 className="text-3xl lg:text-4xl font-serif text-stone-950">Personalitza la teva peça única</h3>
                     <form onSubmit={handleOrderSubmit} className="space-y-8">
 
                       <input

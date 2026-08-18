@@ -3,23 +3,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { PRODUCTS } from '../constants';
-import { Translation, Language } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import SEO from '../components/SEO';
 
-interface ShopProps {
-  t: Translation;
-  lang: Language;
-}
-
-const Shop: React.FC<ShopProps> = ({ t, lang }) => {
+const Shop: React.FC = () => {
+  const { t, lang, urlLang } = useLanguage();
   return (
     <div className="py-20 px-6 lg:py-32 lg:px-20 max-w-[1600px] mx-auto animate-fade-in">
+      <SEO title={t.shop.seoTitle} description={t.shop.seoDescription} path="/shop" />
       <header className="mb-20 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 border-b border-stone-100 pb-16">
         <div className="space-y-6">
           <div className="flex items-center gap-3">
              <span className="h-[1px] w-6 bg-stone-900" />
              <span className="text-[11px] uppercase tracking-[0.4em] text-stone-900 font-bold">{t.shop.label}</span>
           </div>
-          <h2 className="text-5xl lg:text-8xl font-serif text-stone-950 leading-tight tracking-tight">{t.shop.title}</h2>
+          <h2 className="text-5xl lg:text-8xl font-serif text-stone-950 tracking-tight">{t.shop.title}</h2>
         </div>
         <p className="text-stone-900 text-xl max-w-sm leading-relaxed">
           {t.shop.desc}
@@ -31,7 +29,7 @@ const Shop: React.FC<ShopProps> = ({ t, lang }) => {
         {PRODUCTS.map((product) => (
           <Link 
             key={product.id} 
-            to={`/product/${product.id}`}
+            to={`/${urlLang}/product/${product.id}`}
             className="group flex flex-col h-full"
           >
             <div className="aspect-[3/4] mb-8 bg-stone-50 overflow-hidden rounded-sm transition-transform duration-700">

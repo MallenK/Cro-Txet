@@ -1,9 +1,11 @@
 import React from 'react';
 import emailjs from '@emailjs/browser';
-import { Translation } from '../types';
 import { Send, MapPin, Mail, Sparkles, Heart, Loader2, CheckCircle2 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import SEO from '../components/SEO';
 
-const Contact: React.FC<{ t: Translation }> = ({ t }) => {
+const Contact: React.FC = () => {
+  const { t } = useLanguage();
   const [formStatus, setFormStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
 
   const [formData, setFormData] = React.useState({
@@ -40,6 +42,9 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
         message: ''
       });
 
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'generate_lead', form_type: 'contact' });
+
       setTimeout(() => setFormStatus('idle'), 5000);
     } catch (error) {
       console.error(error);
@@ -50,6 +55,7 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
 
   return (
     <div className="animate-fade-in bg-white min-h-screen">
+      <SEO title={t.contact.seoTitle} description={t.contact.seoDescription} path="/contact" />
       {/* 1. Header - Estandarizado con Shop.tsx */}
       <header className="py-20 px-6 lg:py-32 lg:px-20 max-w-[1600px] mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 border-b border-stone-100 pb-16">
         <div className="space-y-6">
@@ -57,11 +63,11 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
              <span className="h-[1px] w-6 bg-stone-900" />
              <span className="text-[11px] uppercase tracking-[0.4em] text-stone-900 font-bold">{t.contact.label}</span>
           </div>
-          <h2 className="text-5xl lg:text-8xl font-serif text-stone-950 leading-tight tracking-tight">
+          <h2 className="text-5xl lg:text-8xl font-serif text-stone-950 tracking-tight">
             {t.contact.title}
           </h2>
         </div>
-        <p className="text-stone-900 text-xl lg:text-2xl max-w-sm leading-relaxed italic-serif">
+        <p className="text-stone-900 text-xl lg:text-2xl max-w-sm italic-serif">
           {t.contact.subtitle}
         </p>
       </header>
@@ -71,7 +77,7 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
         {/* Lado Izquierdo: Formulario Estandarizado con ProductDetail.tsx */}
         <section className="lg:col-span-7 space-y-16">
           <div className="space-y-4">
-            <span className="text-[11px] uppercase tracking-[0.4em] text-stone-400 font-bold">
+            <span className="inline-block text-[11px] uppercase tracking-[0.4em] text-stone-400 font-bold">
               {t.contact.form.productInquiry}
             </span>
             <div className="h-[1px] w-full bg-stone-100" />
@@ -86,7 +92,7 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
             <form onSubmit={handleSubmit} className="space-y-10">
               <div className="grid md:grid-cols-2 gap-10">
                 <div className="space-y-3">
-                  <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
+                  <label className="inline-block text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
                     {t.contact.form.name}
                   </label>
                   <input 
@@ -100,7 +106,7 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
+                  <label className="inline-block text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
                     {t.contact.form.email}
                   </label>
                   <input 
@@ -116,7 +122,7 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
               </div>
               
               <div className="space-y-3">
-                <label className="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
+                <label className="inline-block text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
                   {t.contact.form.message}
                 </label>
                 <textarea 
@@ -155,7 +161,7 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
               </div>
               <div className="space-y-1">
                 <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-stone-400">{t.contact.info.emailTitle}</h4>
-                <p className="text-xl font-serif text-stone-950">hola@croandtxet.com</p>
+                <a href="mailto:hola@croandtxet.com" className="text-xl font-serif text-stone-950 hover:text-stone-600 transition-colors">hola@croandtxet.com</a>
               </div>
             </div>
             <div className="p-10 bg-stone-50 border border-stone-100 flex items-center gap-6 group hover:bg-white hover:shadow-xl transition-all duration-500">
@@ -177,17 +183,17 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
               <Sparkles className="w-24 h-24 text-stone-950" />
             </div>
 
-            <div className="space-y-10 relative z-10">
+            <div className="space-y-10 relative z-10 mt-12">
               <div className="flex items-center gap-4">
                 <Sparkles className="w-6 h-6 text-stone-950" />
-                <h3 className="text-3xl lg:text-4xl font-serif text-stone-950 leading-tight">
+                <h3 className="text-3xl lg:text-4xl font-serif text-stone-950">
                   {t.contact.care.title}
                 </h3>
               </div>
               
               <div className="h-[1px] w-full bg-stone-200" />
               
-              <div className="space-y-10 text-stone-900 italic-serif text-xl lg:text-2xl leading-relaxed">
+              <div className="space-y-10 text-stone-900 italic-serif text-xl lg:text-2xl">
                 {t.contact.care.content.split('\n').map((line, i) => {
                   const trimmed = line.trim();
                   if (trimmed.startsWith('•') || trimmed.startsWith('●')) {
@@ -211,7 +217,7 @@ const Contact: React.FC<{ t: Translation }> = ({ t }) => {
                  </div>
                  <div className="space-y-4">
                    <h4 className="text-[11px] uppercase tracking-[0.4em] font-bold text-stone-950">L'Essència Cro&Txet</h4>
-                   <p className="text-stone-700 text-lg lg:text-xl italic-serif leading-relaxed">
+                   <p className="text-stone-700 text-lg lg:text-xl italic-serif">
                      {t.common.artisanNote}
                    </p>
                  </div>
