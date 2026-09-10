@@ -573,6 +573,15 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       follow: 'Seguir @cro_and_txet',
       viewPost: 'Veure la publicació',
     },
+    testimonials: {
+      label: 'Ressenyes',
+      title: 'El que diuen les clientes',
+      subtitle: 'Cada peça acaba en mans d’algú que l’estima. Això és el que expliquen.',
+      ratingSummary: '{average} de 5 · {count} ressenyes',
+      productTitle: 'Ressenyes d’aquesta peça',
+      requestCta: 'Has comprat una peça? Explica’ns la teva experiència',
+      reviewPrefill: 'La meva experiència amb la meva peça de Cro&Txet:\n\n',
+    },
     home: {
       heroSubtitle: 'Bosses úniques, fetes a mà amb amor i estil',
       heroTitle: 'Fils que expliquen una història',
@@ -754,6 +763,15 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       follow: 'Seguir @cro_and_txet',
       viewPost: 'Ver la publicación',
     },
+    testimonials: {
+      label: 'Reseñas',
+      title: 'Lo que dicen las clientas',
+      subtitle: 'Cada pieza acaba en manos de alguien que la quiere. Esto es lo que cuentan.',
+      ratingSummary: '{average} de 5 · {count} reseñas',
+      productTitle: 'Reseñas de esta pieza',
+      requestCta: '¿Has comprado una pieza? Cuéntanos tu experiencia',
+      reviewPrefill: 'Mi experiencia con mi pieza de Cro&Txet:\n\n',
+    },
     home: {
       heroSubtitle: 'Bolsos únicos, hechos a mano con amor y estilo',
       heroTitle: 'Hilos que cuentan una historia',
@@ -934,6 +952,15 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       subtitle: 'New models, commissions and day-to-day stories. @cro_and_txet.',
       follow: 'Follow @cro_and_txet',
       viewPost: 'View the post',
+    },
+    testimonials: {
+      label: 'Reviews',
+      title: 'What customers say',
+      subtitle: 'Every piece ends up with someone who loves it. Here is what they say.',
+      ratingSummary: '{average} out of 5 · {count} reviews',
+      productTitle: 'Reviews for this piece',
+      requestCta: 'Bought a piece? Tell us about your experience',
+      reviewPrefill: 'My experience with my Cro&Txet piece:\n\n',
     },
     home: {
       heroSubtitle: 'Unique handmade bags, crafted with love and style',

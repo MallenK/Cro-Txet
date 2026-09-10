@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import { Send, MapPin, Mail, Sparkles, Heart, Loader2, Clock, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -10,13 +10,15 @@ import { analytics } from '../lib/analytics';
 const Contact: React.FC = () => {
   const { t, urlLang } = useLanguage();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isReview = searchParams.get('ref') === 'review';
   const [formStatus, setFormStatus] = React.useState<'idle' | 'loading' | 'error'>('idle');
   const startedRef = React.useRef(false);
 
   const [formData, setFormData] = React.useState({
     from_name: '',
     from_email: '',
-    message: ''
+    message: isReview ? t.testimonials.reviewPrefill : ''
   });
 
   const handleChange = (
@@ -24,7 +26,7 @@ const Contact: React.FC = () => {
   ) => {
     if (!startedRef.current) {
       startedRef.current = true;
-      analytics.formStart('contact');
+      analytics.formStart(isReview ? 'review' : 'contact');
     }
     setFormData({
       ...formData,
@@ -48,7 +50,7 @@ const Contact: React.FC = () => {
         'iGpB097zxE-0bBxRC'
       );
 
-      analytics.generateLead('contact');
+      analytics.generateLead(isReview ? 'review' : 'contact');
 
       setFormData({ from_name: '', from_email: '', message: '' });
       navigate(`/${urlLang}/gracias`);

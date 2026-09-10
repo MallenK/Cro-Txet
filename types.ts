@@ -132,6 +132,15 @@ export interface Translation {
     follow: string;
     viewPost: string;
   };
+  testimonials: {
+    label: string;
+    title: string;
+    subtitle: string;
+    ratingSummary: string;
+    productTitle: string;
+    requestCta: string;
+    reviewPrefill: string;
+  };
   home: {
     heroSubtitle: string;
     heroTitle: string;

@@ -182,6 +182,15 @@ Consent Mode operativos. CTA de producto `position: fixed`. Build de producción
 - **Un único `<h1>` por página**: el logo del sidebar pasa a `<span>`;
   Home/Shop/About/Contact promueven su título a `<h1>` (sin cambio visual).
 
+### Testimonios / reseñas
+- `components/Testimonials.tsx` (sección en la Home + bloque compacto en la ficha de
+  producto) + `content/reviews.ts`. **Oculto mientras `REVIEWS` esté vacío.** Con
+  reseñas: sección visible + `aggregateRating`/`review` en el JSON-LD del producto
+  (schema estricto por `productId`, `components/SEO.tsx`).
+- Botón "Explica'ns la teva experiència" → `/contact?ref=review` (mensaje
+  pre-rellenado; se trackea como `form_type: 'review'`).
+- Guía para el cliente: [`RESENYES.md`](RESENYES.md). **No añadir reseñas falsas.**
+
 ### Rendimiento de imágenes
 - `scripts/generate-webp.ts` emite `.avif` además de `.webp` para cada imagen;
   regenera solo lo que falta (los derivados se commitean). `FORCE_IMAGES=1` fuerza.
