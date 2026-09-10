@@ -1,12 +1,88 @@
 @import "tailwindcss";
 
 :root {
+    color-scheme: light;
     --color-bg: #FDFCFB;
     --color-block: #F7F3F0;
     --color-accent: #EAD9D9;
     --color-sage: #DCE2D8;
     --color-text: #171717;
     --color-text-muted: #262626;
+    --color-text-strong: #000000;
+    --input-border: #737373;
+    /* Full-bleed inverted band (newsletter): near-black in light, raised dark in dark. */
+    --color-inverse-bg: #0c0a09;
+    --color-inverse-fg: #fafaf9;
+}
+
+/*
+ * Dark theme.
+ *
+ * Instead of adding `dark:` variants to every component, we remap Tailwind v4's
+ * own color custom properties (`--color-stone-*`, `--color-white`, `--color-black`)
+ * so existing utilities like `text-stone-950` / `bg-white` flip automatically.
+ * The stone ramp is inverted; dark accent panels (`bg-stone-950 text-white`)
+ * become light panels on the dark page, which is the intended dark-mode look.
+ *
+ * The block is duplicated for the two triggers: an explicit `[data-theme="dark"]`
+ * choice, and "system" (no choice) under `prefers-color-scheme: dark`.
+ */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --color-bg: #171717;
+        --color-block: #201d1b;
+        --color-accent: #3a2f2f;
+        --color-sage: #2b322a;
+        --color-text: #ededec;
+        --color-text-muted: #c9c5c1;
+        --color-text-strong: #ffffff;
+        --input-border: #6b6b6b;
+        --color-inverse-bg: #211e1c;
+        --color-inverse-fg: #f0efed;
+
+        --color-white: #171717;
+        --color-black: #fafaf9;
+        --color-stone-50: #1c1917;
+        --color-stone-100: #232020;
+        --color-stone-200: #332e2b;
+        --color-stone-300: #4b4540;
+        --color-stone-400: #8f8a84;
+        --color-stone-500: #a8a29e;
+        --color-stone-600: #cbc7c2;
+        --color-stone-700: #e0ddd9;
+        --color-stone-800: #efedea;
+        --color-stone-900: #e8e6e3;
+        --color-stone-950: #efedeb;
+    }
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-bg: #171717;
+    --color-block: #201d1b;
+    --color-accent: #3a2f2f;
+    --color-sage: #2b322a;
+    --color-text: #ededec;
+    --color-text-muted: #c9c5c1;
+    --color-text-strong: #ffffff;
+    --input-border: #6b6b6b;
+    --color-inverse-bg: #211e1c;
+    --color-inverse-fg: #f0efed;
+
+    --color-white: #171717;
+    --color-black: #fafaf9;
+    --color-stone-50: #1c1917;
+    --color-stone-100: #232020;
+    --color-stone-200: #332e2b;
+    --color-stone-300: #4b4540;
+    --color-stone-400: #8f8a84;
+    --color-stone-500: #a8a29e;
+    --color-stone-600: #cbc7c2;
+    --color-stone-700: #e0ddd9;
+    --color-stone-800: #efedea;
+    --color-stone-900: #e8e6e3;
+    --color-stone-950: #efedeb;
 }
 
 /*
@@ -29,6 +105,7 @@
         background-color: var(--color-bg);
         color: var(--color-text);
         -webkit-font-smoothing: antialiased;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
     p {
         font-family: 'Cormorant Garamond', serif;
@@ -78,8 +155,8 @@
         font-weight: 600;
     }
     .btn-premium:hover {
-        color: #000;
-        border-color: #000;
+        color: var(--color-text-strong);
+        border-color: var(--color-text-strong);
     }
 
     .hero-text-shadow {
@@ -87,7 +164,7 @@
     }
 
     input, textarea {
-        border-color: #737373 !important;
+        border-color: var(--input-border) !important;
         color: var(--color-text) !important;
         font-size: 1.125rem !important;
         font-family: 'Inter', sans-serif;
@@ -95,5 +172,11 @@
     input:focus, textarea:focus {
         border-color: var(--color-text) !important;
         box-shadow: 0 2px 0 var(--color-text);
+    }
+    /* Input sitting on the inverted band needs the inverted foreground colour. */
+    input.on-inverse, input.on-inverse:focus {
+        color: var(--color-inverse-fg) !important;
+        border-color: color-mix(in srgb, var(--color-inverse-fg) 35%, transparent) !important;
+        box-shadow: none;
     }
 }

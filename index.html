@@ -6,7 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Cro&Txet | Fils que expliquen una història</title>
     <meta name="description" content="Bosses de crochet fetes a mà, peces úniques de disseny artesanal. Cro&Txet — Barcelona, slow fashion i producció sota demanda.">
-    <meta name="theme-color" content="#171717">
+    <meta name="theme-color" content="#FDFCFB" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#171717" media="(prefers-color-scheme: dark)">
+
+    <script>
+      // Apply the saved theme before first paint to avoid a flash.
+      (function () {
+        try {
+          var t = localStorage.getItem('cro_txet_theme');
+          if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -95,6 +106,12 @@
         width: 34px; height: 34px; border-radius: 9999px;
         border: 2px solid #e7e5e4; border-top-color: #171717;
         animation: app-boot-spin .7s linear infinite;
+      }
+      :root[data-theme="dark"] #app-boot { background: #171717; }
+      :root[data-theme="dark"] #app-boot .ring { border-color: #3a3a3a; border-top-color: #ededec; }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) #app-boot { background: #171717; }
+        :root:not([data-theme="light"]) #app-boot .ring { border-color: #3a3a3a; border-top-color: #ededec; }
       }
       @keyframes app-boot-spin { to { transform: rotate(360deg); } }
       @media (prefers-reduced-motion: reduce) { #app-boot .ring { animation-duration: 2s; } }

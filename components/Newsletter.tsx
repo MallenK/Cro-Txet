@@ -39,14 +39,14 @@ const Newsletter: React.FC = () => {
   };
 
   return (
-    <section className="bg-stone-950 text-white px-6 lg:px-24 py-24 lg:py-32">
+    <section className="bg-[var(--color-inverse-bg)] text-[var(--color-inverse-fg)] px-6 lg:px-24 py-24 lg:py-32">
       <div className="max-w-3xl mx-auto text-center space-y-8">
-        <span className="text-[11px] uppercase tracking-[0.5em] text-stone-400 font-bold">{t.newsletter.label}</span>
-        <h2 className="text-3xl lg:text-5xl font-serif tracking-tight">{t.newsletter.title}</h2>
-        <p className="text-stone-300 text-lg">{t.newsletter.desc}</p>
+        <span className="text-[11px] uppercase tracking-[0.5em] text-[var(--color-inverse-fg)]/55 font-bold">{t.newsletter.label}</span>
+        <h2 className="text-3xl lg:text-5xl font-serif tracking-tight text-[var(--color-inverse-fg)]">{t.newsletter.title}</h2>
+        <p className="text-[var(--color-inverse-fg)]/75 text-lg">{t.newsletter.desc}</p>
 
         {status === 'success' ? (
-          <p className="inline-flex items-center gap-3 text-lg font-serif text-white">
+          <p className="inline-flex items-center gap-3 text-lg font-serif text-[var(--color-inverse-fg)]">
             <Check className="w-5 h-5" /> {t.newsletter.success}
           </p>
         ) : (
@@ -63,12 +63,12 @@ const Newsletter: React.FC = () => {
                 onChange={e => { setEmail(e.target.value); if (status === 'error') setStatus('idle'); }}
                 required
                 placeholder={t.newsletter.placeholder}
-                className="flex-1 bg-white/10 border border-white/25 px-6 py-4 text-white placeholder:text-stone-400 focus:outline-none focus:border-white transition-colors"
+                className="on-inverse flex-1 bg-[var(--color-inverse-fg)]/10 px-6 py-4 placeholder:text-[var(--color-inverse-fg)]/50 focus:outline-none transition-colors"
               />
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="px-8 py-4 bg-white text-stone-950 text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-stone-200 transition-colors flex items-center justify-center gap-3"
+                className="px-8 py-4 bg-[var(--color-inverse-fg)] text-[var(--color-inverse-bg)] text-[11px] uppercase tracking-[0.3em] font-bold hover:opacity-85 transition-opacity flex items-center justify-center gap-3"
               >
                 {status === 'loading' ? <Loader2 className="w-4 h-4 animate-spin" /> : t.newsletter.cta}
               </button>
@@ -78,8 +78,8 @@ const Newsletter: React.FC = () => {
                 <AlertCircle className="w-4 h-4" /> {t.newsletter.error}
               </p>
             )}
-            <p className="text-xs text-stone-400">
-              <Link to={`/${urlLang}/privacy`} className="underline hover:text-white">
+            <p className="text-xs text-[var(--color-inverse-fg)]/55">
+              <Link to={`/${urlLang}/privacy`} className="underline hover:text-[var(--color-inverse-fg)]">
                 {t.newsletter.consent}
               </Link>
             </p>

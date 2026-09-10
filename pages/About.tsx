@@ -9,7 +9,7 @@ const About: React.FC = () => {
   const { t } = useLanguage();
   useScrollReveal();
   return (
-    <div className="py-14 px-6 lg:py-24 lg:px-24 max-w-7xl mx-auto animate-fade-in bg-[#FDFCFB]">
+    <div className="py-14 px-6 lg:py-24 lg:px-24 max-w-7xl mx-auto animate-fade-in bg-[var(--color-bg)]">
       <SEO title={t.about.seoTitle} description={t.about.seoDescription} path="/about" />
       <Breadcrumbs items={[{ name: t.about.label }]} className="mb-12" />
 

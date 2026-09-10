@@ -435,9 +435,9 @@ const ProductDetail: React.FC = () => {
 
             <div ref={formRef} className="pt-12 border-t border-stone-200 scroll-mt-24">
               {formStatus === 'success' ? (
-                <div className="bg-stone-950 text-white p-14 text-center space-y-10 animate-fade-in shadow-2xl">
-                  <CheckCircle2 className="w-16 h-16 text-stone-300 mx-auto" />
-                  <p className="font-serif text-3xl tracking-tight text-white">{t.contact.form.sent}</p>
+                <div className="bg-[var(--color-inverse-bg)] text-[var(--color-inverse-fg)] p-14 text-center space-y-10 animate-fade-in shadow-2xl">
+                  <CheckCircle2 className="w-16 h-16 text-[var(--color-inverse-fg)]/60 mx-auto" />
+                  <p className="font-serif text-3xl tracking-tight text-[var(--color-inverse-fg)]">{t.contact.form.sent}</p>
                 </div>
               ) : (
                 <div className="space-y-10">

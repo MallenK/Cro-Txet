@@ -504,7 +504,9 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       breadcrumb: 'Ruta de navegació',
       chat: 'Escriu-nos per Instagram',
       skipToContent: 'Salta al contingut',
+      theme: 'Canviar tema',
     },
+    theme: { light: 'Clar', dark: 'Fosc', system: 'Sistema' },
     footer: {
       explore: 'Explora',
       legalHeading: 'Legal',
@@ -676,7 +678,9 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       breadcrumb: 'Ruta de navegación',
       chat: 'Escríbenos por Instagram',
       skipToContent: 'Saltar al contenido',
+      theme: 'Cambiar tema',
     },
+    theme: { light: 'Claro', dark: 'Oscuro', system: 'Sistema' },
     footer: {
       explore: 'Explora',
       legalHeading: 'Legal',
@@ -848,7 +852,9 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       breadcrumb: 'Breadcrumb',
       chat: 'Message us on Instagram',
       skipToContent: 'Skip to content',
+      theme: 'Switch theme',
     },
+    theme: { light: 'Light', dark: 'Dark', system: 'System' },
     footer: {
       explore: 'Explore',
       legalHeading: 'Legal',

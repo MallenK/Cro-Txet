@@ -60,6 +60,12 @@ export interface Translation {
     breadcrumb: string;
     chat: string;
     skipToContent: string;
+    theme: string;
+  };
+  theme: {
+    light: string;
+    dark: string;
+    system: string;
   };
   footer: {
     explore: string;

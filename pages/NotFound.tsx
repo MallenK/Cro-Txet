@@ -8,7 +8,7 @@ const NotFound: React.FC = () => {
   const { t, urlLang } = useLanguage();
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-6 py-24 bg-[#FDFCFB] animate-fade-in">
+    <div className="min-h-[80vh] flex items-center justify-center px-6 py-24 bg-[var(--color-bg)] animate-fade-in">
       <SEO title={t.notFound.seoTitle} description={t.notFound.body} path="/404" noindex />
       <div className="max-w-xl text-center space-y-10">
         <span className="block text-[13rem] leading-none font-serif text-stone-200 select-none">404</span>

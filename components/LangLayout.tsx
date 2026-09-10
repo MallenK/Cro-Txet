@@ -89,7 +89,7 @@ const AppShell: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-[#FDFCFB] text-[#171717] max-w-full overflow-x-hidden">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] max-w-full overflow-x-hidden">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:bg-stone-950 focus:text-white focus:px-4 focus:py-2 focus:text-xs focus:uppercase focus:tracking-widest"

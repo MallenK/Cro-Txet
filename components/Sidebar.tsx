@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Instagram, Menu, X } from 'lucide-react';
 import { Language } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import ThemeToggle from './ThemeToggle';
 
 const Sidebar: React.FC = () => {
   const { t, lang, urlLang, setLang } = useLanguage();
@@ -50,7 +51,7 @@ const Sidebar: React.FC = () => {
       />
 
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-[85vw] max-w-80 lg:w-72 bg-[#FDFCFB] flex flex-col p-10 lg:p-14
+        fixed inset-y-0 left-0 z-50 w-[85vw] max-w-80 lg:w-72 bg-[var(--color-bg)] flex flex-col p-10 lg:p-14
         sidebar-transition border-r border-stone-100 transform-gpu
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
@@ -100,8 +101,10 @@ const Sidebar: React.FC = () => {
             </div>
           </div>
 
-          <a 
-            href="https://instagram.com/cro_and_txet" 
+          <ThemeToggle />
+
+          <a
+            href="https://instagram.com/cro_and_txet"
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center gap-4 w-fit py-2"

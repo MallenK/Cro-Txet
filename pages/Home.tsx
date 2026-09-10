@@ -28,22 +28,22 @@ const Home: React.FC = () => {
             decoding="async"
             className="w-full h-full object-cover scale-105 blur-2"
           />
-          <div className="absolute inset-0 bg-stone-950/20 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-[#0a0a0a]/25 backdrop-blur-[1px]" />
         </div>
 
         <div className="relative z-10 text-center space-y-12 max-w-4xl mx-auto">
           <div className="space-y-4">
-            <span className="block text-[12px] uppercase tracking-[0.6em] text-white font-bold fade-in-section hero-text-shadow">
+            <span className="block text-[12px] uppercase tracking-[0.6em] text-[#fafafa] font-bold fade-in-section hero-text-shadow">
               {t.home.heroSubtitle}
             </span>
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white fade-in-section hero-text-shadow">
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#fafafa] fade-in-section hero-text-shadow">
               {t.home.heroTitle}
             </h2>
           </div>
           <div className="fade-in-section" style={{ transitionDelay: '0.4s' }}>
             <Link
               to={`/${urlLang}/shop`}
-              className="inline-flex items-center text-[13px] uppercase tracking-[0.4em] text-white border-b-2 border-white pb-3 font-bold group hover:text-stone-200 hover:border-stone-200 transition-all"
+              className="inline-flex items-center text-[13px] uppercase tracking-[0.4em] text-[#fafafa] border-b-2 border-[#fafafa] pb-3 font-bold group hover:text-[#d4d4d4] hover:border-[#d4d4d4] transition-all"
             >
               {t.home.cta}
               <ArrowRight className="ml-4 w-4 h-4 group-hover:translate-x-2 transition-transform duration-500" />
@@ -130,7 +130,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Lookbook Style Split */}
-      <section className="grid lg:grid-cols-2 bg-[#F9F8F6]">
+      <section className="grid lg:grid-cols-2 bg-[var(--color-block)]">
         <div className="h-[70vh] lg:h-screen overflow-hidden fade-in-section">
           <img
             src={altair?.images[1]?.src}

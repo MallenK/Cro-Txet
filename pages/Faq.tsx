@@ -23,7 +23,7 @@ const Faq: React.FC = () => {
   };
 
   return (
-    <div className="py-16 px-6 lg:py-28 lg:px-24 max-w-4xl mx-auto animate-fade-in bg-[#FDFCFB] min-h-screen">
+    <div className="py-16 px-6 lg:py-28 lg:px-24 max-w-4xl mx-auto animate-fade-in bg-[var(--color-bg)] min-h-screen">
       <SEO title={t.faqMeta.seoTitle} description={t.faqMeta.seoDescription} path="/faq" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
@@ -62,11 +62,11 @@ const Faq: React.FC = () => {
         })}
       </dl>
 
-      <div className="mt-16 p-10 lg:p-14 bg-stone-950 text-white text-center space-y-6">
-        <p className="font-serif text-2xl lg:text-3xl tracking-tight text-white">{t.faqMeta.stillHelp}</p>
+      <div className="mt-16 p-10 lg:p-14 bg-[var(--color-inverse-bg)] text-[var(--color-inverse-fg)] text-center space-y-6">
+        <p className="font-serif text-2xl lg:text-3xl tracking-tight text-[var(--color-inverse-fg)]">{t.faqMeta.stillHelp}</p>
         <Link
           to={`/${urlLang}/contact`}
-          className="group inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.4em] font-bold border-b-2 border-white pb-2 hover:text-stone-300 hover:border-stone-300 transition-all"
+          className="group inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.4em] font-bold text-[var(--color-inverse-fg)] border-b-2 border-[var(--color-inverse-fg)] pb-2 hover:opacity-70 transition-opacity"
         >
           {t.faqMeta.ctaContact}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
