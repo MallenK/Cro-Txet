@@ -20,3 +20,11 @@ root.render(
     </HelmetProvider>
   </React.StrictMode>
 );
+
+// Fade out the pre-hydration boot loader (index.html) once React has painted.
+requestAnimationFrame(() => {
+  const boot = document.getElementById('app-boot');
+  if (!boot) return;
+  boot.classList.add('is-hidden');
+  setTimeout(() => boot.remove(), 500);
+});

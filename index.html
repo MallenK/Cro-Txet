@@ -5,10 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Cro&Txet | Fils que expliquen una història</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E👜%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Bosses de crochet fetes a mà, peces úniques de disseny artesanal. Cro&Txet — Barcelona, slow fashion i producció sota demanda.">
+    <meta name="theme-color" content="#171717">
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@200;300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@200;300;400;500;600&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@200;300;400;500;600&display=swap"></noscript>
+
+    <!-- Google Consent Mode v2: deny by default until the visitor accepts (see components/CookieConsent.tsx) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
+      try {
+        var stored = localStorage.getItem('cro_txet_consent');
+        if (stored) {
+          var v = JSON.parse(stored);
+          gtag('consent', 'update', {
+            ad_storage: v.marketing ? 'granted' : 'denied',
+            ad_user_data: v.marketing ? 'granted' : 'denied',
+            ad_personalization: v.marketing ? 'granted' : 'denied',
+            analytics_storage: v.analytics ? 'granted' : 'denied'
+          });
+        }
+      } catch (e) {}
+    </script>
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -23,8 +60,15 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Cro&Txet",
+      "alternateName": "Cro and Txet",
       "url": "https://croandtxet.cat/",
-      "logo": "https://croandtxet.cat/img/fotos_txell/Foto_Home.webp",
+      "logo": "https://croandtxet.cat/favicon-512.png",
+      "image": "https://croandtxet.cat/img/og/og-default.jpg",
+      "description": "Bosses de crochet fetes a mà, peces úniques de disseny artesanal. Slow fashion i producció sota demanda.",
+      "email": "hola@croandtxet.cat",
+      "areaServed": "ES",
+      "knowsLanguage": ["ca", "es", "en"],
+      "address": { "@type": "PostalAddress", "addressLocality": "Barcelona", "addressCountry": "ES" },
       "sameAs": ["https://instagram.com/cro_and_txet"]
     }
     </script>
@@ -40,6 +84,21 @@
       }
     }(window.location));
     </script>
+
+    <style>
+      #app-boot {
+        position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+        background: #FDFCFB; z-index: 9999; transition: opacity .4s ease;
+      }
+      #app-boot.is-hidden { opacity: 0; pointer-events: none; }
+      #app-boot .ring {
+        width: 34px; height: 34px; border-radius: 9999px;
+        border: 2px solid #e7e5e4; border-top-color: #171717;
+        animation: app-boot-spin .7s linear infinite;
+      }
+      @keyframes app-boot-spin { to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) { #app-boot .ring { animation-duration: 2s; } }
+    </style>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -47,6 +106,10 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
+    <div id="app-boot" aria-hidden="true"><div class="ring"></div></div>
+    <noscript style="display:block;padding:2rem;text-align:center;font-family:sans-serif;color:#171717">
+      Aquesta web necessita JavaScript per funcionar. Escriu-nos a hola@croandtxet.cat.
+    </noscript>
     <script type="module" src="/index.tsx"></script>
 </body>
 </html>

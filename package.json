@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsx scripts/generate-webp.ts && vite build && tsx scripts/generate-sitemap.ts",
+    "build": "tsx scripts/generate-assets.ts && tsx scripts/generate-webp.ts && vite build && tsx scripts/generate-sitemap.ts",
     "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },

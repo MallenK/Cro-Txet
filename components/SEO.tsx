@@ -49,7 +49,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, path, image, type = 'webs
 
   const fullTitle = `${title} | Cro&Txet`;
   const canonical = `${SITE_ORIGIN}/${urlLang}${path}`;
-  const ogImage = image ? toAbsoluteImageUrl(image) : `${SITE_ORIGIN}/img/fotos_txell/Foto_Home.webp`;
+  const ogImage = image ? toAbsoluteImageUrl(image) : `${SITE_ORIGIN}/img/og/og-default.jpg`;
   const shouldNoindex = noindex || isStaging;
 
   useEffect(() => {

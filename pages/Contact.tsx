@@ -161,7 +161,7 @@ const Contact: React.FC = () => {
               </div>
               <div className="space-y-1">
                 <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-stone-400">{t.contact.info.emailTitle}</h4>
-                <a href="mailto:hola@croandtxet.com" className="text-xl font-serif text-stone-950 hover:text-stone-600 transition-colors">hola@croandtxet.com</a>
+                <a href="mailto:hola@croandtxet.cat" className="text-xl font-serif text-stone-950 hover:text-stone-600 transition-colors">hola@croandtxet.cat</a>
               </div>
             </div>
             <div className="p-10 bg-stone-50 border border-stone-100 flex items-center gap-6 group hover:bg-white hover:shadow-xl transition-all duration-500">
