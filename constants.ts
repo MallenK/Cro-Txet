@@ -565,6 +565,13 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       shareCopied: 'Enllaç copiat',
       stickyCta: 'Consultar aquesta peça',
     },
+    instagram: {
+      label: 'Instagram',
+      title: 'Del taller a Instagram',
+      subtitle: 'Nous models, encàrrecs i històries del dia a dia. @cro_and_txet.',
+      follow: 'Seguir @cro_and_txet',
+      viewPost: 'Veure la publicació',
+    },
     home: {
       heroSubtitle: 'Bosses úniques, fetes a mà amb amor i estil',
       heroTitle: 'Fils que expliquen una història',
@@ -739,6 +746,13 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       shareCopied: 'Enlace copiado',
       stickyCta: 'Consultar esta pieza',
     },
+    instagram: {
+      label: 'Instagram',
+      title: 'Del taller a Instagram',
+      subtitle: 'Nuevos modelos, encargos e historias del día a día. @cro_and_txet.',
+      follow: 'Seguir @cro_and_txet',
+      viewPost: 'Ver la publicación',
+    },
     home: {
       heroSubtitle: 'Bolsos únicos, hechos a mano con amor y estilo',
       heroTitle: 'Hilos que cuentan una historia',
@@ -912,6 +926,13 @@ export const TRANSLATIONS: Record<Language, Translation> = {
       share: 'Share',
       shareCopied: 'Link copied',
       stickyCta: 'Inquire about this piece',
+    },
+    instagram: {
+      label: 'Instagram',
+      title: 'From the studio to Instagram',
+      subtitle: 'New models, commissions and day-to-day stories. @cro_and_txet.',
+      follow: 'Follow @cro_and_txet',
+      viewPost: 'View the post',
     },
     home: {
       heroSubtitle: 'Unique handmade bags, crafted with love and style',

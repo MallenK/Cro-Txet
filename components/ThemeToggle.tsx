@@ -5,7 +5,7 @@ import { ThemeChoice, applyThemeChoice, getThemeChoice, THEME_CHANGE_EVENT } fro
 
 const ThemeToggle: React.FC = () => {
   const { t } = useLanguage();
-  const [choice, setChoice] = useState<ThemeChoice>(null);
+  const [choice, setChoice] = useState<ThemeChoice>('light');
 
   useEffect(() => {
     setChoice(getThemeChoice());
@@ -17,7 +17,7 @@ const ThemeToggle: React.FC = () => {
   const options: { value: ThemeChoice; label: string; icon: React.ReactNode }[] = [
     { value: 'light', label: t.theme.light, icon: <Sun className="w-3.5 h-3.5" /> },
     { value: 'dark', label: t.theme.dark, icon: <Moon className="w-3.5 h-3.5" /> },
-    { value: null, label: t.theme.system, icon: <Monitor className="w-3.5 h-3.5" /> },
+    { value: 'system', label: t.theme.system, icon: <Monitor className="w-3.5 h-3.5" /> },
   ];
 
   return (
@@ -28,7 +28,7 @@ const ThemeToggle: React.FC = () => {
           const active = choice === o.value;
           return (
             <button
-              key={o.label}
+              key={o.value}
               type="button"
               aria-pressed={active}
               onClick={() => applyThemeChoice(o.value)}

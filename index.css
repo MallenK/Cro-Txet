@@ -24,39 +24,10 @@
  * The stone ramp is inverted; dark accent panels (`bg-stone-950 text-white`)
  * become light panels on the dark page, which is the intended dark-mode look.
  *
- * The block is duplicated for the two triggers: an explicit `[data-theme="dark"]`
- * choice, and "system" (no choice) under `prefers-color-scheme: dark`.
+ * Only applied for an explicit `[data-theme="dark"]`. A first-time visitor gets
+ * light; the JS in index.html / context/theme.ts resolves "system" to a concrete
+ * `data-theme` value, so `prefers-color-scheme` is never consulted in CSS.
  */
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        color-scheme: dark;
-        --color-bg: #171717;
-        --color-block: #201d1b;
-        --color-accent: #3a2f2f;
-        --color-sage: #2b322a;
-        --color-text: #ededec;
-        --color-text-muted: #c9c5c1;
-        --color-text-strong: #ffffff;
-        --input-border: #6b6b6b;
-        --color-inverse-bg: #211e1c;
-        --color-inverse-fg: #f0efed;
-
-        --color-white: #171717;
-        --color-black: #fafaf9;
-        --color-stone-50: #1c1917;
-        --color-stone-100: #232020;
-        --color-stone-200: #332e2b;
-        --color-stone-300: #4b4540;
-        --color-stone-400: #8f8a84;
-        --color-stone-500: #a8a29e;
-        --color-stone-600: #cbc7c2;
-        --color-stone-700: #e0ddd9;
-        --color-stone-800: #efedea;
-        --color-stone-900: #e8e6e3;
-        --color-stone-950: #efedeb;
-    }
-}
-
 :root[data-theme="dark"] {
     color-scheme: dark;
     --color-bg: #171717;

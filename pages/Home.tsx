@@ -6,6 +6,7 @@ import { IMG_BASE, PRODUCTS, toWebp } from '../constants';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Newsletter from '../components/Newsletter';
+import FeaturedInstagram from '../components/FeaturedInstagram';
 import Reveal from '../components/motion/Reveal';
 
 const Home: React.FC = () => {
@@ -149,6 +150,7 @@ const Home: React.FC = () => {
         </Reveal>
       </section>
 
+      <FeaturedInstagram />
       <Newsletter />
     </div>
   );

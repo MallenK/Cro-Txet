@@ -125,6 +125,13 @@ export interface Translation {
     shareCopied: string;
     stickyCta: string;
   };
+  instagram: {
+    label: string;
+    title: string;
+    subtitle: string;
+    follow: string;
+    viewPost: string;
+  };
   home: {
     heroSubtitle: string;
     heroTitle: string;
