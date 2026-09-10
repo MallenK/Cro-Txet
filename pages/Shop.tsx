@@ -7,6 +7,7 @@ import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Reveal from '../components/motion/Reveal';
+import Picture from '../components/Picture';
 import { analytics, productItem } from '../lib/analytics';
 
 const LIST_NAME = 'Catàleg';
@@ -48,7 +49,7 @@ const Shop: React.FC = () => {
             onClick={() => analytics.selectItem(LIST_NAME, productItem(product, { index: i }))}
           >
             <div className="aspect-[3/4] mb-8 bg-stone-50 overflow-hidden rounded-sm transition-transform duration-700">
-              <img
+              <Picture
                 src={product.images[0].src}
                 alt={`${product.name} — ${product.meaning[lang]}`}
                 loading={i < 4 ? 'eager' : 'lazy'}

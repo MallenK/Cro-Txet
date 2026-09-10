@@ -21,6 +21,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import Picture from '../components/Picture';
 import { analytics, productItem } from '../lib/analytics';
 
 const ProductDetail: React.FC = () => {
@@ -217,10 +218,12 @@ const ProductDetail: React.FC = () => {
             >
               {imagesToShow.map((img, idx) => (
                 <div key={idx} className="w-full h-full flex-shrink-0 overflow-hidden">
-                  <img
+                  <Picture
                     src={img.src}
                     alt={`${product.name} — ${product.meaning[lang]} (${idx + 1}/${imagesToShow.length})`}
                     loading={idx === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    fetchPriority={idx === 0 ? 'high' : undefined}
                     className="w-full h-full object-cover transition-transform duration-700 active:scale-105"
                   />
                 </div>
@@ -247,11 +250,13 @@ const ProductDetail: React.FC = () => {
                 key={idx} 
                 className="relative overflow-hidden w-full aspect-[4/5] bg-stone-100 rounded-sm group shadow-md"
               >
-                <img
+                <Picture
                   src={img.src}
                   alt={`${product.name} — ${product.meaning[lang]} (${idx + 1}/${imagesToShow.length})`}
                   className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
                   loading={idx === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={idx === 0 ? 'high' : undefined}
                 />
                 {idx === 0 && (
                   <div className="absolute top-10 right-10 bg-white/95 backdrop-blur-md px-6 py-3 rounded-full border border-stone-200 flex items-center gap-3 shadow-lg">

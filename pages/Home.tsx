@@ -8,6 +8,7 @@ import SEO from '../components/SEO';
 import Newsletter from '../components/Newsletter';
 import FeaturedInstagram from '../components/FeaturedInstagram';
 import Reveal from '../components/motion/Reveal';
+import Picture from '../components/Picture';
 import { analytics } from '../lib/analytics';
 
 const Home: React.FC = () => {
@@ -21,7 +22,7 @@ const Home: React.FC = () => {
       {/* Editorial Hero */}
       <section className="relative min-h-[95vh] flex flex-col justify-center items-center overflow-hidden px-8">
         <div className="absolute inset-0 z-0 blur-[2px]">
-          <img
+          <Picture
             src={toWebp(IMG_BASE + "Foto_Home.png")}
             alt={t.home.heroImageAlt}
             fetchPriority="high"
@@ -110,7 +111,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
           <Reveal className="lg:w-1/2 relative">
             <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
-            <img src={toWebp(IMG_BASE + "meritxell-2.jpeg")} alt={t.home.workshopImageAlt} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"/>
+            <Picture src={toWebp(IMG_BASE + "meritxell-2.jpeg")} alt={t.home.workshopImageAlt} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"/>
             </div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-stone-100 hidden lg:block -z-10" />
           </Reveal>
@@ -133,8 +134,10 @@ const Home: React.FC = () => {
       {/* Lookbook Style Split */}
       <section className="grid lg:grid-cols-2 bg-[var(--color-block)]">
         <Reveal className="h-[70vh] lg:h-screen overflow-hidden">
-          <img
-            src={altair?.images[1]?.src}
+          <Picture
+            src={altair?.images[1]?.src ?? ''}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s]"
             alt={`${altair?.name ?? 'Altair'} — ${t.home.lookbookImageAlt}`}
           />

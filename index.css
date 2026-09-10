@@ -99,6 +99,9 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+    /* <Picture> wrapper adds no box; the <img> lays out as a direct child. */
+    picture { display: contents; }
+
     .product-image-container {
         aspect-ratio: 4 / 5;
         position: relative;

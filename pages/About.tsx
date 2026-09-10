@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Reveal from '../components/motion/Reveal';
+import Picture from '../components/Picture';
 
 const About: React.FC = () => {
   const { t } = useLanguage();
@@ -46,12 +47,13 @@ const About: React.FC = () => {
 
           {["meritxell-1.jpeg", "meritxell-2.jpeg", "meritxell.jpeg"].map((img, i) => (
             <Reveal key={img} delay={i * 0.12} className="relative overflow-hidden group shadow-sm rounded-sm max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] mx-auto">
-              <img 
+              <Picture
                 src={toWebp(IMG_BASE + img)}
                 alt={`${t.about.founderImageAlt} ${i + 1}`}
                 className="w-full aspect-[4/5] object-cover transition-transform duration-[2s] group-hover:scale-105"
                 loading={i === 0 ? "eager" : "lazy"}
-                onError={(e) => (e.currentTarget.parentElement!.style.display = "none")}
+                decoding="async"
+                onError={(e) => { const p = e.currentTarget.closest('div'); if (p) (p as HTMLElement).style.display = 'none'; }}
               />
               <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
             </Reveal>

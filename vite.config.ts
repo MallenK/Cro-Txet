@@ -21,8 +21,10 @@ export default defineConfig(({ mode }) => {
       react(),
       tailwindcss(),
       ViteImageOptimizer({
-        exclude: /\.svg$/,
-        webp: { quality: 82 },
+        // .webp / .avif are already produced and tuned by scripts/generate-webp.ts;
+        // re-encoding them here (AVIF especially) makes builds crawl. .svg has no
+        // svgo installed. So the plugin only touches the original png/jpg fallbacks.
+        exclude: /\.(svg|avif|webp)$/,
         png: { quality: 82 },
         jpeg: { quality: 82 },
         jpg: { quality: 82 },

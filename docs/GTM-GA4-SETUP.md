@@ -6,19 +6,32 @@ Esto es configuración manual en la consola de GTM ([tagmanager.google.com](http
 
 ## Eventos que el código ya envía a `dataLayer`
 
-Referencia de lo que el frontend empuja (ver `context/LanguageContext.tsx`, `pages/ProductDetail.tsx`, `pages/Contact.tsx`):
+Todo pasa por `lib/analytics.ts` (punto único). Nomenclatura estilo GA4.
 
-| Evento | Cuándo | Payload |
+| Evento | Cuándo | Parámetros |
 |---|---|---|
-| `view_item` | Al abrir una ficha de producto | `ecommerce.items[0] = { item_id, item_name, price, item_category: 'bags' }` |
-| `select_content` | Al elegir un color en una ficha de producto | `{ content_type: 'product_color', item_id, color }` |
-| `generate_lead` | Al enviar con éxito el formulario de contacto o el de encargo de producto | `{ form_type: 'contact' \| 'product_inquiry', item_id? }` |
-| `language_change` | Al cambiar de idioma desde el selector | `{ previous_language, new_language }` |
-| `consent_update` | Al aceptar/rechazar en el banner de cookies | `{ consent_analytics: bool, consent_marketing: bool }` |
-| `newsletter_signup` | Al suscribirse con éxito a la newsletter (Home) | `—` |
-| `lead_thank_you_view` | Al llegar a la página `/gracias` tras enviar el formulario de contacto | `—` |
+| `page_view` | Cada navegación SPA (tras actualizar el `<title>`) | `page_path, page_title, page_location, content_language, content_group` |
+| `view_item_list` | Al cargar la tienda | `ecommerce.item_list_name`, `ecommerce.items[]` |
+| `select_item` | Al hacer clic en una tarjeta de producto | `ecommerce.item_list_name`, `ecommerce.items[0]` |
+| `view_item` | Al abrir una ficha de producto | `ecommerce = { currency:'EUR', value, items:[{ item_id, item_name, price, item_brand, item_category }] }` |
+| `select_content` | Elegir color (`product_color`) o extra (`product_addon`) en la ficha | `content_type, item_id, color?/addon_id?/addon_price?` |
+| `form_start` | Al escribir el primer carácter en un formulario | `form_type: 'contact' \| 'product_inquiry', item_id?` |
+| `generate_lead` | Envío con éxito de un formulario | `form_type, item_id?, estimated_value?, addons?` |
+| `lead_thank_you_view` | Al llegar a `/gracias` | `—` |
+| `newsletter_signup` | Suscripción con éxito | `signup_location` |
+| `share` | Botón compartir de producto | `method: 'web_share' \| 'copy_link', content_type: 'product', item_id` |
+| `cta_click` | CTA destacado (hero, lookbook, CTA fija de móvil) | `cta_text, cta_location, cta_destination` |
+| `outbound_click` | Clic en cualquier enlace externo (Instagram, créditos…) | `link_url, link_domain, link_context` |
+| `faq_toggle` | Abrir una pregunta de la FAQ | `faq_question` |
+| `language_change` | Cambiar de idioma | `previous_language, new_language` |
+| `theme_change` | Cambiar el tema (Clar/Fosc/Sistema) | `theme_choice, theme_resolved` |
+| `consent_update` | Aceptar/rechazar cookies | `consent_analytics, consent_marketing` |
 
-Las vistas de página (`page_view`), el scroll y el clic saliente a Instagram **no** requieren código — se configuran de forma nativa en GTM (ver Fases 2, 7 y 8).
+El scroll sigue siendo nativo de GTM (Fase 7). El `page_view` ahora **viene del código**
+(evento personalizado `page_view`), así que en GTM usa ese evento como activador de la
+etiqueta de vista de página, **no** el activador "History Change" (así llegan
+`content_group` y `content_language`). Desactiva "Vistas de página basadas en eventos del
+historial del navegador" en la medición mejorada de GA4 para no duplicar.
 
 ### Consent Mode v2 (ya cableado en el código)
 

@@ -9,6 +9,7 @@ export const IMG_PATH = BASE_URL + 'img/fotos_productos/';
 export const IMG_BASE = BASE_URL + 'img/fotos_txell/';
 
 export const toWebp = (src: string) => src.replace(/\.(jpe?g|png)$/i, '.webp');
+export const toAvif = (src: string) => src.replace(/\.(jpe?g|png|webp)$/i, '.avif');
 
 const RAW_FOTOS_TXELL: Fotos_Txell[] = [
   {
@@ -55,7 +56,7 @@ const RAW_PRODUCTS: Product[] = [
     images: [
       {
         color: 'Silver',
-        src: `${IMG_PATH}alea/alea_gpt.png`
+        src: `${IMG_PATH}alea/bossa-crochet-alea.png`
       },
       {
         color: 'Metallic Black',
@@ -144,7 +145,7 @@ const RAW_PRODUCTS: Product[] = [
     price: 40,
 
     images: [
-      { color: 'Burgundy', src: `${IMG_PATH}oraia/oraia_gpt.png` },
+      { color: 'Burgundy', src: `${IMG_PATH}oraia/bossa-crochet-oraia.png` },
 
       // Burgundy
       { color: 'Burgundy', src: `${IMG_PATH}oraia/oraia-ecopell-burgundy-punt-interccalat-2.jpeg` },
@@ -217,7 +218,7 @@ const RAW_PRODUCTS: Product[] = [
     price: 50,
     images: [
       // fallback (general)
-      { color: 'Pale Pink', src: `${IMG_PATH}altair/altair_gpt.png` },
+      { color: 'Pale Pink', src: `${IMG_PATH}altair/bossa-crochet-altair.png` },
 
       // Pale Pink
       { color: 'Pale Pink', src: `${IMG_PATH}altair/altair-pell-rosa.jpeg` },
@@ -273,7 +274,7 @@ const RAW_PRODUCTS: Product[] = [
     price: 50,
     images: [
       // fallback
-      { color: 'Black', src: `${IMG_PATH}lyra/lyra_gpt.png` },
+      { color: 'Black', src: `${IMG_PATH}lyra/bossa-crochet-lyra.png` },
 
       // Black
       { color: 'Black', src: `${IMG_PATH}lyra/lyra-negre-pell.jpeg` },
@@ -323,7 +324,7 @@ const RAW_PRODUCTS: Product[] = [
     price: 30,
     images: [
       // fallback
-      { color: 'Brown', src: `${IMG_PATH}verae/verae_gpt.png` },
+      { color: 'Brown', src: `${IMG_PATH}verae/bossa-crochet-verae.png` },
 
       // Brown
       { color: 'Brown', src: `${IMG_PATH}verae/verae-marro.jpeg` },
@@ -373,7 +374,7 @@ const RAW_PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      { color: 'Black & White', src: `${IMG_PATH}nara/nara_gpt.png` },
+      { color: 'Black & White', src: `${IMG_PATH}nara/bossa-crochet-nara.png` },
 
       { color: 'Black & White', src: `${IMG_PATH}nara/nara-blanc+negre.jpeg` },
       { color: 'Black & White', src: `${IMG_PATH}nara/nara-blanc+negre-2.jpeg` },
@@ -411,7 +412,7 @@ const RAW_PRODUCTS: Product[] = [
     },
     price: 30,
     images: [
-      { color: 'Green', src: `${IMG_PATH}vela/vela_gpt.png` },
+      { color: 'Green', src: `${IMG_PATH}vela/bossa-crochet-vela.png` },
 
       { color: 'Blue', src: `${IMG_PATH}vela/vela-blaus.jpeg` },
 
@@ -449,7 +450,7 @@ const RAW_PRODUCTS: Product[] = [
     },
     price: 45,
     images: [
-      { color: 'Fuchsia', src: `${IMG_PATH}velain/velain_gpt.png` },
+      { color: 'Fuchsia', src: `${IMG_PATH}velain/bossa-crochet-velain.png` },
 
       { color: 'Fuchsia', src: `${IMG_PATH}velain/velain-fucsia.jpeg` },
       { color: 'Fuchsia', src: `${IMG_PATH}velain/velain-fucsia-2.jpeg` }

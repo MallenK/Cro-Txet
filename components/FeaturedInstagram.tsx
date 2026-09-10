@@ -3,6 +3,7 @@ import { Instagram, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { INSTAGRAM_POSTS, INSTAGRAM_URL } from '../content/instagram';
 import Reveal from './motion/Reveal';
+import Picture from './Picture';
 
 const FeaturedInstagram: React.FC = () => {
   const { t, lang } = useLanguage();
@@ -39,7 +40,7 @@ const FeaturedInstagram: React.FC = () => {
                 className="group relative block aspect-square overflow-hidden rounded-sm bg-stone-200"
                 aria-label={`${t.instagram.viewPost} — ${post.caption[lang]}`}
               >
-                <img
+                <Picture
                   src={post.image}
                   alt={post.alt[lang]}
                   loading="lazy"

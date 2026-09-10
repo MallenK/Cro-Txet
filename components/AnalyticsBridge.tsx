@@ -29,8 +29,10 @@ const AnalyticsBridge: React.FC = () => {
 
   useEffect(() => {
     if (last.current === pathname) return;
-    last.current = pathname;
+    // Set `last` only once the event actually fires, so React StrictMode's
+    // mount/unmount/remount doesn't swallow the first page_view.
     const id = window.setTimeout(() => {
+      last.current = pathname;
       analytics.pageView({
         path: pathname,
         title: document.title,
