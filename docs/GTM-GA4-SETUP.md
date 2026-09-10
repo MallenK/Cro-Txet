@@ -14,8 +14,26 @@ Referencia de lo que el frontend empuja (ver `context/LanguageContext.tsx`, `pag
 | `select_content` | Al elegir un color en una ficha de producto | `{ content_type: 'product_color', item_id, color }` |
 | `generate_lead` | Al enviar con éxito el formulario de contacto o el de encargo de producto | `{ form_type: 'contact' \| 'product_inquiry', item_id? }` |
 | `language_change` | Al cambiar de idioma desde el selector | `{ previous_language, new_language }` |
+| `consent_update` | Al aceptar/rechazar en el banner de cookies | `{ consent_analytics: bool, consent_marketing: bool }` |
+| `newsletter_signup` | Al suscribirse con éxito a la newsletter (Home) | `—` |
+| `lead_thank_you_view` | Al llegar a la página `/gracias` tras enviar el formulario de contacto | `—` |
 
 Las vistas de página (`page_view`), el scroll y el clic saliente a Instagram **no** requieren código — se configuran de forma nativa en GTM (ver Fases 2, 7 y 8).
+
+### Consent Mode v2 (ya cableado en el código)
+
+`index.html` inicializa **Google Consent Mode v2** con todo **denegado por defecto**
+(`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) antes de
+cargar GTM, y `components/CookieConsent.tsx` llama a `gtag('consent','update', …)` +
+empuja `consent_update` cuando la persona decide. Por tanto:
+
+- **No hace falta** ninguna plantilla de consentimiento de terceros en GTM.
+- En cada etiqueta de GA4, deja la configuración de consentimiento **"No establecida"**
+  (GTM respeta Consent Mode automáticamente): las etiquetas se disparan siempre, pero
+  GA4 solo usa cookies cuando `analytics_storage` está `granted`. Con `denied` manda
+  *pings* sin cookies (modelado de conversiones).
+- Si más adelante añades píxeles de publicidad (Meta, Google Ads), márcalos para que
+  **requieran `ad_storage`**.
 
 ---
 
@@ -72,6 +90,18 @@ La web es una SPA con URLs limpias (`/ca`, `/es/shop`...); las navegaciones inte
 29. Parámetros: `previous_language` = `{{DLV - previous_language}}`, `new_language` = `{{DLV - new_language}}`.
 30. Activador: `CE - language_change`. Nombre: `GA4 - language_change`. Guardar.
 
+## Fase 6b — Newsletter y "Gracias" (`newsletter_signup`, `lead_thank_you_view`)
+
+30a. **Activadores → Nuevo** → Evento personalizado → `newsletter_signup` → `CE - newsletter_signup`.
+30b. **Etiquetas → Nueva** → GA4 Event → Configuración: `GA4 - Configuration` → Nombre del evento: `newsletter_signup` → Activador: `CE - newsletter_signup`. Guardar.
+30c. Repite con `lead_thank_you_view` (útil como confirmación limpia de lead de contacto, ya que `/gracias` es la página a la que redirige el formulario).
+
+## Fase 6c — Consent (`consent_update`)
+
+30d. **Variables → Nueva** ×2: variable de capa de datos `consent_analytics` → `DLV - consent_analytics`; `consent_marketing` → `DLV - consent_marketing`.
+30e. **Activadores → Nuevo** → Evento personalizado → `consent_update` → `CE - consent_update`.
+30f. **Etiquetas → Nueva** → GA4 Event → `consent_update`, parámetros `analytics` = `{{DLV - consent_analytics}}`, `marketing` = `{{DLV - consent_marketing}}`. Sirve para medir la tasa de aceptación de cookies.
+
 ## Fase 7 — Scroll depth (nativo, sin código)
 
 31. **Activadores → Nuevo** → tipo **Profundidad de desplazamiento (Scroll Depth)**.
@@ -97,6 +127,14 @@ La web es una SPA con URLs limpias (`/ca`, `/es/shop`...); las navegaciones inte
 45. Comprueba en GA4 → **Informes en tiempo real** que los eventos van llegando.
 46. Cuando todo esté validado: botón **Submit** (arriba a la derecha) → escribe un nombre de versión (p. ej. "Configuración inicial GA4") → **Publish**.
 
+## Fase 10 — Marcar conversiones en GA4
+
+47. En **GA4 → Administrar → Eventos** (o "Conversiones"/"Key events"), marca como **evento clave**:
+    - `generate_lead` (o `lead_thank_you_view` si prefieres contar solo el formulario de contacto)
+    - `newsletter_signup`
+48. Espera 24-48 h a que GA4 acumule datos y podrás construir informes de embudo (`page_view` → `view_item` → `generate_lead`).
+
 ## Pendiente fuera de GTM
 
 - Dar de alta `croandtxet.cat` en [Google Search Console](https://search.google.com/search-console) y enviar el sitemap: `https://croandtxet.cat/sitemap.xml`.
+- (Opcional) Microsoft Clarity o Hotjar para mapas de calor y grabaciones: script propio, añadir a la CSP de `vercel.json` (`script-src` + `connect-src`).
