@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import {
   ConsentValue,
@@ -37,14 +38,24 @@ const CookieConsent: React.FC = () => {
     setShowDetails(false);
   };
 
-  if (!open) return null;
-
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[120] p-4 sm:p-6">
-      <div
+    <AnimatePresence>
+      {open && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        className="fixed inset-x-0 bottom-0 z-[120] p-4 sm:p-6"
+      >
+      <motion.div
         role="dialog"
         aria-live="polite"
         aria-label={t.cookies.title}
+        initial={{ y: 24, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 24, opacity: 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="mx-auto max-w-3xl bg-white border border-stone-200 shadow-2xl p-6 lg:p-8 space-y-5"
       >
         <div className="space-y-2">
@@ -107,8 +118,10 @@ const CookieConsent: React.FC = () => {
             {showDetails ? t.cookies.save : t.cookies.accept}
           </button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+      </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

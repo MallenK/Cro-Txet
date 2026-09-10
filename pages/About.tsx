@@ -3,11 +3,10 @@ import { IMG_BASE, toWebp } from '../constants';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import Reveal from '../components/motion/Reveal';
 
 const About: React.FC = () => {
   const { t } = useLanguage();
-  useScrollReveal();
   return (
     <div className="py-14 px-6 lg:py-24 lg:px-24 max-w-7xl mx-auto animate-fade-in bg-[var(--color-bg)]">
       <SEO title={t.about.seoTitle} description={t.about.seoDescription} path="/about" />
@@ -46,7 +45,7 @@ const About: React.FC = () => {
         <section className="flex flex-col gap-12 lg:gap-16">
 
           {["meritxell-1.jpeg", "meritxell-2.jpeg", "meritxell.jpeg"].map((img, i) => (
-            <div key={img} className="relative overflow-hidden group shadow-sm rounded-sm max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] mx-auto fade-in-section" style={{ transitionDelay: `${i * 0.1}s` }}>
+            <Reveal key={img} delay={i * 0.12} className="relative overflow-hidden group shadow-sm rounded-sm max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] mx-auto">
               <img 
                 src={toWebp(IMG_BASE + img)}
                 alt={`${t.about.founderImageAlt} ${i + 1}`}
@@ -55,7 +54,7 @@ const About: React.FC = () => {
                 onError={(e) => (e.currentTarget.parentElement!.style.display = "none")}
               />
               <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
-            </div>
+            </Reveal>
           ))}
 
         </section>

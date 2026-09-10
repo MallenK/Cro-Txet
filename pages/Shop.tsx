@@ -6,11 +6,10 @@ import { PRODUCTS } from '../constants';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import Reveal from '../components/motion/Reveal';
 
 const Shop: React.FC = () => {
   const { t, lang, urlLang } = useLanguage();
-  useScrollReveal();
   return (
     <div className="py-14 px-6 lg:py-24 lg:px-20 max-w-[1600px] mx-auto animate-fade-in">
       <SEO title={t.shop.seoTitle} description={t.shop.seoDescription} path="/shop" />
@@ -31,11 +30,10 @@ const Shop: React.FC = () => {
       {/* Grid optimized for premium scanability */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-20 lg:gap-y-32">
         {PRODUCTS.map((product, i) => (
+          <Reveal key={product.id} delay={Math.min(i, 6) * 0.05} className="h-full">
           <Link
-            key={product.id}
             to={`/${urlLang}/product/${product.id}`}
-            className="group flex flex-col h-full fade-in-section"
-            style={{ transitionDelay: `${Math.min(i, 6) * 0.05}s` }}
+            className="group flex flex-col h-full"
           >
             <div className="aspect-[3/4] mb-8 bg-stone-50 overflow-hidden rounded-sm transition-transform duration-700">
               <img
@@ -69,6 +67,7 @@ const Shop: React.FC = () => {
               </div>
             </div>
           </Link>
+          </Reveal>
         ))}
       </div>
     </div>

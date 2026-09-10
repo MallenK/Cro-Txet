@@ -1,11 +1,12 @@
 import React from 'react';
-import { Navigate, Outlet, useParams, Link } from 'react-router-dom';
+import { Navigate, Outlet, useParams, Link, useLocation } from 'react-router-dom';
 import { Instagram } from 'lucide-react';
 import Sidebar from './Sidebar';
 import ScrollProgress from './ScrollProgress';
 import BackToTop from './BackToTop';
 import FloatingContact from './FloatingContact';
 import CookieConsent from './CookieConsent';
+import PageFade from './motion/PageFade';
 import { LanguageProvider, useLanguage } from '../context/LanguageContext';
 import { openConsentSettings } from '../context/consent';
 import { isSupportedUrlLang } from '../i18n';
@@ -87,6 +88,7 @@ const Footer: React.FC = () => {
 
 const AppShell: React.FC = () => {
   const { t } = useLanguage();
+  const location = useLocation();
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] max-w-full overflow-x-hidden">
@@ -101,7 +103,9 @@ const AppShell: React.FC = () => {
 
       <main id="main" className="flex-1 lg:pl-72 min-h-screen transition-all duration-500 max-w-full overflow-x-hidden">
         <div className="w-full">
-          <Outlet />
+          <PageFade routeKey={location.pathname}>
+            <Outlet />
+          </PageFade>
         </div>
         <Footer />
       </main>

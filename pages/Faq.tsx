@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { AnimatePresence, motion } from 'motion/react';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
@@ -54,9 +55,20 @@ const Faq: React.FC = () => {
                   <ChevronDown className={`w-5 h-5 text-stone-500 shrink-0 mt-1.5 transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}`} />
                 </button>
               </dt>
-              <dd className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[600px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
-                <p className="text-stone-700 text-lg leading-relaxed pr-10">{item.a}</p>
-              </dd>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.dd
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-stone-700 text-lg leading-relaxed pr-10 pb-8">{item.a}</p>
+                  </motion.dd>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}

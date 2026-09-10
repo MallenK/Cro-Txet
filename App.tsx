@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { MotionConfig } from 'motion/react';
 import LangLayout from './components/LangLayout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -39,6 +40,7 @@ const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const App: React.FC = () => {
   return (
+    <MotionConfig reducedMotion="user" transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>
     <Router basename={basename}>
       <ScrollToTop />
       <Routes>
@@ -59,6 +61,7 @@ const App: React.FC = () => {
         <Route path="*" element={<LangPrefixRedirect />} />
       </Routes>
     </Router>
+    </MotionConfig>
   );
 };
 

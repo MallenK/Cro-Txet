@@ -17,6 +17,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { AnimatePresence, motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -403,8 +404,17 @@ const ProductDetail: React.FC = () => {
                 <ChevronDown className={`w-4 h-4 text-stone-600 transition-transform duration-500 ${isDetailsOpen ? 'rotate-180' : ''}`} />
               </button>
               
-              <div className={`overflow-hidden transition-all duration-700 ease-in-out ${isDetailsOpen ? 'max-h-[900px] opacity-100 pt-8 pb-10' : 'max-h-0 opacity-0'}`}>
-                <div className="space-y-12">
+              <AnimatePresence initial={false}>
+                {isDetailsOpen && (
+                <motion.div
+                  key="details"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="overflow-hidden"
+                >
+                <div className="space-y-12 pt-8 pb-10">
                   {product.details?.material && (
                     <div>
                       <h4 className="text-[11px] uppercase tracking-widest text-stone-950 font-bold mb-4 font-sans opacity-60">{t.shop.materialLabel}</h4>
@@ -430,7 +440,9 @@ const ProductDetail: React.FC = () => {
                     </div>
                   )}
                 </div>
-              </div>
+                </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <div ref={formRef} className="pt-12 border-t border-stone-200 scroll-mt-24">
@@ -505,17 +517,25 @@ const ProductDetail: React.FC = () => {
       </div>
 
       {/* Sticky mobile CTA */}
-      {formStatus !== 'success' && (
-        <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-stone-200 px-5 py-4 flex items-center justify-between gap-4">
-          <span className="text-2xl font-serif text-stone-950 shrink-0">{finalPrice}€</span>
-          <button
-            onClick={scrollToForm}
-            className="flex-1 py-4 bg-stone-950 text-white text-[10px] uppercase tracking-[0.35em] font-bold hover:bg-black transition-all"
+      <AnimatePresence>
+        {formStatus !== 'success' && (
+          <motion.div
+            initial={{ y: '110%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '110%' }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+            className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-stone-200 px-5 py-4 flex items-center justify-between gap-4"
           >
-            {t.product.stickyCta}
-          </button>
-        </div>
-      )}
+            <span className="text-2xl font-serif text-stone-950 shrink-0">{finalPrice}€</span>
+            <button
+              onClick={scrollToForm}
+              className="flex-1 py-4 bg-stone-950 text-white text-[10px] uppercase tracking-[0.35em] font-bold hover:bg-black transition-all"
+            >
+              {t.product.stickyCta}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
