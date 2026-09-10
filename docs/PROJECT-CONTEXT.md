@@ -105,6 +105,14 @@ Repaso completo contra checklists de "cosas que arreglar antes de lanzar". Imple
 - **Newsletter** con incentivo (10% primer encargo) en la Home (`components/Newsletter.tsx`).
   Sin proveedor de email marketing todavía: envía a la bandeja vía EmailJS. Migrar cuando haya proveedor.
 
+### Micro-animaciones (Motion / motion.dev)
+- `motion@13`. `<MotionConfig reducedMotion="user">` en `App.tsx` (todo respeta
+  `prefers-reduced-motion`). `components/motion/Reveal.tsx` (reveal on scroll con
+  `useInView` + red de seguridad de 1.3s) sustituye al hook `useScrollReveal` y a
+  `.fade-in-section`, ya eliminados. `components/motion/PageFade.tsx` (transición de
+  ruta). Acordeones de FAQ y de producto animan `height` de verdad. CTA móvil de
+  producto y banner de cookies entran deslizando.
+
 ### Modo oscuro
 - Tema por variables CSS: `[data-theme="dark"]` / `prefers-color-scheme` remapean las custom
   properties de color de Tailwind v4 (`--color-stone-*`, `--color-white/black`) invirtiendo la
