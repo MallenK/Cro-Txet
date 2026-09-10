@@ -22,6 +22,7 @@ import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Picture from '../components/Picture';
+import Testimonials from '../components/Testimonials';
 import { analytics, productItem } from '../lib/analytics';
 
 const ProductDetail: React.FC = () => {
@@ -452,6 +453,8 @@ const ProductDetail: React.FC = () => {
                 )}
               </AnimatePresence>
             </div>
+
+            <Testimonials productId={product.id} />
 
             <div ref={formRef} className="pt-12 border-t border-stone-200 scroll-mt-24">
               {formStatus === 'success' ? (

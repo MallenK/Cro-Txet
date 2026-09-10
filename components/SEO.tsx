@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Product } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { SUPPORTED_URL_LANGS, LANG_TO_URL } from '../i18n';
-import { reviewsFor } from '../content/reviews';
+import { productReviews } from '../content/reviews';
 
 const SITE_ORIGIN = 'https://croandtxet.cat';
 
@@ -58,7 +58,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, path, image, type = 'webs
 
   let productJsonLd: Record<string, unknown> | null = null;
   if (product) {
-    const reviews = reviewsFor(product.id);
+    const reviews = productReviews(product.id);
     productJsonLd = {
       '@context': 'https://schema.org',
       '@type': 'Product',
