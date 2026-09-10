@@ -151,6 +151,47 @@ Repaso completo contra checklists de "cosas que arreglar antes de lanzar". Imple
 Rutas ca/es, 404, FAQ, términos, contacto: sin errores de consola. Banner de cookies y
 Consent Mode operativos. CTA de producto `position: fixed`. Build de producción OK (sitemap 48 URLs).
 
+## Tercera pasada — SEO + Analytics fase 1 (rama `seo-analytics-fase-1`)
+
+### Analytics (listo para GA4, config en `docs/GTM-GA4-SETUP.md`)
+- `lib/analytics.ts`: **punto único** para `dataLayer`. Eventos estilo GA4:
+  `page_view` (con `content_group` y `content_language`), `view_item_list`,
+  `select_item`, `view_item` (ecommerce), `select_content` (color/addon),
+  `form_start`, `generate_lead` (con `estimated_value`), `lead_thank_you_view`,
+  `newsletter_signup`, `share`, `cta_click`, `outbound_click`, `faq_toggle`,
+  `language_change`, `theme_change`, `consent_update`.
+- `components/AnalyticsBridge.tsx`: `page_view` por navegación SPA (tras flush del
+  `<title>`) + tracking delegado de enlaces salientes (`data-analytics`).
+- Todos los `window.dataLayer.push` sueltos migrados a `lib/analytics.ts`.
+- **En GTM**: activar la etiqueta de vista de página con el evento personalizado
+  `page_view` (no History Change) y desactivar las vistas por historial de la
+  medición mejorada de GA4.
+
+### SEO técnico
+- `components/SEO.tsx`: `Product` JSON-LD enriquecido (`sku`, `image[]`,
+  `material`, `color`, `category`, `url`, `inLanguage`) **con `offers`** (precio
+  mostrado, EUR, `LimitedAvailability`, `priceValidUntil`) → revierte la decisión
+  previa "sin offers" por petición de SEO máxima; **mantener el precio del schema
+  sincronizado con `product.price`**. `aggregateRating`/`review` se emiten
+  automáticamente si `content/reviews.ts` tiene reseñas reales (vacío, plumbing
+  listo — **no añadir reseñas falsas**).
+- Meta: `og:site_name`, `og:image:alt`, `og:locale:alternate`,
+  `product:price:*`, `robots: max-image-preview:large` en páginas indexables.
+- `index.html`: `@graph` con `Organization`+`Brand` (`founder`, `priceRange`,
+  `address`) + `WebSite`.
+- **Un único `<h1>` por página**: el logo del sidebar pasa a `<span>`;
+  Home/Shop/About/Contact promueven su título a `<h1>` (sin cambio visual).
+
+### Rendimiento de imágenes
+- `scripts/generate-webp.ts` emite `.avif` además de `.webp` para cada imagen;
+  regenera solo lo que falta (los derivados se commitean). `FORCE_IMAGES=1` fuerza.
+- `components/Picture.tsx`: `<picture>` con `<source>` AVIF + `<img>` webp de
+  fallback (`picture { display: contents }`). En Home, Shop, ProductDetail, About
+  e Instagram. `fetchPriority="high"` en la primera imagen de galería.
+- 8 imágenes principales de producto renombradas: `<id>_gpt.png` →
+  `bossa-crochet-<id>.png`.
+- `vite.config.ts`: el optimizador ya no reprocesa `.webp`/`.avif` (build de 3 min → 15 s).
+
 ## Pendiente
 
 1. **Configurar GTM en la consola** (tags/activadores para los eventos que ya llegan al `dataLayer`, más `page_view`/scroll/clic saliente) — ver [`GTM-GA4-SETUP.md`](GTM-GA4-SETUP.md). Sin esto, GA4 no recibe nada todavía aunque el código ya esté listo. **Nuevos eventos disponibles**: `consent_update`, `newsletter_signup`, `lead_thank_you_view`.
