@@ -5,12 +5,16 @@ import { ArrowRight } from 'lucide-react';
 import { PRODUCTS } from '../constants';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Shop: React.FC = () => {
   const { t, lang, urlLang } = useLanguage();
+  useScrollReveal();
   return (
-    <div className="py-20 px-6 lg:py-32 lg:px-20 max-w-[1600px] mx-auto animate-fade-in">
+    <div className="py-14 px-6 lg:py-24 lg:px-20 max-w-[1600px] mx-auto animate-fade-in">
       <SEO title={t.shop.seoTitle} description={t.shop.seoDescription} path="/shop" />
+      <Breadcrumbs items={[{ name: t.shop.label }]} className="mb-10" />
       <header className="mb-20 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 border-b border-stone-100 pb-16">
         <div className="space-y-6">
           <div className="flex items-center gap-3">
@@ -26,16 +30,19 @@ const Shop: React.FC = () => {
 
       {/* Grid optimized for premium scanability */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-10 gap-y-20 lg:gap-y-32">
-        {PRODUCTS.map((product) => (
-          <Link 
-            key={product.id} 
+        {PRODUCTS.map((product, i) => (
+          <Link
+            key={product.id}
             to={`/${urlLang}/product/${product.id}`}
-            className="group flex flex-col h-full"
+            className="group flex flex-col h-full fade-in-section"
+            style={{ transitionDelay: `${Math.min(i, 6) * 0.05}s` }}
           >
             <div className="aspect-[3/4] mb-8 bg-stone-50 overflow-hidden rounded-sm transition-transform duration-700">
-              <img 
-                src={product.images[0].src} 
-                alt={product.name} 
+              <img
+                src={product.images[0].src}
+                alt={`${product.name} — ${product.meaning[lang]}`}
+                loading={i < 4 ? 'eager' : 'lazy'}
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
             </div>

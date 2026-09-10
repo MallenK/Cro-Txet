@@ -1,28 +1,17 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Sparkles, Package } from 'lucide-react';
 import { IMG_BASE, PRODUCTS, toWebp } from '../constants';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
+import Newsletter from '../components/Newsletter';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Home: React.FC = () => {
   const { t, urlLang } = useLanguage();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const sections = document.querySelectorAll('.fade-in-section');
-    sections.forEach(s => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
+  useScrollReveal();
 
   const altair = PRODUCTS.find(p => p.id === 'altair');
 
@@ -35,6 +24,8 @@ const Home: React.FC = () => {
           <img
             src={toWebp(IMG_BASE + "Foto_Home.png")}
             alt={t.home.heroImageAlt}
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover scale-105 blur-2"
           />
           <div className="absolute inset-0 bg-stone-950/20 backdrop-blur-[1px]" />
@@ -159,6 +150,8 @@ const Home: React.FC = () => {
           </Link>
         </div>
       </section>
+
+      <Newsletter />
     </div>
   );
 };
