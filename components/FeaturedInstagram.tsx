@@ -8,7 +8,7 @@ const FeaturedInstagram: React.FC = () => {
   const { t, lang } = useLanguage();
 
   return (
-    <section className="py-28 lg:py-40 px-6 lg:px-24 bg-stone-100">
+    <section className="py-28 lg:py-40 px-6 lg:px-24 bg-stone-100" data-analytics-section="instagram_featured">
       <div className="max-w-7xl mx-auto">
         <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div className="space-y-4">

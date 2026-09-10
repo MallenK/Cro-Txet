@@ -3,6 +3,8 @@
  * explicit opt-in, not the fallback.
  */
 
+import { analytics } from '../lib/analytics';
+
 export const THEME_KEY = 'cro_txet_theme';
 export const THEME_CHANGE_EVENT = 'cro-txet:theme';
 
@@ -37,6 +39,7 @@ const paint = (choice: ThemeChoice) => {
 export const applyThemeChoice = (choice: ThemeChoice) => {
   try { localStorage.setItem(THEME_KEY, choice); } catch { /* private mode */ }
   paint(choice);
+  analytics.themeChange(choice, getActiveTheme());
   window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
 };
 

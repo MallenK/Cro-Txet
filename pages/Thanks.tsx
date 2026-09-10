@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { CheckCircle2, ArrowRight, Clock } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
+import { analytics } from '../lib/analytics';
 
 const Thanks: React.FC = () => {
   const { t, urlLang } = useLanguage();
 
   useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'lead_thank_you_view' });
+    analytics.leadThankYouView();
   }, []);
 
   return (

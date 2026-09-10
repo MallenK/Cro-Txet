@@ -5,11 +5,13 @@ import { Send, MapPin, Mail, Sparkles, Heart, Loader2, Clock, AlertCircle } from
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import { analytics } from '../lib/analytics';
 
 const Contact: React.FC = () => {
   const { t, urlLang } = useLanguage();
   const navigate = useNavigate();
   const [formStatus, setFormStatus] = React.useState<'idle' | 'loading' | 'error'>('idle');
+  const startedRef = React.useRef(false);
 
   const [formData, setFormData] = React.useState({
     from_name: '',
@@ -20,6 +22,10 @@ const Contact: React.FC = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      analytics.formStart('contact');
+    }
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -42,8 +48,7 @@ const Contact: React.FC = () => {
         'iGpB097zxE-0bBxRC'
       );
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'generate_lead', form_type: 'contact' });
+      analytics.generateLead('contact');
 
       setFormData({ from_name: '', from_email: '', message: '' });
       navigate(`/${urlLang}/gracias`);

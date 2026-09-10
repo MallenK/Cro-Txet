@@ -8,6 +8,7 @@ import SEO from '../components/SEO';
 import Newsletter from '../components/Newsletter';
 import FeaturedInstagram from '../components/FeaturedInstagram';
 import Reveal from '../components/motion/Reveal';
+import { analytics } from '../lib/analytics';
 
 const Home: React.FC = () => {
   const { t, urlLang } = useLanguage();
@@ -42,6 +43,7 @@ const Home: React.FC = () => {
           <Reveal delay={0.16}>
             <Link
               to={`/${urlLang}/shop`}
+              onClick={() => analytics.ctaClick({ cta_text: t.home.cta, cta_location: 'home_hero', cta_destination: 'shop' })}
               className="inline-flex items-center text-[13px] uppercase tracking-[0.4em] text-[#fafafa] border-b-2 border-[#fafafa] pb-3 font-bold group hover:text-[#d4d4d4] hover:border-[#d4d4d4] transition-all"
             >
               {t.home.cta}
@@ -144,7 +146,11 @@ const Home: React.FC = () => {
           <p className="text-stone-900 text-xl max-w-md leading-relaxed">
             {t.home.lookbookDesc}
           </p>
-          <Link to={`/${urlLang}/shop`} className="btn-premium w-fit text-xs uppercase tracking-[0.3em] pt-4 font-bold">
+          <Link
+            to={`/${urlLang}/shop`}
+            onClick={() => analytics.ctaClick({ cta_text: t.home.lookbookCta, cta_location: 'home_lookbook', cta_destination: 'shop' })}
+            className="btn-premium w-fit text-xs uppercase tracking-[0.3em] pt-4 font-bold"
+          >
             {t.home.lookbookCta}
           </Link>
         </Reveal>

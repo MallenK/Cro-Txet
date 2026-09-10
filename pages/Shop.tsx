@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { PRODUCTS } from '../constants';
@@ -7,9 +7,20 @@ import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Reveal from '../components/motion/Reveal';
+import { analytics, productItem } from '../lib/analytics';
+
+const LIST_NAME = 'Catàleg';
 
 const Shop: React.FC = () => {
   const { t, lang, urlLang } = useLanguage();
+
+  useEffect(() => {
+    analytics.viewItemList(
+      LIST_NAME,
+      PRODUCTS.map((p, i) => productItem(p, { index: i })),
+    );
+  }, []);
+
   return (
     <div className="py-14 px-6 lg:py-24 lg:px-20 max-w-[1600px] mx-auto animate-fade-in">
       <SEO title={t.shop.seoTitle} description={t.shop.seoDescription} path="/shop" />
@@ -34,6 +45,7 @@ const Shop: React.FC = () => {
           <Link
             to={`/${urlLang}/product/${product.id}`}
             className="group flex flex-col h-full"
+            onClick={() => analytics.selectItem(LIST_NAME, productItem(product, { index: i }))}
           >
             <div className="aspect-[3/4] mb-8 bg-stone-50 overflow-hidden rounded-sm transition-transform duration-700">
               <img
@@ -44,7 +56,7 @@ const Shop: React.FC = () => {
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
             </div>
-            
+
             <div className="flex flex-col flex-1 px-1 space-y-3">
               <div className="flex justify-between items-baseline">
                 <h3 className="text-3xl lg:text-4xl font-serif text-stone-950 group-hover:text-stone-700 transition-colors">
@@ -52,7 +64,7 @@ const Shop: React.FC = () => {
                 </h3>
                 <span className="text-xl font-bold text-stone-950">{product.price}€</span>
               </div>
-              
+
               <div className="flex items-center gap-2">
                 <span className="text-[10px] uppercase tracking-[0.3em] text-stone-600 font-bold">
                   {product.meaning[lang]}

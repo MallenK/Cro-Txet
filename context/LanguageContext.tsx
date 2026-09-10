@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Language, Translation } from '../types';
 import { TRANSLATIONS } from '../constants';
 import { DEFAULT_URL_LANG, LANG_TO_URL, URL_TO_LANG, UrlLang } from '../i18n';
+import { analytics } from '../lib/analytics';
 
 interface LanguageContextValue {
   lang: Language;
@@ -24,13 +25,7 @@ export const LanguageProvider: React.FC<{ urlLang: UrlLang; children: React.Reac
     const newUrlLang = LANG_TO_URL[newLang];
     localStorage.setItem('cro_txet_lang', newLang);
 
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({
-        event: 'language_change',
-        previous_language: lang,
-        new_language: newLang,
-      });
-    }
+    analytics.languageChange(lang, newLang);
 
     const segments = location.pathname.split('/');
     segments[1] = newUrlLang;

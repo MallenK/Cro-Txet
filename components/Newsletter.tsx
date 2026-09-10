@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import { Loader2, Check, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { analytics } from '../lib/analytics';
 
 /**
  * Newsletter sign-up. No email-marketing provider yet, so submissions are
@@ -29,8 +30,7 @@ const Newsletter: React.FC = () => {
         { from_name: 'Newsletter', from_email: email, message: 'Nova subscripció a la newsletter des de la web.' },
         'iGpB097zxE-0bBxRC'
       );
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'newsletter_signup' });
+      analytics.newsletterSignup('home_footer');
       setEmail('');
       setStatus('success');
     } catch {

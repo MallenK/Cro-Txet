@@ -6,6 +6,7 @@ import ScrollProgress from './ScrollProgress';
 import BackToTop from './BackToTop';
 import FloatingContact from './FloatingContact';
 import CookieConsent from './CookieConsent';
+import AnalyticsBridge from './AnalyticsBridge';
 import PageFade from './motion/PageFade';
 import { LanguageProvider, useLanguage } from '../context/LanguageContext';
 import { openConsentSettings } from '../context/consent';
@@ -40,6 +41,7 @@ const Footer: React.FC = () => {
             href="https://instagram.com/cro_and_txet"
             target="_blank"
             rel="noopener noreferrer"
+            data-analytics="instagram_footer"
             className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold hover:text-stone-500 transition-colors"
           >
             <Instagram className="w-4 h-4" /> {t.footer.followUs}
@@ -99,6 +101,7 @@ const AppShell: React.FC = () => {
         {t.a11y.skipToContent}
       </a>
       <ScrollProgress />
+      <AnalyticsBridge />
       <Sidebar />
 
       <main id="main" className="flex-1 lg:pl-72 min-h-screen transition-all duration-500 max-w-full overflow-x-hidden">
