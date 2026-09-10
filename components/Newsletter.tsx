@@ -46,7 +46,7 @@ const Newsletter: React.FC = () => {
         <p className="text-stone-300 text-lg">{t.newsletter.desc}</p>
 
         {status === 'success' ? (
-          <p className="inline-flex items-center gap-3 text-lg font-serif">
+          <p className="inline-flex items-center gap-3 text-lg font-serif text-white">
             <Check className="w-5 h-5" /> {t.newsletter.success}
           </p>
         ) : (

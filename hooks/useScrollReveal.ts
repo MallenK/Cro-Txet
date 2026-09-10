@@ -34,7 +34,7 @@ export function useScrollReveal(deps: unknown[] = []) {
     // Safety net: never leave content hidden if the observer misbehaves.
     const fallback = window.setTimeout(() => {
       nodes.forEach(n => n.classList.add('visible'));
-    }, 2500);
+    }, 1200);
 
     return () => {
       observer.disconnect();

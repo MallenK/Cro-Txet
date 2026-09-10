@@ -437,7 +437,7 @@ const ProductDetail: React.FC = () => {
               {formStatus === 'success' ? (
                 <div className="bg-stone-950 text-white p-14 text-center space-y-10 animate-fade-in shadow-2xl">
                   <CheckCircle2 className="w-16 h-16 text-stone-300 mx-auto" />
-                  <p className="font-serif text-3xl tracking-tight">{t.contact.form.sent}</p>
+                  <p className="font-serif text-3xl tracking-tight text-white">{t.contact.form.sent}</p>
                 </div>
               ) : (
                 <div className="space-y-10">

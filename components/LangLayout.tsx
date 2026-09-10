@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
           ))}
           <button
             onClick={openConsentSettings}
-            className="block text-[11px] uppercase tracking-[0.2em] text-stone-700 font-bold hover:text-stone-950 transition-colors"
+            className="block text-left text-[11px] uppercase tracking-[0.2em] text-stone-700 font-bold hover:text-stone-950 transition-colors"
           >
             {t.footer.cookiePrefs}
           </button>

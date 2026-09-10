@@ -63,7 +63,7 @@ const Faq: React.FC = () => {
       </dl>
 
       <div className="mt-16 p-10 lg:p-14 bg-stone-950 text-white text-center space-y-6">
-        <p className="font-serif text-2xl lg:text-3xl tracking-tight">{t.faqMeta.stillHelp}</p>
+        <p className="font-serif text-2xl lg:text-3xl tracking-tight text-white">{t.faqMeta.stillHelp}</p>
         <Link
           to={`/${urlLang}/contact`}
           className="group inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.4em] font-bold border-b-2 border-white pb-2 hover:text-stone-300 hover:border-stone-300 transition-all"
