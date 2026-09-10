@@ -87,7 +87,7 @@ const Contact: React.FC = () => {
             <div className="h-[1px] w-full bg-stone-100" />
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-10" noValidate>
+          <form onSubmit={handleSubmit} className="space-y-10">
               <p className="hidden" aria-hidden="true">
                 <label>No omplir<input type="text" name="company" tabIndex={-1} autoComplete="off" /></label>
               </p>

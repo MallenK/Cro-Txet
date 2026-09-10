@@ -442,7 +442,7 @@ const ProductDetail: React.FC = () => {
               ) : (
                 <div className="space-y-10">
                   <h3 className="text-3xl lg:text-4xl font-serif text-stone-950">Personalitza la teva peça única</h3>
-                    <form onSubmit={handleOrderSubmit} className="space-y-8" noValidate>
+                    <form onSubmit={handleOrderSubmit} className="space-y-8">
 
                       <p className="hidden" aria-hidden="true">
                         <label>No omplir<input type="text" name="company" tabIndex={-1} autoComplete="off" /></label>

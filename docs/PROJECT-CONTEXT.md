@@ -65,11 +65,77 @@ Resultado final (diff de imagen, umbral 0.15): 0.00%–0.14% en todas las págin
 - Todo commiteado y en producción (`git log` → commit `a92a974` en `main`, desplegado en Vercel).
 - Verificado en `croandtxet.cat`: rutas limpias (`/ca/shop`, `/es/product/alea`), `sitemap.xml`, `robots.txt` y GTM cargando correctamente.
 
+## Segunda pasada — auditoría pre-lanzamiento (rama `pre-lanzamiento-mejoras`)
+
+Repaso completo contra checklists de "cosas que arreglar antes de lanzar". Implementado:
+
+### Legal y privacidad
+- **Banner de cookies** (`components/CookieConsent.tsx`) con **Google Consent Mode v2**: deny por
+  defecto en `index.html`, `consent update` al aceptar, reapertura desde el footer
+  ("Preferències de cookies"). Helpers en `context/consent.ts`.
+- **Política de privacidad** reescrita y completa (RGPD/LSSI, cookies, EmailJS, transferencias,
+  derechos) y **Términos y condiciones** nuevos, ambos en CA/ES/EN, en `content/legal.ts`,
+  renderizados por `pages/LegalPage.tsx` (`type` ahora `privacy | returns | terms`).
+
+### Páginas y navegación nuevas
+- `/:lang/faq` (`pages/Faq.tsx`, acordeón + `FAQPage` JSON-LD, contenido en `content/faq.ts`).
+- `/:lang/gracias` (`pages/Thanks.tsx`, noindex) — el formulario de Contacto redirige aquí al enviar.
+- `/:lang/terms`.
+- **404 real** (`pages/NotFound.tsx`) como catch-all dentro del layout; rutas sin prefijo de idioma
+  redirigen conservando el path.
+- **Breadcrumbs** visibles + `BreadcrumbList` JSON-LD (`components/Breadcrumbs.tsx`) en shop,
+  producto, about, contacto, faq y legales. `SEO.tsx` ya no emite el breadcrumb (fuente única).
+- Footer reconstruido (navegación + legal + preferencias de cookies + RRSS). FAQ en la navegación.
+
+### Chrome global (en `AppShell`)
+- Barra de progreso de scroll, botón "volver arriba", botón flotante de contacto (Instagram DM —
+  no hay teléfono/WhatsApp), skip-link de accesibilidad.
+
+### Formularios
+- Estado de **error visible** en Contacto y ProductDetail (antes fallaban en silencio).
+- **Honeypot** anti-spam en los tres formularios.
+- Compromiso de tiempo de respuesta en Contacto.
+
+### Producto
+- Botón **compartir** (Web Share API + fallback a portapapeles).
+- **CTA fija en móvil** (precio + "consultar", hace scroll al formulario).
+- Alt de imágenes localizado (antes texto fijo en inglés).
+
+### Marketing
+- **Newsletter** con incentivo (10% primer encargo) en la Home (`components/Newsletter.tsx`).
+  Sin proveedor de email marketing todavía: envía a la bandeja vía EmailJS. Migrar cuando haya proveedor.
+
+### Rendimiento e imágenes
+- Favicon de marca (SVG + PNG 16/32/192/512 + apple-touch-icon), `site.webmanifest`, `theme-color`.
+- Imagen Open Graph dedicada 1200×630 (`public/img/og/og-default.jpg`).
+- `scripts/generate-assets.ts` genera favicons + OG en cada build.
+- Fuentes de Google no bloqueantes; `fetchpriority`/`decoding` en el hero; `loading="lazy"` en la
+  rejilla de tienda; pantalla de carga previa a la hidratación.
+- `hooks/useScrollReveal.ts`: reveal on scroll reutilizable (Home, Shop, About).
+
+### Seguridad
+- **Headers en `vercel.json`**: CSP, HSTS, X-Content-Type-Options, X-Frame-Options,
+  Referrer-Policy, Permissions-Policy, COOP + cache de assets.
+- `npm audit fix` → 0 vulnerabilidades.
+- Fix: email de contacto `.com` → `.cat` (era incoherente).
+
+### Verificado en navegador
+Rutas ca/es, 404, FAQ, términos, contacto: sin errores de consola. Banner de cookies y
+Consent Mode operativos. CTA de producto `position: fixed`. Build de producción OK (sitemap 48 URLs).
+
 ## Pendiente
 
-1. **Configurar GTM en la consola** (tags/activadores para los eventos que ya llegan al `dataLayer`, más `page_view`/scroll/clic saliente) — ver [`GTM-GA4-SETUP.md`](GTM-GA4-SETUP.md). Sin esto, GA4 no recibe nada todavía aunque el código ya esté listo.
+1. **Configurar GTM en la consola** (tags/activadores para los eventos que ya llegan al `dataLayer`, más `page_view`/scroll/clic saliente) — ver [`GTM-GA4-SETUP.md`](GTM-GA4-SETUP.md). Sin esto, GA4 no recibe nada todavía aunque el código ya esté listo. **Nuevos eventos disponibles**: `consent_update`, `newsletter_signup`, `lead_thank_you_view`.
 2. **Dar de alta el dominio en Google Search Console** y enviar `https://croandtxet.cat/sitemap.xml`.
 3. **Extender `dimensions`/`careInstructions`** al resto de productos del catálogo (Oraïa, Lyra, Vérae, Nara, Vela, Velaïn) — copy, no código.
-4. **Deliberadamente fuera de alcance por ahora** (decisión tomada en el plan original, no un olvido):
-   - Blog/journal — necesitaría un compromiso de contenido continuo para tener valor SEO real; no encaja en un pase técnico puntual.
-   - Limpieza de nombres de archivo `*_gpt.png` (artefactos de generación con IA) — bajo impacto SEO frente al esfuerzo de re-referenciar cada uso.
+4. **Pasos manuales fuera del código de la auditoría pre-lanzamiento**:
+   - **EmailJS**: restringir los dominios permitidos en el panel de EmailJS (allowlist) para evitar abuso del formulario desde otros orígenes.
+   - **Newsletter**: dar de alta un proveedor (Mailchimp/MailerLite/Brevo) y sustituir el `emailjs.send` de `components/Newsletter.tsx` por su endpoint + doble opt-in.
+   - **Revisar la redacción legal** de `content/legal.ts` con los datos fiscales reales del titular antes de publicar.
+   - **Confirmar** el deep link de Instagram DM (`ig.me/m/cro_and_txet`) en `components/FloatingContact.tsx`.
+5. **Deliberadamente fuera de alcance**:
+   - **Modo oscuro** — la identidad de marca es un editorial claro muy afinado (ver fidelidad de píxeles arriba). Un tema oscuro completo es invasivo y de valor dudoso aquí; pendiente de confirmación explícita antes de abordarlo.
+   - **LocalBusiness schema completo** — sin dirección física publicable; el JSON-LD `Organization` se ha enriquecido con ciudad, email e idiomas, que es lo correcto sin NAP real.
+   - **Monitorización de errores** (Sentry) — opcional; Vercel Analytics cubre lo básico.
+   - **Blog/journal** — necesitaría un compromiso de contenido continuo para tener valor SEO real.
+   - Limpieza de nombres de archivo `*_gpt.png` (artefactos de generación con IA) — bajo impacto SEO.
