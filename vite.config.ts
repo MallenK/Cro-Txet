@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
       react(),
       tailwindcss(),
       ViteImageOptimizer({
+        exclude: /\.svg$/,
         webp: { quality: 82 },
         png: { quality: 82 },
         jpeg: { quality: 82 },

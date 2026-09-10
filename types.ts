@@ -41,6 +41,7 @@ export interface Translation {
     loading: string;
     notFound: string;
     backToShop: string;
+    backToHome: string;
     artisanNote: string;
     productionTime: string;
     language: string;
@@ -50,6 +51,86 @@ export interface Translation {
     about: string;
     shop: string;
     contact: string;
+    faq: string;
+  };
+  a11y: {
+    backToTop: string;
+    openMenu: string;
+    closeMenu: string;
+    breadcrumb: string;
+    chat: string;
+    skipToContent: string;
+    theme: string;
+  };
+  theme: {
+    light: string;
+    dark: string;
+    system: string;
+  };
+  footer: {
+    explore: string;
+    legalHeading: string;
+    cookiePrefs: string;
+    followUs: string;
+  };
+  notFound: {
+    seoTitle: string;
+    title: string;
+    body: string;
+    cta: string;
+  };
+  thanks: {
+    seoTitle: string;
+    title: string;
+    body: string;
+    response: string;
+    ctaShop: string;
+    ctaHome: string;
+  };
+  faqMeta: {
+    seoTitle: string;
+    seoDescription: string;
+    label: string;
+    title: string;
+    subtitle: string;
+    stillHelp: string;
+    ctaContact: string;
+  };
+  newsletter: {
+    label: string;
+    title: string;
+    desc: string;
+    incentive: string;
+    placeholder: string;
+    cta: string;
+    success: string;
+    error: string;
+    consent: string;
+  };
+  cookies: {
+    title: string;
+    body: string;
+    accept: string;
+    reject: string;
+    settings: string;
+    save: string;
+    necessary: string;
+    necessaryDesc: string;
+    analytics: string;
+    analyticsDesc: string;
+    policy: string;
+  };
+  product: {
+    share: string;
+    shareCopied: string;
+    stickyCta: string;
+  };
+  instagram: {
+    label: string;
+    title: string;
+    subtitle: string;
+    follow: string;
+    viewPost: string;
   };
   home: {
     heroSubtitle: string;
@@ -109,6 +190,9 @@ export interface Translation {
   legal: {
     returnsSeoDescription: string;
     privacySeoDescription: string;
+    termsSeoDescription: string;
+    terms: string;
+    lastUpdated: string;
   };
   contact: {
     label: string;
@@ -116,6 +200,7 @@ export interface Translation {
     subtitle: string;
     seoTitle: string;
     seoDescription: string;
+    responseTime: string;
     form: {
       name: string;
       namePlaceholder: string;
@@ -126,6 +211,8 @@ export interface Translation {
       send: string;
       sent: string;
       productInquiry: string;
+      error: string;
+      invalidEmail: string;
     };
     info: {
       emailTitle: string;

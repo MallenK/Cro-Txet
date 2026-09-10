@@ -1,28 +1,16 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Sparkles, Package } from 'lucide-react';
 import { IMG_BASE, PRODUCTS, toWebp } from '../constants';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
+import Newsletter from '../components/Newsletter';
+import FeaturedInstagram from '../components/FeaturedInstagram';
+import Reveal from '../components/motion/Reveal';
 
 const Home: React.FC = () => {
   const { t, urlLang } = useLanguage();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const sections = document.querySelectorAll('.fade-in-section');
-    sections.forEach(s => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
 
   const altair = PRODUCTS.find(p => p.id === 'altair');
 
@@ -35,29 +23,31 @@ const Home: React.FC = () => {
           <img
             src={toWebp(IMG_BASE + "Foto_Home.png")}
             alt={t.home.heroImageAlt}
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover scale-105 blur-2"
           />
-          <div className="absolute inset-0 bg-stone-950/20 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-[#0a0a0a]/25 backdrop-blur-[1px]" />
         </div>
 
         <div className="relative z-10 text-center space-y-12 max-w-4xl mx-auto">
           <div className="space-y-4">
-            <span className="block text-[12px] uppercase tracking-[0.6em] text-white font-bold fade-in-section hero-text-shadow">
+            <Reveal as="span" className="block text-[12px] uppercase tracking-[0.6em] text-[#fafafa] font-bold hero-text-shadow">
               {t.home.heroSubtitle}
-            </span>
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white fade-in-section hero-text-shadow">
+            </Reveal>
+            <Reveal as="h2" delay={0.08} className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#fafafa] hero-text-shadow">
               {t.home.heroTitle}
-            </h2>
+            </Reveal>
           </div>
-          <div className="fade-in-section" style={{ transitionDelay: '0.4s' }}>
+          <Reveal delay={0.16}>
             <Link
               to={`/${urlLang}/shop`}
-              className="inline-flex items-center text-[13px] uppercase tracking-[0.4em] text-white border-b-2 border-white pb-3 font-bold group hover:text-stone-200 hover:border-stone-200 transition-all"
+              className="inline-flex items-center text-[13px] uppercase tracking-[0.4em] text-[#fafafa] border-b-2 border-[#fafafa] pb-3 font-bold group hover:text-[#d4d4d4] hover:border-[#d4d4d4] transition-all"
             >
               {t.home.cta}
               <ArrowRight className="ml-4 w-4 h-4 group-hover:translate-x-2 transition-transform duration-500" />
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -65,16 +55,16 @@ const Home: React.FC = () => {
       <section className="py-32 lg:py-48 px-8 lg:px-24 bg-stone-100">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-            <div className="lg:col-span-4 space-y-6 fade-in-section">
+            <Reveal className="lg:col-span-4 space-y-6">
               <span className="inline-block text-[12px] uppercase tracking-[0.4em] text-stone-900 font-bold">{t.home.philosophyTitle}</span>
               <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-stone-950">
                 {t.home.philosophySubtitle}
               </h3>
-            </div>
-            
+            </Reveal>
+
             <div className="lg:col-span-8 grid md:grid-cols-3 gap-16 lg:pt-20">
               {/* Value 1 */}
-              <div className="space-y-6 fade-in-section text-center md:text-left" style={{ transitionDelay: '0.1s' }}>
+              <Reveal delay={0.1} className="space-y-6 text-center md:text-left">
                 <div className="flex justify-center md:justify-start">
                   <div className="p-5 bg-stone-950 rounded-full shadow-lg flex items-center justify-center">
                     <Clock className="w-6 h-6 text-white" strokeWidth={1.5} />
@@ -82,21 +72,21 @@ const Home: React.FC = () => {
                 </div>
                 <h4 className="text-sm uppercase tracking-widest text-stone-950 font-bold">{t.home.values.slow}</h4>
                 <p className="text-stone-900 text-lg leading-relaxed">{t.home.values.slowDesc}</p>
-              </div>
+              </Reveal>
 
               {/* Value 2 */}
-              <div className="space-y-6 fade-in-section text-center md:text-left" style={{ transitionDelay: '0.2s' }}>
+              <Reveal delay={0.18} className="space-y-6 text-center md:text-left">
                 <div className="flex justify-center md:justify-start">
-                  <div className="p-5 bg-stone-950 rounded-full shadow-lg flex -center justify-center">
+                  <div className="p-5 bg-stone-950 rounded-full shadow-lg flex items-center justify-center">
                     <Sparkles className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </div>
                 </div>
                 <h4 className="text-sm uppercase tracking-widest text-stone-950 font-bold">{t.home.values.handmade}</h4>
                 <p className="text-stone-900 text-lg leading-relaxed">{t.home.values.handmadeDesc}</p>
-              </div>
+              </Reveal>
 
               {/* Value 3 */}
-              <div className="space-y-6 fade-in-section text-center md:text-left" style={{ transitionDelay: '0.3s' }}>
+              <Reveal delay={0.26} className="space-y-6 text-center md:text-left">
                 <div className="flex justify-center md:justify-start">
                   <div className="p-5 bg-stone-950 rounded-full shadow-lg flex items-center justify-center">
                     <Package className="w-6 h-6 text-white" strokeWidth={1.5} />
@@ -107,7 +97,7 @@ const Home: React.FC = () => {
                   <span className="font-bold text-stone-950 block mb-2">{t.home.values.demandSubtitle}</span>
                   {t.home.values.demandDesc}
                 </p>
-              </div>
+              </Reveal>
             </div>
           </div>
         </div>
@@ -116,13 +106,13 @@ const Home: React.FC = () => {
       {/* New Section: Link to 'Qui Sóc' */}
       <section className="py-32 lg:py-60 px-8 lg:px-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
-          <div className="lg:w-1/2 relative fade-in-section">
+          <Reveal className="lg:w-1/2 relative">
             <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
             <img src={toWebp(IMG_BASE + "meritxell-2.jpeg")} alt={t.home.workshopImageAlt} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"/>
             </div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-stone-100 hidden lg:block -z-10" />
-          </div>
-          <div className="lg:w-1/2 space-y-10 fade-in-section" style={{ transitionDelay: '0.2s' }}>
+          </Reveal>
+          <Reveal delay={0.15} className="lg:w-1/2 space-y-10">
              <span className="inline-block text-[11px] uppercase tracking-[0.5em] text-stone-400 font-bold">{t.nav.about}</span>
              <h3 className="text-5xl lg:text-7xl font-serif text-stone-950">
                {t.home.aboutLinkTitle}
@@ -134,20 +124,20 @@ const Home: React.FC = () => {
                {t.home.aboutLinkCta}
                <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-500" />
              </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Lookbook Style Split */}
-      <section className="grid lg:grid-cols-2 bg-[#F9F8F6]">
-        <div className="h-[70vh] lg:h-screen overflow-hidden fade-in-section">
+      <section className="grid lg:grid-cols-2 bg-[var(--color-block)]">
+        <Reveal className="h-[70vh] lg:h-screen overflow-hidden">
           <img
             src={altair?.images[1]?.src}
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s]"
             alt={`${altair?.name ?? 'Altair'} — ${t.home.lookbookImageAlt}`}
           />
-        </div>
-        <div className="flex flex-col justify-center p-12 lg:p-24 space-y-10 fade-in-section">
+        </Reveal>
+        <Reveal delay={0.1} className="flex flex-col justify-center p-12 lg:p-24 space-y-10">
           <h3 className="text-4xl lg:text-7xl font-serif text-stone-950">
             {t.home.lookbookTitle}
           </h3>
@@ -157,8 +147,11 @@ const Home: React.FC = () => {
           <Link to={`/${urlLang}/shop`} className="btn-premium w-fit text-xs uppercase tracking-[0.3em] pt-4 font-bold">
             {t.home.lookbookCta}
           </Link>
-        </div>
+        </Reveal>
       </section>
+
+      <FeaturedInstagram />
+      <Newsletter />
     </div>
   );
 };

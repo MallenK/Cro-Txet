@@ -12,12 +12,6 @@ const OG_LOCALE: Record<string, string> = {
   en: 'en_US',
 };
 
-interface BreadcrumbItem {
-  name: string;
-  /** Path without language prefix, e.g. "/shop" */
-  path: string;
-}
-
 interface SEOProps {
   title: string;
   description: string;
@@ -26,7 +20,6 @@ interface SEOProps {
   image?: string;
   type?: 'website' | 'product' | 'article';
   product?: Product;
-  breadcrumb?: BreadcrumbItem[];
   noindex?: boolean;
 }
 
@@ -44,12 +37,12 @@ const toAbsoluteImageUrl = (src: string): string => {
   return `${SITE_ORIGIN}${normalized}`;
 };
 
-const SEO: React.FC<SEOProps> = ({ title, description, path, image, type = 'website', product, breadcrumb, noindex }) => {
+const SEO: React.FC<SEOProps> = ({ title, description, path, image, type = 'website', product, noindex }) => {
   const { urlLang } = useLanguage();
 
   const fullTitle = `${title} | Cro&Txet`;
   const canonical = `${SITE_ORIGIN}/${urlLang}${path}`;
-  const ogImage = image ? toAbsoluteImageUrl(image) : `${SITE_ORIGIN}/img/fotos_txell/Foto_Home.webp`;
+  const ogImage = image ? toAbsoluteImageUrl(image) : `${SITE_ORIGIN}/img/og/og-default.jpg`;
   const shouldNoindex = noindex || isStaging;
 
   useEffect(() => {
@@ -64,19 +57,6 @@ const SEO: React.FC<SEOProps> = ({ title, description, path, image, type = 'webs
         description,
         image: product.images.map(img => toAbsoluteImageUrl(img.src)),
         brand: { '@type': 'Brand', name: 'Cro&Txet' },
-      }
-    : null;
-
-  const breadcrumbJsonLd = breadcrumb
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: breadcrumb.map((item, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          name: item.name,
-          item: `${SITE_ORIGIN}/${urlLang}${item.path}`,
-        })),
       }
     : null;
 
@@ -106,9 +86,6 @@ const SEO: React.FC<SEOProps> = ({ title, description, path, image, type = 'webs
 
       {productJsonLd && (
         <script type="application/ld+json">{JSON.stringify(productJsonLd)}</script>
-      )}
-      {breadcrumbJsonLd && (
-        <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       )}
     </Helmet>
   );

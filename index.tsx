@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import { Analytics } from "@vercel/analytics/react"
+import { initTheme } from './context/theme';
+
+initTheme();
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -20,3 +23,11 @@ root.render(
     </HelmetProvider>
   </React.StrictMode>
 );
+
+// Fade out the pre-hydration boot loader (index.html) once React has painted.
+requestAnimationFrame(() => {
+  const boot = document.getElementById('app-boot');
+  if (!boot) return;
+  boot.classList.add('is-hidden');
+  setTimeout(() => boot.remove(), 500);
+});

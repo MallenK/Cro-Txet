@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Instagram, Menu, X } from 'lucide-react';
 import { Language } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import ThemeToggle from './ThemeToggle';
 
 const Sidebar: React.FC = () => {
   const { t, lang, urlLang, setLang } = useLanguage();
@@ -26,6 +27,7 @@ const Sidebar: React.FC = () => {
     { name: t.nav.home, path: base },
     { name: t.nav.shop, path: `${base}/shop` },
     { name: t.nav.about, path: `${base}/about` },
+    { name: t.nav.faq, path: `${base}/faq` },
     { name: t.nav.contact, path: `${base}/contact` },
   ];
 
@@ -37,7 +39,7 @@ const Sidebar: React.FC = () => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden fixed top-5 right-5 z-[100] w-12 h-12 flex items-center justify-center bg-white shadow-xl rounded-full border border-stone-200 focus:outline-none active:scale-90 transition-all duration-300"
-        aria-label={isOpen ? "Tancar menú" : "Obrir menú"}
+        aria-label={isOpen ? t.a11y.closeMenu : t.a11y.openMenu}
       >
         {isOpen ? <X className="w-5 h-5 text-stone-900" /> : <Menu className="w-5 h-5 text-stone-900" />}
       </button>
@@ -49,7 +51,7 @@ const Sidebar: React.FC = () => {
       />
 
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-[85vw] max-w-80 lg:w-72 bg-[#FDFCFB] flex flex-col p-10 lg:p-14
+        fixed inset-y-0 left-0 z-50 w-[85vw] max-w-80 lg:w-72 bg-[var(--color-bg)] flex flex-col p-10 lg:p-14
         sidebar-transition border-r border-stone-100 transform-gpu
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
@@ -99,8 +101,10 @@ const Sidebar: React.FC = () => {
             </div>
           </div>
 
-          <a 
-            href="https://instagram.com/cro_and_txet" 
+          <ThemeToggle />
+
+          <a
+            href="https://instagram.com/cro_and_txet"
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center gap-4 w-fit py-2"
