@@ -105,6 +105,13 @@ Repaso completo contra checklists de "cosas que arreglar antes de lanzar". Imple
 - **Newsletter** con incentivo (10% primer encargo) en la Home (`components/Newsletter.tsx`).
   Sin proveedor de email marketing todavía: envía a la bandeja vía EmailJS. Migrar cuando haya proveedor.
 
+### Modo oscuro
+- Tema por variables CSS: `[data-theme="dark"]` / `prefers-color-scheme` remapean las custom
+  properties de color de Tailwind v4 (`--color-stone-*`, `--color-white/black`) invirtiendo la
+  escala, sin variantes `dark:` en componentes. Toggle Clar/Fosc/Sistema en el sidebar
+  (`components/ThemeToggle.tsx`, `context/theme.ts`), persistido en `localStorage`, sin parpadeo
+  (script inline en `index.html`). Tokens `--color-inverse-bg/fg` para las bandas invertidas.
+
 ### Rendimiento e imágenes
 - Favicon de marca (SVG + PNG 16/32/192/512 + apple-touch-icon), `site.webmanifest`, `theme-color`.
 - Imagen Open Graph dedicada 1200×630 (`public/img/og/og-default.jpg`).
@@ -134,7 +141,6 @@ Consent Mode operativos. CTA de producto `position: fixed`. Build de producción
    - **Revisar la redacción legal** de `content/legal.ts` con los datos fiscales reales del titular antes de publicar.
    - **Confirmar** el deep link de Instagram DM (`ig.me/m/cro_and_txet`) en `components/FloatingContact.tsx`.
 5. **Deliberadamente fuera de alcance**:
-   - **Modo oscuro** — la identidad de marca es un editorial claro muy afinado (ver fidelidad de píxeles arriba). Un tema oscuro completo es invasivo y de valor dudoso aquí; pendiente de confirmación explícita antes de abordarlo.
    - **LocalBusiness schema completo** — sin dirección física publicable; el JSON-LD `Organization` se ha enriquecido con ciudad, email e idiomas, que es lo correcto sin NAP real.
    - **Monitorización de errores** (Sentry) — opcional; Vercel Analytics cubre lo básico.
    - **Blog/journal** — necesitaría un compromiso de contenido continuo para tener valor SEO real.
