@@ -26,6 +26,7 @@ const Sidebar: React.FC = () => {
     { name: t.nav.home, path: base },
     { name: t.nav.shop, path: `${base}/shop` },
     { name: t.nav.about, path: `${base}/about` },
+    { name: t.nav.faq, path: `${base}/faq` },
     { name: t.nav.contact, path: `${base}/contact` },
   ];
 
@@ -37,7 +38,7 @@ const Sidebar: React.FC = () => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden fixed top-5 right-5 z-[100] w-12 h-12 flex items-center justify-center bg-white shadow-xl rounded-full border border-stone-200 focus:outline-none active:scale-90 transition-all duration-300"
-        aria-label={isOpen ? "Tancar menú" : "Obrir menú"}
+        aria-label={isOpen ? t.a11y.closeMenu : t.a11y.openMenu}
       >
         {isOpen ? <X className="w-5 h-5 text-stone-900" /> : <Menu className="w-5 h-5 text-stone-900" />}
       </button>

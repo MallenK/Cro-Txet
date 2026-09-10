@@ -8,6 +8,9 @@ import Shop from './pages/Shop';
 import Contact from './pages/Contact';
 import ProductDetail from './pages/ProductDetail';
 import LegalPage from './pages/LegalPage';
+import Faq from './pages/Faq';
+import Thanks from './pages/Thanks';
+import NotFound from './pages/NotFound';
 import { useSavedLangOrDefault } from './context/LanguageContext';
 
 const ScrollToTop = () => {
@@ -21,6 +24,13 @@ const ScrollToTop = () => {
 const RootRedirect: React.FC = () => {
   const urlLang = useSavedLangOrDefault();
   return <Navigate to={`/${urlLang}`} replace />;
+};
+
+/** Unknown top-level path (no language prefix): keep the path, prepend the saved/default language. */
+const LangPrefixRedirect: React.FC = () => {
+  const urlLang = useSavedLangOrDefault();
+  const { pathname, search, hash } = useLocation();
+  return <Navigate to={`/${urlLang}${pathname}${search}${hash}`} replace />;
 };
 
 // Vite's BASE_URL is "/" on Vercel and "/Cro-Txet/" on GitHub Pages (staging);
@@ -39,10 +49,14 @@ const App: React.FC = () => {
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<ProductDetail />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="faq" element={<Faq />} />
+          <Route path="gracias" element={<Thanks />} />
           <Route path="privacy" element={<LegalPage type="privacy" />} />
           <Route path="returns" element={<LegalPage type="returns" />} />
+          <Route path="terms" element={<LegalPage type="terms" />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="*" element={<Navigate to="/ca" replace />} />
+        <Route path="*" element={<LangPrefixRedirect />} />
       </Routes>
     </Router>
   );

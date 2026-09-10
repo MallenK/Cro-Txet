@@ -11,11 +11,15 @@ import {
   Award,
   ChevronDown,
   Sparkles,
-  Package
+  Package,
+  Share2,
+  Check,
+  AlertCircle
 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const ProductDetail: React.FC = () => {
   const { t, lang, urlLang } = useLanguage();
@@ -26,6 +30,25 @@ const ProductDetail: React.FC = () => {
   const [activeImg, setActiveImg] = useState(0);
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [isDetailsOpen, setIsDetailsOpen] = useState(true);
+  const [shareCopied, setShareCopied] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () =>
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const handleShare = async () => {
+    const url = window.location.href;
+    const title = product ? `${product.name} — Cro&Txet` : 'Cro&Txet';
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, url });
+      } else {
+        await navigator.clipboard.writeText(url);
+        setShareCopied(true);
+        setTimeout(() => setShareCopied(false), 2500);
+      }
+    } catch { /* user cancelled */ }
+  };
   
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -103,6 +126,7 @@ const ProductDetail: React.FC = () => {
 
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if ((e.target as HTMLFormElement).company?.value) return; // honeypot
     setFormStatus('loading');
 
     try {
@@ -146,7 +170,7 @@ const ProductDetail: React.FC = () => {
 
     } catch (error) {
       console.error(error);
-      setFormStatus('idle');
+      setFormStatus('error');
     }
   };
 
@@ -162,10 +186,6 @@ const ProductDetail: React.FC = () => {
         image={product.images[0]?.src}
         type="product"
         product={product}
-        breadcrumb={[
-          { name: t.nav.shop, path: '/shop' },
-          { name: product.name, path: `/product/${product.id}` },
-        ]}
       />
       <div className="lg:hidden sticky top-0 z-30 bg-white/90 backdrop-blur-md px-6 py-4 flex items-center border-b border-stone-100">
         <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-stone-950 font-bold text-[10px] uppercase tracking-[0.2em] font-sans">
@@ -190,9 +210,10 @@ const ProductDetail: React.FC = () => {
             >
               {imagesToShow.map((img, idx) => (
                 <div key={idx} className="w-full h-full flex-shrink-0 overflow-hidden">
-                  <img 
+                  <img
                     src={img.src}
-                    alt={`${product.name} perspective ${idx + 1}`} 
+                    alt={`${product.name} — ${product.meaning[lang]} (${idx + 1}/${imagesToShow.length})`}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
                     className="w-full h-full object-cover transition-transform duration-700 active:scale-105"
                   />
                 </div>
@@ -219,9 +240,9 @@ const ProductDetail: React.FC = () => {
                 key={idx} 
                 className="relative overflow-hidden w-full aspect-[4/5] bg-stone-100 rounded-sm group shadow-md"
               >
-                <img 
+                <img
                   src={img.src}
-                  alt={`${product.name} detail ${idx + 1}`} 
+                  alt={`${product.name} — ${product.meaning[lang]} (${idx + 1}/${imagesToShow.length})`}
                   className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
                   loading={idx === 0 ? "eager" : "lazy"}
                 />
@@ -254,6 +275,12 @@ const ProductDetail: React.FC = () => {
         <section className="lg:w-[40%] xl:w-[35%] lg:sticky lg:top-0 lg:h-screen flex flex-col p-10 lg:p-16 xl:p-24 overflow-y-auto no-scrollbar bg-white">
           <div className="space-y-16">
           <header className="space-y-6">
+            <Breadcrumbs
+              items={[
+                { name: t.nav.shop, path: '/shop' },
+                { name: product.name },
+              ]}
+            />
             <div className="space-y-3">
               <h1 className="text-6xl lg:text-7xl xl:text-8xl font-serif text-stone-950 leading-none tracking-tighter">
                 {product.name}
@@ -263,9 +290,19 @@ const ProductDetail: React.FC = () => {
               </p>
             </div>
 
-            <p className="text-4xl font-serif text-stone-950 font-light">
-              {finalPrice}€
-            </p>
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-4xl font-serif text-stone-950 font-light">
+                {finalPrice}€
+              </p>
+              <button
+                type="button"
+                onClick={handleShare}
+                className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-bold text-stone-500 hover:text-stone-950 transition-colors py-2"
+              >
+                {shareCopied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+                {shareCopied ? t.product.shareCopied : t.product.share}
+              </button>
+            </div>
 
             {/* 🔥 SELECTOR DE COLOR */}
             {product.colors && (
@@ -396,7 +433,7 @@ const ProductDetail: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-12 border-t border-stone-200">
+            <div ref={formRef} className="pt-12 border-t border-stone-200 scroll-mt-24">
               {formStatus === 'success' ? (
                 <div className="bg-stone-950 text-white p-14 text-center space-y-10 animate-fade-in shadow-2xl">
                   <CheckCircle2 className="w-16 h-16 text-stone-300 mx-auto" />
@@ -405,7 +442,11 @@ const ProductDetail: React.FC = () => {
               ) : (
                 <div className="space-y-10">
                   <h3 className="text-3xl lg:text-4xl font-serif text-stone-950">Personalitza la teva peça única</h3>
-                    <form onSubmit={handleOrderSubmit} className="space-y-8">
+                    <form onSubmit={handleOrderSubmit} className="space-y-8" noValidate>
+
+                      <p className="hidden" aria-hidden="true">
+                        <label>No omplir<input type="text" name="company" tabIndex={-1} autoComplete="off" /></label>
+                      </p>
 
                       <input
                         type="text"
@@ -447,6 +488,13 @@ const ProductDetail: React.FC = () => {
                           : <>{t.contact.form.send} <Send className="w-4 h-4 group-hover:translate-x-2 transition-transform" /></>}
                       </button>
 
+                      {formStatus === 'error' && (
+                        <p role="alert" className="flex items-start gap-3 text-sm text-red-700 bg-red-50 border border-red-200 p-4">
+                          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                          {t.contact.form.error}
+                        </p>
+                      )}
+
                     </form>
 
                 </div>
@@ -455,6 +503,19 @@ const ProductDetail: React.FC = () => {
           </div>
         </section>
       </div>
+
+      {/* Sticky mobile CTA */}
+      {formStatus !== 'success' && (
+        <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-stone-200 px-5 py-4 flex items-center justify-between gap-4">
+          <span className="text-2xl font-serif text-stone-950 shrink-0">{finalPrice}€</span>
+          <button
+            onClick={scrollToForm}
+            className="flex-1 py-4 bg-stone-950 text-white text-[10px] uppercase tracking-[0.35em] font-bold hover:bg-black transition-all"
+          >
+            {t.product.stickyCta}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,12 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
-import { Send, MapPin, Mail, Sparkles, Heart, Loader2, CheckCircle2 } from 'lucide-react';
+import { Send, MapPin, Mail, Sparkles, Heart, Loader2, Clock, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const Contact: React.FC = () => {
-  const { t } = useLanguage();
-  const [formStatus, setFormStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
+  const { t, urlLang } = useLanguage();
+  const navigate = useNavigate();
+  const [formStatus, setFormStatus] = React.useState<'idle' | 'loading' | 'error'>('idle');
 
   const [formData, setFormData] = React.useState({
     from_name: '',
@@ -25,6 +28,10 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot: bots fill hidden fields; humans never see this one.
+    if ((e.target as HTMLFormElement).company?.value) return;
+
     setFormStatus('loading');
 
     try {
@@ -35,20 +42,14 @@ const Contact: React.FC = () => {
         'iGpB097zxE-0bBxRC'
       );
 
-      setFormStatus('success');
-      setFormData({
-        from_name: '',
-        from_email: '',
-        message: ''
-      });
-
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'generate_lead', form_type: 'contact' });
 
-      setTimeout(() => setFormStatus('idle'), 5000);
+      setFormData({ from_name: '', from_email: '', message: '' });
+      navigate(`/${urlLang}/gracias`);
     } catch (error) {
       console.error(error);
-      setFormStatus('idle');
+      setFormStatus('error');
     }
   };
 
@@ -56,8 +57,11 @@ const Contact: React.FC = () => {
   return (
     <div className="animate-fade-in bg-white min-h-screen">
       <SEO title={t.contact.seoTitle} description={t.contact.seoDescription} path="/contact" />
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-20 pt-10">
+        <Breadcrumbs items={[{ name: t.contact.label }]} />
+      </div>
       {/* 1. Header - Estandarizado con Shop.tsx */}
-      <header className="py-20 px-6 lg:py-32 lg:px-20 max-w-[1600px] mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 border-b border-stone-100 pb-16">
+      <header className="py-16 px-6 lg:py-24 lg:px-20 max-w-[1600px] mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 border-b border-stone-100 pb-16">
         <div className="space-y-6">
           <div className="flex items-center gap-3">
              <span className="h-[1px] w-6 bg-stone-900" />
@@ -83,13 +87,10 @@ const Contact: React.FC = () => {
             <div className="h-[1px] w-full bg-stone-100" />
           </div>
 
-          {formStatus === 'success' ? (
-            <div className="bg-stone-950 text-white p-12 lg:p-20 text-center space-y-8 animate-fade-in shadow-2xl rounded-sm">
-              <CheckCircle2 className="w-16 h-16 text-stone-300 mx-auto" strokeWidth={1} />
-              <p className="font-serif text-3xl tracking-tight">{t.contact.form.sent}</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-10">
+          <form onSubmit={handleSubmit} className="space-y-10" noValidate>
+              <p className="hidden" aria-hidden="true">
+                <label>No omplir<input type="text" name="company" tabIndex={-1} autoComplete="off" /></label>
+              </p>
               <div className="grid md:grid-cols-2 gap-10">
                 <div className="space-y-3">
                   <label className="inline-block text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold ml-1">
@@ -150,8 +151,19 @@ const Contact: React.FC = () => {
                   </>
                 )}
               </button>
+
+              {formStatus === 'error' && (
+                <p role="alert" className="flex items-start gap-3 text-sm text-red-700 bg-red-50 border border-red-200 p-4">
+                  <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                  {t.contact.form.error}
+                </p>
+              )}
+
+              <p className="flex items-center gap-3 text-[12px] uppercase tracking-[0.25em] font-bold text-stone-400">
+                <Clock className="w-4 h-4" strokeWidth={1.5} />
+                {t.contact.responseTime}
+              </p>
             </form>
-          )}
 
           {/* Información de Contacto Directo - Estilo Home Icons */}
           <div className="grid md:grid-cols-2 gap-8 pt-12">
