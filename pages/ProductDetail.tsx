@@ -21,6 +21,8 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import Picture from '../components/Picture';
+import { analytics, productItem } from '../lib/analytics';
 
 const ProductDetail: React.FC = () => {
   const { t, lang, urlLang } = useLanguage();
@@ -33,13 +35,17 @@ const ProductDetail: React.FC = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(true);
   const [shareCopied, setShareCopied] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
+  const orderStartedRef = useRef(false);
 
-  const scrollToForm = () =>
+  const scrollToForm = () => {
+    analytics.ctaClick({ cta_text: 'sticky_inquire', cta_location: 'product_sticky_mobile', cta_destination: 'product_form' });
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   const handleShare = async () => {
     const url = window.location.href;
     const title = product ? `${product.name} — Cro&Txet` : 'Cro&Txet';
+    if (product) analytics.share({ method: navigator.share ? 'web_share' : 'copy_link', content_type: 'product', item_id: product.id });
     try {
       if (navigator.share) {
         await navigator.share({ title, url });
@@ -61,13 +67,7 @@ const ProductDetail: React.FC = () => {
 
   useEffect(() => {
     if (!product) return;
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'view_item',
-      ecommerce: {
-        items: [{ item_id: product.id, item_name: product.name, price: product.price, item_category: 'bags' }],
-      },
-    });
+    analytics.viewItem(productItem(product));
   }, [product]);
 
   if (!product) {
@@ -119,6 +119,10 @@ const ProductDetail: React.FC = () => {
   const handleOrderChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    if (!orderStartedRef.current && product) {
+      orderStartedRef.current = true;
+      analytics.formStart('product_inquiry', { item_id: product.id });
+    }
     setOrderData({
       ...orderData,
       [e.target.name]: e.target.value
@@ -164,8 +168,11 @@ const ProductDetail: React.FC = () => {
         message: ''
       });
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'generate_lead', form_type: 'product_inquiry', item_id: product.id });
+      analytics.generateLead('product_inquiry', {
+        item_id: product.id,
+        estimated_value: finalPrice,
+        addons: selectedAddonLabels || undefined,
+      });
 
       setTimeout(() => setFormStatus('idle'), 5000);
 
@@ -211,10 +218,12 @@ const ProductDetail: React.FC = () => {
             >
               {imagesToShow.map((img, idx) => (
                 <div key={idx} className="w-full h-full flex-shrink-0 overflow-hidden">
-                  <img
+                  <Picture
                     src={img.src}
                     alt={`${product.name} — ${product.meaning[lang]} (${idx + 1}/${imagesToShow.length})`}
                     loading={idx === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    fetchPriority={idx === 0 ? 'high' : undefined}
                     className="w-full h-full object-cover transition-transform duration-700 active:scale-105"
                   />
                 </div>
@@ -241,11 +250,13 @@ const ProductDetail: React.FC = () => {
                 key={idx} 
                 className="relative overflow-hidden w-full aspect-[4/5] bg-stone-100 rounded-sm group shadow-md"
               >
-                <img
+                <Picture
                   src={img.src}
                   alt={`${product.name} — ${product.meaning[lang]} (${idx + 1}/${imagesToShow.length})`}
                   className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
                   loading={idx === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={idx === 0 ? 'high' : undefined}
                 />
                 {idx === 0 && (
                   <div className="absolute top-10 right-10 bg-white/95 backdrop-blur-md px-6 py-3 rounded-full border border-stone-200 flex items-center gap-3 shadow-lg">
@@ -316,13 +327,7 @@ const ProductDetail: React.FC = () => {
                         setSelectedColor(null); // 👈 quitar filtro
                       } else {
                         setSelectedColor(color.name); // 👈 aplicar filtro
-                        window.dataLayer = window.dataLayer || [];
-                        window.dataLayer.push({
-                          event: 'select_content',
-                          content_type: 'product_color',
-                          item_id: product.id,
-                          color: color.name,
-                        });
+                        analytics.selectContent('product_color', { item_id: product.id, color: color.name });
                       }
                       setActiveImg(0);
                     }}
@@ -346,13 +351,16 @@ const ProductDetail: React.FC = () => {
                 <button
                   key={addon.id}
                   type="button"
-                  onClick={() =>
+                  onClick={() => {
+                    if (!isSelected) {
+                      analytics.selectContent('product_addon', { item_id: product.id, addon_id: addon.id, addon_price: addon.price });
+                    }
                     setSelectedAddons(prev =>
                       isSelected
                         ? prev.filter(id => id !== addon.id)
                         : [...prev, addon.id]
-                    )
-                  }
+                    );
+                  }}
                   className={`mt-6 w-full flex justify-between items-center px-6 py-4 border transition-all duration-300
                     ${isSelected
                       ? 'border-stone-950 bg-stone-50'

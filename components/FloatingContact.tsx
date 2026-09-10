@@ -14,6 +14,7 @@ const FloatingContact: React.FC = () => {
       href="https://ig.me/m/cro_and_txet"
       target="_blank"
       rel="noopener noreferrer"
+      data-analytics="instagram_dm_floating"
       aria-label={t.a11y.chat}
       className="hidden sm:flex fixed right-5 bottom-6 lg:bottom-20 z-[90] w-14 h-14 rounded-full bg-stone-950 text-white shadow-xl items-center justify-center hover:scale-105 active:scale-95 transition-transform"
     >

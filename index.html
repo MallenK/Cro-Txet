@@ -73,18 +73,33 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Cro&Txet",
-      "alternateName": "Cro and Txet",
-      "url": "https://croandtxet.cat/",
-      "logo": "https://croandtxet.cat/favicon-512.png",
-      "image": "https://croandtxet.cat/img/og/og-default.jpg",
-      "description": "Bosses de crochet fetes a mà, peces úniques de disseny artesanal. Slow fashion i producció sota demanda.",
-      "email": "hola@croandtxet.cat",
-      "areaServed": "ES",
-      "knowsLanguage": ["ca", "es", "en"],
-      "address": { "@type": "PostalAddress", "addressLocality": "Barcelona", "addressCountry": "ES" },
-      "sameAs": ["https://instagram.com/cro_and_txet"]
+      "@graph": [
+        {
+          "@type": ["Organization", "Brand"],
+          "@id": "https://croandtxet.cat/#org",
+          "name": "Cro&Txet",
+          "alternateName": "Cro and Txet",
+          "url": "https://croandtxet.cat/",
+          "logo": "https://croandtxet.cat/favicon-512.png",
+          "image": "https://croandtxet.cat/img/og/og-default.jpg",
+          "description": "Bosses de crochet fetes a mà, peces úniques de disseny artesanal. Slow fashion i producció sota demanda.",
+          "email": "hola@croandtxet.cat",
+          "founder": { "@type": "Person", "name": "Meritxell" },
+          "areaServed": { "@type": "Country", "name": "España" },
+          "knowsLanguage": ["ca", "es", "en"],
+          "priceRange": "€€",
+          "address": { "@type": "PostalAddress", "addressLocality": "Barcelona", "addressRegion": "Catalunya", "addressCountry": "ES" },
+          "sameAs": ["https://instagram.com/cro_and_txet"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://croandtxet.cat/#website",
+          "url": "https://croandtxet.cat/",
+          "name": "Cro&Txet",
+          "inLanguage": ["ca", "es", "en"],
+          "publisher": { "@id": "https://croandtxet.cat/#org" }
+        }
+      ]
     }
     </script>
 

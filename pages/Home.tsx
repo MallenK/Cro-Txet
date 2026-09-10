@@ -8,6 +8,8 @@ import SEO from '../components/SEO';
 import Newsletter from '../components/Newsletter';
 import FeaturedInstagram from '../components/FeaturedInstagram';
 import Reveal from '../components/motion/Reveal';
+import Picture from '../components/Picture';
+import { analytics } from '../lib/analytics';
 
 const Home: React.FC = () => {
   const { t, urlLang } = useLanguage();
@@ -20,7 +22,7 @@ const Home: React.FC = () => {
       {/* Editorial Hero */}
       <section className="relative min-h-[95vh] flex flex-col justify-center items-center overflow-hidden px-8">
         <div className="absolute inset-0 z-0 blur-[2px]">
-          <img
+          <Picture
             src={toWebp(IMG_BASE + "Foto_Home.png")}
             alt={t.home.heroImageAlt}
             fetchPriority="high"
@@ -35,13 +37,14 @@ const Home: React.FC = () => {
             <Reveal as="span" className="block text-[12px] uppercase tracking-[0.6em] text-[#fafafa] font-bold hero-text-shadow">
               {t.home.heroSubtitle}
             </Reveal>
-            <Reveal as="h2" delay={0.08} className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#fafafa] hero-text-shadow">
+            <Reveal as="h1" delay={0.08} className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#fafafa] hero-text-shadow">
               {t.home.heroTitle}
             </Reveal>
           </div>
           <Reveal delay={0.16}>
             <Link
               to={`/${urlLang}/shop`}
+              onClick={() => analytics.ctaClick({ cta_text: t.home.cta, cta_location: 'home_hero', cta_destination: 'shop' })}
               className="inline-flex items-center text-[13px] uppercase tracking-[0.4em] text-[#fafafa] border-b-2 border-[#fafafa] pb-3 font-bold group hover:text-[#d4d4d4] hover:border-[#d4d4d4] transition-all"
             >
               {t.home.cta}
@@ -108,7 +111,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
           <Reveal className="lg:w-1/2 relative">
             <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
-            <img src={toWebp(IMG_BASE + "meritxell-2.jpeg")} alt={t.home.workshopImageAlt} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"/>
+            <Picture src={toWebp(IMG_BASE + "meritxell-2.jpeg")} alt={t.home.workshopImageAlt} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"/>
             </div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-stone-100 hidden lg:block -z-10" />
           </Reveal>
@@ -131,8 +134,10 @@ const Home: React.FC = () => {
       {/* Lookbook Style Split */}
       <section className="grid lg:grid-cols-2 bg-[var(--color-block)]">
         <Reveal className="h-[70vh] lg:h-screen overflow-hidden">
-          <img
-            src={altair?.images[1]?.src}
+          <Picture
+            src={altair?.images[1]?.src ?? ''}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s]"
             alt={`${altair?.name ?? 'Altair'} — ${t.home.lookbookImageAlt}`}
           />
@@ -144,7 +149,11 @@ const Home: React.FC = () => {
           <p className="text-stone-900 text-xl max-w-md leading-relaxed">
             {t.home.lookbookDesc}
           </p>
-          <Link to={`/${urlLang}/shop`} className="btn-premium w-fit text-xs uppercase tracking-[0.3em] pt-4 font-bold">
+          <Link
+            to={`/${urlLang}/shop`}
+            onClick={() => analytics.ctaClick({ cta_text: t.home.lookbookCta, cta_location: 'home_lookbook', cta_destination: 'shop' })}
+            className="btn-premium w-fit text-xs uppercase tracking-[0.3em] pt-4 font-bold"
+          >
             {t.home.lookbookCta}
           </Link>
         </Reveal>

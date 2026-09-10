@@ -15,7 +15,7 @@ import { motion, useInView, useReducedMotion } from 'motion/react';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-type RevealTag = 'div' | 'section' | 'span' | 'li' | 'h2' | 'h3' | 'p' | 'article';
+type RevealTag = 'div' | 'section' | 'span' | 'li' | 'h1' | 'h2' | 'h3' | 'p' | 'article';
 
 export interface RevealProps {
   as?: RevealTag;

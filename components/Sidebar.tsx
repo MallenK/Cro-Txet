@@ -57,7 +57,7 @@ const Sidebar: React.FC = () => {
       `}>
         <div className="mb-20 text-center lg:text-left">
           <Link to={base} onClick={closeSidebar} className="group inline-block">
-            <h1 className="text-4xl font-serif tracking-tighter text-stone-950 mb-1">Cro&Txet</h1>
+            <span className="block text-4xl font-serif tracking-tighter text-stone-950 mb-1">Cro&Txet</span>
             <p className="text-[10px] uppercase tracking-[0.4em] text-stone-900 font-bold pl-1">Disseny Artesanal</p>
           </Link>
         </div>
@@ -105,8 +105,9 @@ const Sidebar: React.FC = () => {
 
           <a
             href="https://instagram.com/cro_and_txet"
-            target="_blank" 
+            target="_blank"
             rel="noopener noreferrer"
+            data-analytics="instagram_sidebar"
             className="group flex items-center gap-4 w-fit py-2"
           >
             <div className="w-11 h-11 bg-stone-100 rounded-full flex items-center justify-center group-hover:bg-stone-950 group-hover:text-white transition-all shadow-sm">

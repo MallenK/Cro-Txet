@@ -7,6 +7,7 @@ import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { FAQ } from '../content/faq';
+import { analytics } from '../lib/analytics';
 
 const Faq: React.FC = () => {
   const { t, lang, urlLang } = useLanguage();
@@ -45,7 +46,10 @@ const Faq: React.FC = () => {
             <div key={i} className="py-2">
               <dt>
                 <button
-                  onClick={() => setOpen(isOpen ? null : i)}
+                  onClick={() => {
+                    if (!isOpen) analytics.faqToggle(item.q);
+                    setOpen(isOpen ? null : i);
+                  }}
                   aria-expanded={isOpen}
                   className="w-full flex items-start justify-between gap-6 py-6 text-left group"
                 >

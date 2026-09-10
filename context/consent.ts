@@ -1,5 +1,7 @@
 /** Shared cookie-consent helpers (storage + Google Consent Mode wiring). */
 
+import { analytics } from '../lib/analytics';
+
 export const CONSENT_KEY = 'cro_txet_consent';
 export const OPEN_CONSENT_EVENT = 'cro-txet:open-consent';
 
@@ -35,12 +37,7 @@ export const applyConsent = (v: ConsentValue) => {
     ad_personalization: grant(v.marketing),
   });
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: 'consent_update',
-    consent_analytics: v.analytics,
-    consent_marketing: v.marketing,
-  });
+  analytics.consentUpdate(v.analytics, v.marketing);
 };
 
 export const openConsentSettings = () =>

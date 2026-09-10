@@ -3,12 +3,13 @@ import { Instagram, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { INSTAGRAM_POSTS, INSTAGRAM_URL } from '../content/instagram';
 import Reveal from './motion/Reveal';
+import Picture from './Picture';
 
 const FeaturedInstagram: React.FC = () => {
   const { t, lang } = useLanguage();
 
   return (
-    <section className="py-28 lg:py-40 px-6 lg:px-24 bg-stone-100">
+    <section className="py-28 lg:py-40 px-6 lg:px-24 bg-stone-100" data-analytics-section="instagram_featured">
       <div className="max-w-7xl mx-auto">
         <Reveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div className="space-y-4">
@@ -39,7 +40,7 @@ const FeaturedInstagram: React.FC = () => {
                 className="group relative block aspect-square overflow-hidden rounded-sm bg-stone-200"
                 aria-label={`${t.instagram.viewPost} — ${post.caption[lang]}`}
               >
-                <img
+                <Picture
                   src={post.image}
                   alt={post.alt[lang]}
                   loading="lazy"
