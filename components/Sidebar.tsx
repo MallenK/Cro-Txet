@@ -57,7 +57,7 @@ const Sidebar: React.FC = () => {
       `}>
         <div className="mb-20 text-center lg:text-left">
           <Link to={base} onClick={closeSidebar} className="group inline-block">
-            <h1 className="text-4xl font-serif tracking-tighter text-stone-950 mb-1">Cro&Txet</h1>
+            <span className="block text-4xl font-serif tracking-tighter text-stone-950 mb-1">Cro&Txet</span>
             <p className="text-[10px] uppercase tracking-[0.4em] text-stone-900 font-bold pl-1">Disseny Artesanal</p>
           </Link>
         </div>

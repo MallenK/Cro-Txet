@@ -37,7 +37,7 @@ const Home: React.FC = () => {
             <Reveal as="span" className="block text-[12px] uppercase tracking-[0.6em] text-[#fafafa] font-bold hero-text-shadow">
               {t.home.heroSubtitle}
             </Reveal>
-            <Reveal as="h2" delay={0.08} className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#fafafa] hero-text-shadow">
+            <Reveal as="h1" delay={0.08} className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#fafafa] hero-text-shadow">
               {t.home.heroTitle}
             </Reveal>
           </div>

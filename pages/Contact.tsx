@@ -72,9 +72,9 @@ const Contact: React.FC = () => {
              <span className="h-[1px] w-6 bg-stone-900" />
              <span className="text-[11px] uppercase tracking-[0.4em] text-stone-900 font-bold">{t.contact.label}</span>
           </div>
-          <h2 className="text-5xl lg:text-8xl font-serif text-stone-950 tracking-tight">
+          <h1 className="text-5xl lg:text-8xl font-serif text-stone-950 tracking-tight">
             {t.contact.title}
-          </h2>
+          </h1>
         </div>
         <p className="text-stone-900 text-xl lg:text-2xl max-w-sm italic-serif">
           {t.contact.subtitle}

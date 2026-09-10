@@ -21,9 +21,9 @@ const About: React.FC = () => {
             <span className="text-[11px] uppercase tracking-[0.5em] text-stone-900 block font-bold font-sans">
               {t.about.label}
             </span>
-            <h2 className="text-4xl lg:text-6xl xl:text-7xl font-serif text-stone-950 tracking-tight">
+            <h1 className="text-4xl lg:text-6xl xl:text-7xl font-serif text-stone-950 tracking-tight">
               {t.about.title}
-            </h2>
+            </h1>
           </div>
           
           <div className="space-y-8 text-stone-900 leading-relaxed">

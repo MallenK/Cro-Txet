@@ -32,7 +32,7 @@ const Shop: React.FC = () => {
              <span className="h-[1px] w-6 bg-stone-900" />
              <span className="text-[11px] uppercase tracking-[0.4em] text-stone-900 font-bold">{t.shop.label}</span>
           </div>
-          <h2 className="text-5xl lg:text-8xl font-serif text-stone-950 tracking-tight">{t.shop.title}</h2>
+          <h1 className="text-5xl lg:text-8xl font-serif text-stone-950 tracking-tight">{t.shop.title}</h1>
         </div>
         <p className="text-stone-900 text-xl max-w-sm leading-relaxed">
           {t.shop.desc}
