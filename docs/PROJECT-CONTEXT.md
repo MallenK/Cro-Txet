@@ -113,12 +113,25 @@ Repaso completo contra checklists de "cosas que arreglar antes de lanzar". Imple
   ruta). Acordeones de FAQ y de producto animan `height` de verdad. CTA móvil de
   producto y banner de cookies entran deslizando.
 
-### Modo oscuro
-- Tema por variables CSS: `[data-theme="dark"]` / `prefers-color-scheme` remapean las custom
-  properties de color de Tailwind v4 (`--color-stone-*`, `--color-white/black`) invirtiendo la
-  escala, sin variantes `dark:` en componentes. Toggle Clar/Fosc/Sistema en el sidebar
-  (`components/ThemeToggle.tsx`, `context/theme.ts`), persistido en `localStorage`, sin parpadeo
-  (script inline en `index.html`). Tokens `--color-inverse-bg/fg` para las bandas invertidas.
+### Modo oscuro (por defecto: CLARO)
+- Tema por variables CSS: `[data-theme="dark"]` remapea las custom properties de color de
+  Tailwind v4 (`--color-stone-*`, `--color-white/black`) invirtiendo la escala, sin variantes
+  `dark:` en componentes. Tokens `--color-inverse-bg/fg` para las bandas invertidas.
+- **El valor por defecto de un visitante nuevo es claro.** El toggle del sidebar
+  (`components/ThemeToggle.tsx`, `context/theme.ts`) tiene 3 opciones: Clar / Fosc / **Sistema**
+  (opt-in explícito a seguir el SO). `initTheme()` resuelve "system" a un `data-theme` concreto
+  y escucha los cambios del SO. Sin parpadeo (script en `index.html`). No hay `@media
+  (prefers-color-scheme)` en el CSS.
+
+### Instagram (@cro_and_txet)
+- `content/instagram.ts`: 6 publicaciones reales enlazadas como **enlaces salientes normales**
+  (sin el script de embed de Instagram, sin iframe de terceros → sin coste de CSP ni de
+  privacidad), con fotografía propia de producto. `components/FeaturedInstagram.tsx` las muestra
+  en una sección editorial de la Home. Para refrescar la selección: editar `url`/`image`/copy.
+- Datos del perfil (sept. 2026): 231 seguidores, 26 posts. Bio: "sóc la Meritxell… Crochet lover
+  & addict · Clutches, Bolsets & peces úniques · Total handmade from Barcelona". Cuenta personal:
+  @TxellMallen. El contenido individual está tras el muro de login de Instagram; el endpoint
+  `/p/<id>/embed/captioned/` sí expone caption e imagen sin login.
 
 ### Rendimiento e imágenes
 - Favicon de marca (SVG + PNG 16/32/192/512 + apple-touch-icon), `site.webmanifest`, `theme-color`.
