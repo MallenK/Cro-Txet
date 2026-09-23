@@ -102,7 +102,7 @@ Repaso completo contra checklists de "cosas que arreglar antes de lanzar". Imple
 - Alt de imágenes localizado (antes texto fijo en inglés).
 
 ### Marketing
-- **Newsletter** con incentivo (10% primer encargo) en la Home (`components/Newsletter.tsx`).
+- **Newsletter** (sin descuento) en la Home (`components/Newsletter.tsx`).
   Sin proveedor de email marketing todavía: envía a la bandeja vía EmailJS. Migrar cuando haya proveedor.
 
 ### Micro-animaciones (Motion / motion.dev)
